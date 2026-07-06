@@ -4,7 +4,7 @@ pandas>=2.0
 scipy>=1.10
 
 # Image processing
-opencv-python>=4.8
+opencv-python-headless>=4.8
 Pillow>=10.0
 scikit-image>=0.22
 imageio>=2.31

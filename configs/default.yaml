@@ -1,0 +1,31 @@
+data:
+  raw_root: "data/raw/Retinal Vessel"
+  working_png_root: "data/working_png"
+  manifest_path: "data/manifests/manifest.csv"
+
+experiment:
+  output_dir: "outputs/experiments"
+  always_refine: true
+  false_positive_precision_threshold: 0.95
+
+preprocessing:
+  use_green_channel: true
+  clahe_clip_limit: 2.0
+  clahe_tile_grid_size: [8, 8]
+  normalize: true
+
+apsrg_baseline:
+  vesselness_kernel_sizes: [7, 11, 15]
+  seed_percentile: 92
+  candidate_percentile: 78
+  min_component_area: 8
+
+ca_apsrg:
+  low_density_threshold: 0.025
+  high_density_threshold: 0.120
+  small_component_area_low_density: 8
+  small_component_area_normal: 14
+  small_component_area_high_density: 24
+  closing_kernel_low_density: 3
+  closing_kernel_normal: 3
+  closing_kernel_high_density: 5

@@ -1,19 +1,35 @@
 # ============================================================
 # Default configuration for CA-APSRG retinal vessel segmentation
 # ============================================================
+# Notes:
+# - Keep original datasets unchanged under data/raw.
+# - Use data/working_png as the standardized PNG working dataset.
+# - Binary masks must be saved as 0/255 PNG files.
+# - APSRG is used as the baseline.
+# - CA-APSRG will refine APSRG output using context-aware adaptive morphology.
 
 project:
   name: "ca_apsrg_retinal_project"
   description: "Context-Aware APSRG with Adaptive Morphological Refinement for retinal blood vessel segmentation"
   random_seed: 42
 
-# Tetap dipertahankan agar kompatibel dengan src/config.py awal
+# Main path configuration
+paths:
+  raw_root: "data/raw/Retinal Vessel"
+  working_png_root: "data/working_png"
+  manifest_path: "data/manifests/manifest.csv"
+  output_root: "outputs"
+  reports_dir: "outputs/reports"
+  experiments_dir: "outputs/experiments"
+  single_test_dir: "outputs/single_test"
+
+# Backward-compatible path configuration
 data:
   raw_root: "data/raw/Retinal Vessel"
   working_png_root: "data/working_png"
   manifest_path: "data/manifests/manifest.csv"
 
-# Tetap dipertahankan agar kompatibel dengan src/config.py awal
+# Backward-compatible experiment configuration
 experiment:
   output_dir: "outputs/experiments"
   reports_dir: "outputs/reports"
@@ -32,6 +48,7 @@ conversion:
     - ".bmp"
 
   copy_existing_png: true
+
   skip_archive_extensions:
     - ".zip"
     - ".7z"
@@ -49,10 +66,12 @@ conversion:
     - "mask"
     - "manual"
     - "label"
+    - "groundtruth"
+    - "ground_truth"
+    - "gt"
     - "1stho"
     - "2ndho"
-    - "ah"
-    - "vk"
+    - "fov"
 
 manifest:
   datasets:
@@ -63,12 +82,16 @@ manifest:
   require_ground_truth: true
   include_fov_mask_if_available: true
 
+  # STARE has two observers commonly named ah and vk.
   stare_observer: "ah"
+
+  # CHASEDB1 has two observers: 1stHO and 2ndHO.
   chasedb1_observer: "1stHO"
 
 preprocessing:
   use_green_channel: true
-  normalize: true
+  normalize_intensity: true
+
   apply_clahe: true
   clahe_clip_limit: 2.0
   clahe_tile_grid_size: [8, 8]
@@ -83,17 +106,33 @@ preprocessing:
   apply_fov_mask: true
 
 apsrg_baseline:
+  # APSRG-style baseline parameters.
+  # These parameters are initial experimental values and can be tuned after
+  # observing results on DRIVE first.
+
   vessel_enhancement_method: "blackhat_multiscale"
   vesselness_kernel_sizes: [7, 11, 15]
 
-  seed_selection_method: "percentile"
+  # options: percentile, polling, percentile_polling
+  seed_selection_method: "percentile_polling"
+
+  # Higher seed percentile means fewer but stronger seed pixels.
   seed_percentile: 92
+
+  # Candidate percentile should be lower than seed percentile.
   candidate_percentile: 78
 
+  # Local polling helps distribute seed points across retinal regions.
+  polling_window_size: 16
+  polling_top_percentile: 97
+  min_seed_distance: 2
+
+  # Region growing parameters.
   region_growing_connectivity: 8
   max_intensity_difference: 18
   max_iterations: 500000
 
+  # Light APSRG post-processing.
   min_component_area: 8
   fill_small_holes_area: 8
 
@@ -118,14 +157,6 @@ ca_apsrg:
   low_density_threshold: 0.025
   high_density_threshold: 0.120
 
-  small_component_area_low_density: 8
-  small_component_area_normal: 14
-  small_component_area_high_density: 24
-
-  closing_kernel_low_density: 3
-  closing_kernel_normal: 3
-  closing_kernel_high_density: 5
-
   target_preserve_thin_vessels: true
 
 adaptive_morphology:
@@ -137,18 +168,22 @@ adaptive_morphology:
   opening_enabled: false
   skeleton_guard_enabled: true
 
+  # Adaptive area filtering.
   small_component_area_low_density: 8
   small_component_area_normal: 14
   small_component_area_high_density: 24
 
+  # Adaptive hole filling.
   hole_area_low_density: 8
   hole_area_normal: 16
   hole_area_high_density: 32
 
+  # Adaptive closing kernel.
   closing_kernel_low_density: 3
   closing_kernel_normal: 3
   closing_kernel_high_density: 5
 
+  # Opening is disabled by default to avoid removing thin vessels too early.
   opening_kernel_low_density: 0
   opening_kernel_normal: 3
   opening_kernel_high_density: 3

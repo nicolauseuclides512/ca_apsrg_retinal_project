@@ -163,27 +163,23 @@ adaptive_morphology:
   enabled: true
 
   remove_small_objects: true
-  fill_small_holes: true
-  closing_enabled: true
-  opening_enabled: false
-  skeleton_guard_enabled: true
+  fill_small_holes: false
+  closing_enabled: false
+  opening_enabled: true
+  skeleton_guard_enabled: false
 
-  # Adaptive area filtering.
-  small_component_area_low_density: 8
-  small_component_area_normal: 14
-  small_component_area_high_density: 24
+  small_component_area_low_density: 12
+  small_component_area_normal: 24
+  small_component_area_high_density: 36
 
-  # Adaptive hole filling.
-  hole_area_low_density: 8
-  hole_area_normal: 16
-  hole_area_high_density: 32
+  hole_area_low_density: 4
+  hole_area_normal: 8
+  hole_area_high_density: 12
 
-  # Adaptive closing kernel.
-  closing_kernel_low_density: 3
-  closing_kernel_normal: 3
-  closing_kernel_high_density: 5
+  closing_kernel_low_density: 0
+  closing_kernel_normal: 0
+  closing_kernel_high_density: 0
 
-  # Opening is disabled by default to avoid removing thin vessels too early.
   opening_kernel_low_density: 0
   opening_kernel_normal: 3
   opening_kernel_high_density: 3

@@ -1,8 +1,19 @@
-numpy>=1.24
+# Core scientific computing
+numpy>=1.24,<3.0
 pandas>=2.0
+scipy>=1.10
+
+# Image processing
 opencv-python>=4.8
 Pillow>=10.0
 scikit-image>=0.22
+imageio>=2.31
+tifffile>=2023.7.10
+
+# Experiment utilities
 matplotlib>=3.7
-tqdm>=4.66
 PyYAML>=6.0
+tqdm>=4.66
+
+# Testing
+pytest>=7.4

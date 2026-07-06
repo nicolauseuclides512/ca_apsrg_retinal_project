@@ -1,31 +1,186 @@
+# ============================================================
+# Default configuration for CA-APSRG retinal vessel segmentation
+# ============================================================
+
+project:
+  name: "ca_apsrg_retinal_project"
+  description: "Context-Aware APSRG with Adaptive Morphological Refinement for retinal blood vessel segmentation"
+  random_seed: 42
+
+# Tetap dipertahankan agar kompatibel dengan src/config.py awal
 data:
   raw_root: "data/raw/Retinal Vessel"
   working_png_root: "data/working_png"
   manifest_path: "data/manifests/manifest.csv"
 
+# Tetap dipertahankan agar kompatibel dengan src/config.py awal
 experiment:
   output_dir: "outputs/experiments"
+  reports_dir: "outputs/reports"
+  single_test_dir: "outputs/single_test"
   always_refine: true
   false_positive_precision_threshold: 0.95
 
+conversion:
+  convertible_extensions:
+    - ".ppm"
+    - ".jpg"
+    - ".jpeg"
+    - ".tif"
+    - ".tiff"
+    - ".gif"
+    - ".bmp"
+
+  copy_existing_png: true
+  skip_archive_extensions:
+    - ".zip"
+    - ".7z"
+    - ".rar"
+    - ".tar"
+    - ".gz"
+
+  preserve_relative_structure: true
+  binarize_masks: true
+  binary_threshold: 127
+  png_compress_level: 3
+  report_csv: "outputs/reports/png_conversion_report.csv"
+
+  mask_name_keywords:
+    - "mask"
+    - "manual"
+    - "label"
+    - "1stho"
+    - "2ndho"
+    - "ah"
+    - "vk"
+
+manifest:
+  datasets:
+    - "DRIVE"
+    - "STARE"
+    - "CHASEDB1"
+
+  require_ground_truth: true
+  include_fov_mask_if_available: true
+
+  stare_observer: "ah"
+  chasedb1_observer: "1stHO"
+
 preprocessing:
   use_green_channel: true
+  normalize: true
+  apply_clahe: true
   clahe_clip_limit: 2.0
   clahe_tile_grid_size: [8, 8]
-  normalize: true
+
+  denoise_method: "median"   # options: none, median, bilateral
+  median_kernel_size: 3
+
+  bilateral_d: 5
+  bilateral_sigma_color: 50
+  bilateral_sigma_space: 50
+
+  apply_fov_mask: true
 
 apsrg_baseline:
+  vessel_enhancement_method: "blackhat_multiscale"
   vesselness_kernel_sizes: [7, 11, 15]
+
+  seed_selection_method: "percentile"
   seed_percentile: 92
   candidate_percentile: 78
+
+  region_growing_connectivity: 8
+  max_intensity_difference: 18
+  max_iterations: 500000
+
   min_component_area: 8
+  fill_small_holes_area: 8
+
+false_positive_analysis:
+  enabled: true
+  precision_threshold: 0.95
+  small_component_area: 12
+  high_small_component_ratio: 0.35
+
+context_features:
+  enabled: true
+  compute_vessel_density: true
+  compute_connected_components: true
+  compute_small_component_ratio: true
+  compute_component_area_statistics: true
+  small_component_area: 12
 
 ca_apsrg:
+  enabled: true
+  always_refine: true
+
   low_density_threshold: 0.025
   high_density_threshold: 0.120
+
   small_component_area_low_density: 8
   small_component_area_normal: 14
   small_component_area_high_density: 24
+
   closing_kernel_low_density: 3
   closing_kernel_normal: 3
   closing_kernel_high_density: 5
+
+  target_preserve_thin_vessels: true
+
+adaptive_morphology:
+  enabled: true
+
+  remove_small_objects: true
+  fill_small_holes: true
+  closing_enabled: true
+  opening_enabled: false
+  skeleton_guard_enabled: true
+
+  small_component_area_low_density: 8
+  small_component_area_normal: 14
+  small_component_area_high_density: 24
+
+  hole_area_low_density: 8
+  hole_area_normal: 16
+  hole_area_high_density: 32
+
+  closing_kernel_low_density: 3
+  closing_kernel_normal: 3
+  closing_kernel_high_density: 5
+
+  opening_kernel_low_density: 0
+  opening_kernel_normal: 3
+  opening_kernel_high_density: 3
+
+evaluation:
+  binary_threshold: 127
+  evaluate_inside_fov_only: true
+
+  positive_label: 255
+  negative_label: 0
+
+  metrics:
+    - "accuracy"
+    - "precision"
+    - "recall"
+    - "specificity"
+    - "f1_score"
+    - "iou"
+
+outputs:
+  save_preprocessed: true
+  save_apsrg_mask: true
+  save_ca_apsrg_mask: true
+  save_overlay: true
+  save_metrics_per_image: true
+  save_metrics_summary: true
+
+  overlay_alpha: 0.45
+  metrics_per_image_csv: "outputs/experiments/metrics_per_image.csv"
+  metrics_summary_csv: "outputs/experiments/metrics_summary.csv"
+
+visualization:
+  dpi: 150
+  show_titles: true
+  save_side_by_side: true

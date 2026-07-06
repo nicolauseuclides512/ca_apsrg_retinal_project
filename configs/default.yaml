@@ -188,6 +188,9 @@ adaptive_morphology:
   opening_kernel_normal: 3
   opening_kernel_high_density: 3
 
+  skeleton_restore_radius: 1
+  skeleton_min_component_length: 6
+
 evaluation:
   binary_threshold: 127
   evaluate_inside_fov_only: true

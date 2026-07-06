@@ -165,12 +165,12 @@ adaptive_morphology:
   remove_small_objects: true
   fill_small_holes: false
   closing_enabled: false
-  opening_enabled: true
-  skeleton_guard_enabled: false
+  opening_enabled: false
+  skeleton_guard_enabled: true
 
-  small_component_area_low_density: 12
-  small_component_area_normal: 24
-  small_component_area_high_density: 36
+  small_component_area_low_density: 8
+  small_component_area_normal: 18
+  small_component_area_high_density: 28
 
   hole_area_low_density: 4
   hole_area_normal: 8
@@ -181,8 +181,8 @@ adaptive_morphology:
   closing_kernel_high_density: 0
 
   opening_kernel_low_density: 0
-  opening_kernel_normal: 3
-  opening_kernel_high_density: 3
+  opening_kernel_normal: 0
+  opening_kernel_high_density: 0
 
   skeleton_restore_radius: 1
   skeleton_min_component_length: 6

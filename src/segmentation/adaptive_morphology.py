@@ -24,8 +24,9 @@ from typing import Any, Optional
 
 import cv2
 import numpy as np
-from skimage.morphology import remove_small_holes, skeletonize
+from skimage.morphology import skeletonize
 
+from src.segmentation.skimage_compat import remove_small_holes_compat
 from src.segmentation.context_features import (
     ContextFeatureConfig,
     ContextFeatures,
@@ -220,7 +221,7 @@ def fill_holes_adaptive(mask: np.ndarray, hole_area: int = 16) -> np.ndarray:
     if hole_area <= 0:
         return mask_bool
 
-    return remove_small_holes(mask_bool, area_threshold=hole_area).astype(bool)
+    return remove_small_holes_compat(mask_bool, area_threshold=hole_area)
 
 
 def apply_morphological_closing(mask: np.ndarray, kernel_size: int = 3) -> np.ndarray:

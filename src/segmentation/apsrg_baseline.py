@@ -31,8 +31,8 @@ from typing import Any, Literal, Optional
 
 import cv2
 import numpy as np
-from skimage.morphology import remove_small_holes
 
+from src.segmentation.skimage_compat import remove_small_holes_compat
 from src.utils.image_io import (
     ensure_binary_mask,
     normalize_to_uint8,
@@ -475,7 +475,7 @@ def fill_small_holes(mask: np.ndarray, area_threshold: int = 8) -> np.ndarray:
     if area_threshold <= 0:
         return mask_bool
 
-    return remove_small_holes(mask_bool, area_threshold=area_threshold).astype(bool)
+    return remove_small_holes_compat(mask_bool, area_threshold=area_threshold)
 
 
 def apsrg_postprocess(mask: np.ndarray, *, params: APSRGParams) -> np.ndarray:

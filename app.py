@@ -285,7 +285,7 @@ def render_single_image_result(
     if baseline_metrics is not None and ca_metrics is not None:
         st.subheader("Metrics Comparison")
         metrics_df = make_metrics_dataframe(baseline_metrics, ca_metrics)
-        st.dataframe(metrics_df, use_container_width=True, hide_index=True)
+        st.dataframe(metrics_df, width="stretch", hide_index=True)
     else:
         st.info("Ground truth mask not uploaded; metrics cannot be computed.")
 
@@ -306,7 +306,7 @@ def render_single_image_result(
     if show_debug_features:
         st.subheader("Debug and Context Features")
         context_df = make_context_dataframe(ca_debug)
-        st.dataframe(context_df, use_container_width=True, hide_index=True)
+        st.dataframe(context_df, width="stretch", hide_index=True)
 
 
 def single_image_demo_page(config_path: Path) -> None:
@@ -650,7 +650,7 @@ def render_experiment_overview(result_set: dict[str, Any], tables: dict[str, pd.
     article_df = tables.get("Article table mean/std", pd.DataFrame())
     if not article_df.empty:
         st.subheader("Article-style Summary")
-        st.dataframe(article_df, use_container_width=True, hide_index=True)
+        st.dataframe(article_df, width="stretch", hide_index=True)
 
     if not improvement_df.empty:
         st.subheader("Improvement by Dataset")
@@ -665,7 +665,7 @@ def render_experiment_overview(result_set: dict[str, Any], tables: dict[str, pd.
             "f1_score_n_decreased",
         ]
         cols = [col for col in preferred_cols if col in improvement_df.columns]
-        st.dataframe(improvement_df[cols] if cols else improvement_df, use_container_width=True, hide_index=True)
+        st.dataframe(improvement_df[cols] if cols else improvement_df, width="stretch", hide_index=True)
 
 
 def render_metric_charts(tables: dict[str, pd.DataFrame]) -> None:
@@ -697,7 +697,7 @@ def render_saved_plots(result_set: dict[str, Any]) -> None:
         cols = st.columns(2)
         for col, path in zip(cols, plot_paths[start : start + 2]):
             with col:
-                st.image(str(path), caption=path.stem.replace("_", " ").title(), use_container_width=True)
+                st.image(str(path), caption=path.stem.replace("_", " ").title(), width="stretch")
 
 
 def selected_image_metrics(row: pd.Series) -> pd.DataFrame:
@@ -755,7 +755,7 @@ def render_image_browser(result_set: dict[str, Any], tables: dict[str, pd.DataFr
     row = filtered[filtered["image_id"].astype(str) == selected_image_id].iloc[0]
 
     st.subheader(f"{selected_dataset} / {selected_image_id}")
-    st.dataframe(selected_image_metrics(row), use_container_width=True, hide_index=True)
+    st.dataframe(selected_image_metrics(row), width="stretch", hide_index=True)
 
     images: list[tuple[str, Any]] = []
     missing: list[str] = []
@@ -785,7 +785,7 @@ def render_tables(tables: dict[str, pd.DataFrame]) -> None:
         return
     table_name = st.selectbox("Table", list(tables.keys()))
     df = tables[table_name]
-    st.dataframe(df, use_container_width=True)
+    st.dataframe(df, width="stretch")
     st.download_button(
         "Download selected table as CSV",
         data=df.to_csv(index=False).encode("utf-8"),
@@ -806,7 +806,7 @@ def render_case_tables_and_report(result_set: dict[str, Any], tables: dict[str, 
         st.info("No case tables found.")
         return
     table_name = st.selectbox("Case table", list(case_tables.keys()))
-    st.dataframe(case_tables[table_name], use_container_width=True, hide_index=True)
+    st.dataframe(case_tables[table_name], width="stretch", hide_index=True)
 
 
 def collect_all_experiment_comparison(result_sets: list[dict[str, Any]]) -> pd.DataFrame:
@@ -843,7 +843,7 @@ def render_all_experiment_comparison(result_sets: list[dict[str, Any]]) -> None:
         return
 
     st.subheader("Experiment 1-6 Comparison")
-    st.dataframe(comparison_df, use_container_width=True, hide_index=True)
+    st.dataframe(comparison_df, width="stretch", hide_index=True)
 
     for metric in ["delta_precision", "delta_recall", "delta_f1_score", "delta_iou"]:
         if metric not in comparison_df.columns:

@@ -172,7 +172,7 @@ def show_image_grid(title_image_pairs: Sequence[tuple[str, np.ndarray | None]], 
         cols = st.columns(columns)
         for col, (title, image) in zip(cols, pairs[start : start + columns]):
             with col:
-                st.image(image, caption=title, use_container_width=True)
+                st.image(image, caption=title, width="stretch")
 
 
 def safe_read_csv(path: str | Path) -> pd.DataFrame | None:

@@ -162,7 +162,7 @@ ca_apsrg:
 adaptive_morphology:
   enabled: true
 
-  remove_small_objects: true
+  remove_small_objects: false
   fill_small_holes: false
   closing_enabled: false
   opening_enabled: false

@@ -1,0 +1,372 @@
+{
+  "dataset": "CHASEDB1",
+  "image_id": "Image_02R",
+  "image_path": "E:\\ca_apsrg_retinal_project\\data\\working_png\\CHASEDB1\\CHASEDB1\\Image_02R.png",
+  "mask_path": "E:\\ca_apsrg_retinal_project\\data\\working_png\\CHASEDB1\\CHASEDB1\\Image_02R_1stHO.png",
+  "fov_path": "",
+  "pipeline_config": {
+    "preprocessing": {
+      "use_green_channel": true,
+      "normalize_intensity": true,
+      "apply_clahe": true,
+      "clahe_clip_limit": 2.0,
+      "clahe_tile_grid_size": [
+        8,
+        8
+      ],
+      "denoise_method": "median",
+      "median_kernel_size": 3,
+      "bilateral_d": 5,
+      "bilateral_sigma_color": 50.0,
+      "bilateral_sigma_space": 50.0,
+      "apply_fov_mask": true
+    },
+    "apsrg_baseline": {
+      "vessel_enhancement_method": "blackhat_multiscale",
+      "vesselness_kernel_sizes": [
+        7,
+        11,
+        15
+      ],
+      "seed_selection_method": "percentile_polling",
+      "seed_percentile": 92.0,
+      "candidate_percentile": 78.0,
+      "polling_window_size": 16,
+      "polling_top_percentile": 97.0,
+      "min_seed_distance": 2,
+      "region_growing_connectivity": 8,
+      "max_intensity_difference": 18.0,
+      "max_iterations": 500000,
+      "min_component_area": 8,
+      "fill_small_holes_area": 8
+    },
+    "adaptive_morphology": {
+      "enabled": true,
+      "remove_small_objects": true,
+      "fill_small_holes": false,
+      "closing_enabled": false,
+      "opening_enabled": true,
+      "skeleton_guard_enabled": false,
+      "small_component_area_low_density": 12,
+      "small_component_area_normal": 24,
+      "small_component_area_high_density": 36,
+      "hole_area_low_density": 4,
+      "hole_area_normal": 8,
+      "hole_area_high_density": 12,
+      "closing_kernel_low_density": 0,
+      "closing_kernel_normal": 0,
+      "closing_kernel_high_density": 0,
+      "opening_kernel_low_density": 0,
+      "opening_kernel_normal": 3,
+      "opening_kernel_high_density": 3,
+      "low_density_threshold": 0.025,
+      "high_density_threshold": 0.12,
+      "skeleton_restore_radius": 1,
+      "skeleton_min_component_length": 6
+    },
+    "ca_apsrg": {
+      "enabled": true,
+      "always_refine": true,
+      "low_density_threshold": 0.025,
+      "high_density_threshold": 0.12,
+      "target_preserve_thin_vessels": true
+    },
+    "context_features": {
+      "small_component_area": 12,
+      "connectivity": 8,
+      "compute_skeleton_features": true,
+      "resize_fov_to_mask": false
+    },
+    "evaluation": {
+      "binary_threshold": 127,
+      "evaluate_inside_fov_only": true,
+      "resize_prediction_to_gt": true,
+      "resize_fov_to_gt": true
+    },
+    "outputs": {
+      "save_preprocessed": true,
+      "save_apsrg_mask": true,
+      "save_ca_apsrg_mask": true,
+      "save_overlay": true,
+      "save_side_by_side": true,
+      "save_debug_json": true,
+      "overlay_alpha": 0.45
+    },
+    "always_refine": true,
+    "precision_threshold": 0.95
+  },
+  "apsrg_debug": {
+    "vesselness": {
+      "type": "ndarray",
+      "shape": [
+        960,
+        999
+      ],
+      "dtype": "uint8",
+      "min": 0.0,
+      "max": 255.0,
+      "sum": 16426336.0
+    },
+    "seeds": {
+      "type": "ndarray",
+      "shape": [
+        960,
+        999
+      ],
+      "dtype": "bool",
+      "min": 0.0,
+      "max": 1.0,
+      "sum": 52007.0
+    },
+    "candidate": {
+      "type": "ndarray",
+      "shape": [
+        960,
+        999
+      ],
+      "dtype": "bool",
+      "min": 0.0,
+      "max": 1.0,
+      "sum": 135915.0
+    },
+    "grown_before_postprocess": {
+      "type": "ndarray",
+      "shape": [
+        960,
+        999
+      ],
+      "dtype": "bool",
+      "min": 0.0,
+      "max": 1.0,
+      "sum": 101524.0
+    },
+    "seed_thr": 67.0,
+    "candidate_thr": 40.0,
+    "n_seed_pixels": 52007,
+    "n_candidate_pixels": 135915,
+    "n_output_pixels": 101692,
+    "params": {
+      "vessel_enhancement_method": "blackhat_multiscale",
+      "vesselness_kernel_sizes": [
+        7,
+        11,
+        15
+      ],
+      "seed_selection_method": "percentile_polling",
+      "seed_percentile": 92.0,
+      "candidate_percentile": 78.0,
+      "polling_window_size": 16,
+      "polling_top_percentile": 97.0,
+      "min_seed_distance": 2,
+      "region_growing_connectivity": 8,
+      "max_intensity_difference": 18.0,
+      "max_iterations": 500000,
+      "min_component_area": 8,
+      "fill_small_holes_area": 8
+    }
+  },
+  "ca_apsrg_debug": {
+    "enabled": true,
+    "context_features": {
+      "vessel_density": 0.1060352018685352,
+      "vessel_pixel_count": 101692,
+      "valid_area_pixel_count": 959040,
+      "component_count": 1060,
+      "mean_component_area": 95.93584905660377,
+      "median_component_area": 26.0,
+      "std_component_area": 348.16223397674156,
+      "min_component_area": 8,
+      "max_component_area": 5194,
+      "small_component_count": 174,
+      "small_component_ratio": 0.1641509433962264,
+      "small_component_area_total": 1642,
+      "small_component_area_ratio": 0.016146796208157968,
+      "largest_component_area": 5194,
+      "largest_component_area_ratio": 0.051075797506195175,
+      "skeleton_pixel_count": 25243,
+      "skeleton_to_vessel_ratio": 0.2482299492585454,
+      "endpoint_count": 3239,
+      "branchpoint_count": 4130,
+      "endpoint_density": 0.1283127995880046,
+      "branchpoint_density": 0.16360971358396387,
+      "density_level": "normal",
+      "noise_level": "low",
+      "recommended_refinement_level": "normal"
+    },
+    "refined_context_features": {
+      "vessel_density": 0.09131006006006007,
+      "vessel_pixel_count": 87570,
+      "valid_area_pixel_count": 959040,
+      "component_count": 910,
+      "mean_component_area": 96.23076923076923,
+      "median_component_area": 31.0,
+      "std_component_area": 283.6952349018251,
+      "min_component_area": 5,
+      "max_component_area": 4242,
+      "small_component_count": 148,
+      "small_component_ratio": 0.16263736263736264,
+      "small_component_area_total": 1059,
+      "small_component_area_ratio": 0.012093182596779719,
+      "largest_component_area": 4242,
+      "largest_component_area_ratio": 0.04844124700239808,
+      "skeleton_pixel_count": 16958,
+      "skeleton_to_vessel_ratio": 0.19365079365079366,
+      "endpoint_count": 2055,
+      "branchpoint_count": 1644,
+      "endpoint_density": 0.12118174313008609,
+      "branchpoint_density": 0.09694539450406887,
+      "density_level": "normal",
+      "noise_level": "low",
+      "recommended_refinement_level": "normal"
+    },
+    "refinement_debug": {
+      "enabled": true,
+      "context_features": {
+        "vessel_density": 0.1060352018685352,
+        "vessel_pixel_count": 101692,
+        "valid_area_pixel_count": 959040,
+        "component_count": 1060,
+        "mean_component_area": 95.93584905660377,
+        "median_component_area": 26.0,
+        "std_component_area": 348.16223397674156,
+        "min_component_area": 8,
+        "max_component_area": 5194,
+        "small_component_count": 174,
+        "small_component_ratio": 0.1641509433962264,
+        "small_component_area_total": 1642,
+        "small_component_area_ratio": 0.016146796208157968,
+        "largest_component_area": 5194,
+        "largest_component_area_ratio": 0.051075797506195175,
+        "skeleton_pixel_count": 25243,
+        "skeleton_to_vessel_ratio": 0.2482299492585454,
+        "endpoint_count": 3239,
+        "branchpoint_count": 4130,
+        "endpoint_density": 0.1283127995880046,
+        "branchpoint_density": 0.16360971358396387,
+        "density_level": "normal",
+        "noise_level": "low",
+        "recommended_refinement_level": "normal"
+      },
+      "refined_context_features": {
+        "vessel_density": 0.09131006006006007,
+        "vessel_pixel_count": 87570,
+        "valid_area_pixel_count": 959040,
+        "component_count": 910,
+        "mean_component_area": 96.23076923076923,
+        "median_component_area": 31.0,
+        "std_component_area": 283.6952349018251,
+        "min_component_area": 5,
+        "max_component_area": 4242,
+        "small_component_count": 148,
+        "small_component_ratio": 0.16263736263736264,
+        "small_component_area_total": 1059,
+        "small_component_area_ratio": 0.012093182596779719,
+        "largest_component_area": 4242,
+        "largest_component_area_ratio": 0.04844124700239808,
+        "skeleton_pixel_count": 16958,
+        "skeleton_to_vessel_ratio": 0.19365079365079366,
+        "endpoint_count": 2055,
+        "branchpoint_count": 1644,
+        "endpoint_density": 0.12118174313008609,
+        "branchpoint_density": 0.09694539450406887,
+        "density_level": "normal",
+        "noise_level": "low",
+        "recommended_refinement_level": "normal"
+      },
+      "selected_parameters": {
+        "refinement_level": "normal",
+        "density_level": "normal",
+        "noise_level": "low",
+        "min_component_area": 24,
+        "hole_area": 8,
+        "closing_kernel_size": 0,
+        "opening_kernel_size": 3,
+        "use_opening": true,
+        "use_closing": false,
+        "use_skeleton_guard": false
+      },
+      "config": {
+        "enabled": true,
+        "remove_small_objects": true,
+        "fill_small_holes": false,
+        "closing_enabled": false,
+        "opening_enabled": true,
+        "skeleton_guard_enabled": false,
+        "small_component_area_low_density": 12,
+        "small_component_area_normal": 24,
+        "small_component_area_high_density": 36,
+        "hole_area_low_density": 4,
+        "hole_area_normal": 8,
+        "hole_area_high_density": 12,
+        "closing_kernel_low_density": 0,
+        "closing_kernel_normal": 0,
+        "closing_kernel_high_density": 0,
+        "opening_kernel_low_density": 0,
+        "opening_kernel_normal": 3,
+        "opening_kernel_high_density": 3,
+        "low_density_threshold": 0.025,
+        "high_density_threshold": 0.12,
+        "skeleton_restore_radius": 1,
+        "skeleton_min_component_length": 6
+      },
+      "intermediate_masks": {
+        "baseline": {
+          "type": "ndarray",
+          "shape": [
+            960,
+            999
+          ],
+          "dtype": "bool",
+          "min": 0.0,
+          "max": 1.0,
+          "sum": 101692.0
+        },
+        "after_remove_small_objects": {
+          "type": "ndarray",
+          "shape": [
+            960,
+            999
+          ],
+          "dtype": "bool",
+          "min": 0.0,
+          "max": 1.0,
+          "sum": 94739.0
+        },
+        "after_opening": {
+          "type": "ndarray",
+          "shape": [
+            960,
+            999
+          ],
+          "dtype": "bool",
+          "min": 0.0,
+          "max": 1.0,
+          "sum": 87570.0
+        }
+      },
+      "n_pixels_before": 101692,
+      "n_pixels_after": 87570,
+      "n_pixels_removed": 14122,
+      "n_pixels_added": 0
+    },
+    "ca_apsrg_config": {
+      "enabled": true,
+      "always_refine": true,
+      "low_density_threshold": 0.025,
+      "high_density_threshold": 0.12,
+      "target_preserve_thin_vessels": true
+    },
+    "n_baseline_pixels": 101692,
+    "n_refined_pixels": 87570,
+    "n_pixels_removed": 14122,
+    "n_pixels_added": 0
+  },
+  "saved_paths": {
+    "preprocessed_path": "E:\\ca_apsrg_retinal_project\\outputs\\experiments_exp2_precision_oriented\\CHASEDB1\\preprocessed\\Image_02R_preprocessed.png",
+    "baseline_mask_path": "E:\\ca_apsrg_retinal_project\\outputs\\experiments_exp2_precision_oriented\\CHASEDB1\\baseline_masks\\Image_02R_apsrg_baseline.png",
+    "ca_apsrg_mask_path": "E:\\ca_apsrg_retinal_project\\outputs\\experiments_exp2_precision_oriented\\CHASEDB1\\ca_apsrg_masks\\Image_02R_ca_apsrg.png",
+    "baseline_overlay_path": "E:\\ca_apsrg_retinal_project\\outputs\\experiments_exp2_precision_oriented\\CHASEDB1\\overlays\\Image_02R_baseline_overlay.png",
+    "ca_apsrg_overlay_path": "E:\\ca_apsrg_retinal_project\\outputs\\experiments_exp2_precision_oriented\\CHASEDB1\\overlays\\Image_02R_ca_apsrg_overlay.png",
+    "comparison_path": "E:\\ca_apsrg_retinal_project\\outputs\\experiments_exp2_precision_oriented\\CHASEDB1\\comparison\\Image_02R_comparison.png"
+  }
+}

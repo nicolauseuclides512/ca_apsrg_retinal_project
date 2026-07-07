@@ -8,6 +8,10 @@ data/working_png/
 outputs/*
 !outputs/analysis/
 !outputs/analysis/**
+!outputs/analysis_exp*/
+!outputs/analysis_exp*/**
 !outputs/experiments/
 !outputs/experiments/**
+!outputs/experiments_exp*/
+!outputs/experiments_exp*/**
 *.log

@@ -1,0 +1,11 @@
+dataset,image_id,comparison_path,baseline_f1_score,ca_apsrg_f1_score,delta_f1_score,delta_precision,delta_recall
+CHASEDB1,Image_01L,E:\ca_apsrg_retinal_project\outputs\experiments_exp6_no_small_component\CHASEDB1\comparison\Image_01L_comparison.png,0.5520798182268115,0.5520798182268115,0.0,0.0,0.0
+CHASEDB1,Image_01R,E:\ca_apsrg_retinal_project\outputs\experiments_exp6_no_small_component\CHASEDB1\comparison\Image_01R_comparison.png,0.5426298476066865,0.5426298476066865,0.0,0.0,0.0
+CHASEDB1,Image_02L,E:\ca_apsrg_retinal_project\outputs\experiments_exp6_no_small_component\CHASEDB1\comparison\Image_02L_comparison.png,0.5279164750750588,0.5279164750750588,0.0,0.0,0.0
+CHASEDB1,Image_02R,E:\ca_apsrg_retinal_project\outputs\experiments_exp6_no_small_component\CHASEDB1\comparison\Image_02R_comparison.png,0.5140274773193191,0.5140274773193191,0.0,0.0,0.0
+CHASEDB1,Image_03L,E:\ca_apsrg_retinal_project\outputs\experiments_exp6_no_small_component\CHASEDB1\comparison\Image_03L_comparison.png,0.6304531284983552,0.6304531284983552,0.0,0.0,0.0
+CHASEDB1,Image_03R,E:\ca_apsrg_retinal_project\outputs\experiments_exp6_no_small_component\CHASEDB1\comparison\Image_03R_comparison.png,0.5859627132740979,0.5859627132740979,0.0,0.0,0.0
+CHASEDB1,Image_04L,E:\ca_apsrg_retinal_project\outputs\experiments_exp6_no_small_component\CHASEDB1\comparison\Image_04L_comparison.png,0.558252870108471,0.558252870108471,0.0,0.0,0.0
+CHASEDB1,Image_04R,E:\ca_apsrg_retinal_project\outputs\experiments_exp6_no_small_component\CHASEDB1\comparison\Image_04R_comparison.png,0.5299055206351143,0.5299055206351143,0.0,0.0,0.0
+CHASEDB1,Image_05L,E:\ca_apsrg_retinal_project\outputs\experiments_exp6_no_small_component\CHASEDB1\comparison\Image_05L_comparison.png,0.582165736014525,0.582165736014525,0.0,0.0,0.0
+CHASEDB1,Image_05R,E:\ca_apsrg_retinal_project\outputs\experiments_exp6_no_small_component\CHASEDB1\comparison\Image_05R_comparison.png,0.6173870306865685,0.6173870306865685,0.0,0.0,0.0

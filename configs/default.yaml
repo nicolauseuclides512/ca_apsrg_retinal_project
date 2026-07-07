@@ -166,15 +166,15 @@ adaptive_morphology:
   fill_small_holes: false
   closing_enabled: false
   opening_enabled: false
-  skeleton_guard_enabled: true
+  skeleton_guard_enabled: false
 
-  small_component_area_low_density: 18
+  small_component_area_low_density: 8
   small_component_area_normal: 18
-  small_component_area_high_density: 18
+  small_component_area_high_density: 28
 
-  hole_area_low_density: 8
+  hole_area_low_density: 4
   hole_area_normal: 8
-  hole_area_high_density: 8
+  hole_area_high_density: 12
 
   closing_kernel_low_density: 0
   closing_kernel_normal: 0

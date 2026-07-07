@@ -5,5 +5,9 @@ __pycache__/
 .idea/
 data/raw/
 data/working_png/
-# outputs/
+outputs/*
+!outputs/analysis/
+!outputs/analysis/**
+!outputs/experiments/
+!outputs/experiments/**
 *.log

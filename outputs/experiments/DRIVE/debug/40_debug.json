@@ -46,13 +46,13 @@
       "fill_small_holes": false,
       "closing_enabled": false,
       "opening_enabled": false,
-      "skeleton_guard_enabled": true,
-      "small_component_area_low_density": 18,
+      "skeleton_guard_enabled": false,
+      "small_component_area_low_density": 8,
       "small_component_area_normal": 18,
-      "small_component_area_high_density": 18,
-      "hole_area_low_density": 8,
+      "small_component_area_high_density": 28,
+      "hole_area_low_density": 4,
       "hole_area_normal": 8,
-      "hole_area_high_density": 8,
+      "hole_area_high_density": 12,
       "closing_kernel_low_density": 0,
       "closing_kernel_normal": 0,
       "closing_kernel_high_density": 0,
@@ -283,7 +283,7 @@
         "opening_kernel_size": 0,
         "use_opening": false,
         "use_closing": false,
-        "use_skeleton_guard": true
+        "use_skeleton_guard": false
       },
       "config": {
         "enabled": true,
@@ -291,13 +291,13 @@
         "fill_small_holes": false,
         "closing_enabled": false,
         "opening_enabled": false,
-        "skeleton_guard_enabled": true,
-        "small_component_area_low_density": 18,
+        "skeleton_guard_enabled": false,
+        "small_component_area_low_density": 8,
         "small_component_area_normal": 18,
-        "small_component_area_high_density": 18,
-        "hole_area_low_density": 8,
+        "small_component_area_high_density": 28,
+        "hole_area_low_density": 4,
         "hole_area_normal": 8,
-        "hole_area_high_density": 8,
+        "hole_area_high_density": 12,
         "closing_kernel_low_density": 0,
         "closing_kernel_normal": 0,
         "closing_kernel_high_density": 0,
@@ -331,17 +331,6 @@
           "min": 0.0,
           "max": 1.0,
           "sum": 24247.0
-        },
-        "after_skeleton_guard": {
-          "type": "ndarray",
-          "shape": [
-            584,
-            565
-          ],
-          "dtype": "bool",
-          "min": 0.0,
-          "max": 1.0,
-          "sum": 24247.0
         }
       },
       "n_pixels_before": 24365,
@@ -362,11 +351,11 @@
     "n_pixels_added": 0
   },
   "saved_paths": {
-    "preprocessed_path": "E:\\ca_apsrg_retinal_project\\outputs\\experiments_exp4_static\\DRIVE\\preprocessed\\40_preprocessed.png",
-    "baseline_mask_path": "E:\\ca_apsrg_retinal_project\\outputs\\experiments_exp4_static\\DRIVE\\baseline_masks\\40_apsrg_baseline.png",
-    "ca_apsrg_mask_path": "E:\\ca_apsrg_retinal_project\\outputs\\experiments_exp4_static\\DRIVE\\ca_apsrg_masks\\40_ca_apsrg.png",
-    "baseline_overlay_path": "E:\\ca_apsrg_retinal_project\\outputs\\experiments_exp4_static\\DRIVE\\overlays\\40_baseline_overlay.png",
-    "ca_apsrg_overlay_path": "E:\\ca_apsrg_retinal_project\\outputs\\experiments_exp4_static\\DRIVE\\overlays\\40_ca_apsrg_overlay.png",
-    "comparison_path": "E:\\ca_apsrg_retinal_project\\outputs\\experiments_exp4_static\\DRIVE\\comparison\\40_comparison.png"
+    "preprocessed_path": "E:\\ca_apsrg_retinal_project\\outputs\\experiments\\DRIVE\\preprocessed\\40_preprocessed.png",
+    "baseline_mask_path": "E:\\ca_apsrg_retinal_project\\outputs\\experiments\\DRIVE\\baseline_masks\\40_apsrg_baseline.png",
+    "ca_apsrg_mask_path": "E:\\ca_apsrg_retinal_project\\outputs\\experiments\\DRIVE\\ca_apsrg_masks\\40_ca_apsrg.png",
+    "baseline_overlay_path": "E:\\ca_apsrg_retinal_project\\outputs\\experiments\\DRIVE\\overlays\\40_baseline_overlay.png",
+    "ca_apsrg_overlay_path": "E:\\ca_apsrg_retinal_project\\outputs\\experiments\\DRIVE\\overlays\\40_ca_apsrg_overlay.png",
+    "comparison_path": "E:\\ca_apsrg_retinal_project\\outputs\\experiments\\DRIVE\\comparison\\40_comparison.png"
   }
 }

@@ -1,0 +1,11 @@
+dataset,image_id,comparison_path,baseline_precision,ca_apsrg_precision,delta_precision,delta_recall,delta_f1_score
+CHASEDB1,Image_04R,E:\ca_apsrg_retinal_project\outputs\experiments_exp4_static\CHASEDB1\comparison\Image_04R_comparison.png,0.448739511590104,0.4800748079255964,0.031335296335492424,-0.003643801473775521,0.019913865276986797
+CHASEDB1,Image_07L,E:\ca_apsrg_retinal_project\outputs\experiments_exp4_static\CHASEDB1\comparison\Image_07L_comparison.png,0.4742065290289837,0.502373135908964,0.02816660687998035,-0.001887575469551095,0.018902129679723267
+CHASEDB1,Image_07R,E:\ca_apsrg_retinal_project\outputs\experiments_exp4_static\CHASEDB1\comparison\Image_07R_comparison.png,0.4832921684141735,0.5100544531234067,0.026762284709233197,-0.0036865475276832704,0.016742667649661036
+CHASEDB1,Image_14L,E:\ca_apsrg_retinal_project\outputs\experiments_exp4_static\CHASEDB1\comparison\Image_14L_comparison.png,0.4648138893516205,0.488001011259991,0.023187121908370523,-0.0005756441912956323,0.01736237282167874
+STARE,im0004,E:\ca_apsrg_retinal_project\outputs\experiments_exp4_static\STARE\comparison\im0004_comparison.png,0.4177973505446895,0.4398131580434332,0.022015807498743656,-0.0026118808727504383,0.01704325552373398
+CHASEDB1,Image_05R,E:\ca_apsrg_retinal_project\outputs\experiments_exp4_static\CHASEDB1\comparison\Image_05R_comparison.png,0.5622372417677469,0.5838888947032412,0.021651652935494314,-0.0013592447007824138,0.012254302857435229
+CHASEDB1,Image_01R,E:\ca_apsrg_retinal_project\outputs\experiments_exp4_static\CHASEDB1\comparison\Image_01R_comparison.png,0.4579076574450004,0.4794592609502635,0.021551603505263084,-0.002622257612784562,0.013926155365852066
+CHASEDB1,Image_05L,E:\ca_apsrg_retinal_project\outputs\experiments_exp4_static\CHASEDB1\comparison\Image_05L_comparison.png,0.5139055491154679,0.5342733462217366,0.02036779710626868,-0.0017381914907625973,0.012164459115123094
+CHASEDB1,Image_14R,E:\ca_apsrg_retinal_project\outputs\experiments_exp4_static\CHASEDB1\comparison\Image_14R_comparison.png,0.3639623808712647,0.3842875988193871,0.02032521794812242,-0.0018535350834982811,0.017216795530803186
+CHASEDB1,Image_12R,E:\ca_apsrg_retinal_project\outputs\experiments_exp4_static\CHASEDB1\comparison\Image_12R_comparison.png,0.4778482499412732,0.4972782832550553,0.019430033313782125,-0.003475621001262641,0.012677479281817061

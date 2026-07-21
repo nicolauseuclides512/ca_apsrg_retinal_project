@@ -23,7 +23,7 @@ Conventions:
 from __future__ import annotations
 
 import json
-from dataclasses import asdict, dataclass
+from dataclasses import asdict, dataclass, replace
 from pathlib import Path
 from typing import Any, Optional
 
@@ -185,6 +185,390 @@ class PipelineConfig:
             "precision_threshold": self.precision_threshold,
         }
 
+VALID_SEED_SELECTION_METHODS = {
+    "percentile",
+    "polling",
+    "percentile_polling",
+    "polling_percentile",
+    "harris_polling",
+    "percentile_harris_polling",
+    "harris_percentile",
+    "polling_harris",
+    "hybrid_harris",
+    "fuzzy_srg",
+    "percentile_fuzzy_srg",
+    "polling_fuzzy_srg",
+    "fuzzy_harris",
+    "hybrid_fuzzy_harris",
+    "selective_fuzzy_harris",
+}
+
+VALID_REGION_GROWING_MODES = {
+    "bfs",
+    "edge_delayed",
+}
+
+VALID_EDGE_PRIORITY_MODES = {
+    "kang_product",
+    "additive",
+    "hybrid",
+}
+
+
+def _is_zero_or_odd(value: int) -> bool:
+    """Return True when value is zero or a positive odd integer."""
+    value = int(value)
+    return value == 0 or (value > 0 and value % 2 == 1)
+
+
+def validate_pipeline_config(
+    config: PipelineConfig,
+) -> None:
+    """
+    Validate the resolved pipeline configuration.
+
+    Raises
+    ------
+    ValueError
+        When one or more configuration values are invalid.
+    """
+    errors: list[str] = []
+
+    apsrg = config.apsrg
+    harris = apsrg.harris_seed
+    fuzzy = apsrg.srg_features
+    hybrid = apsrg.hybrid_seed
+    growing = apsrg.edge_delayed_region_growing
+    ca_config = config.ca_apsrg
+    process = ca_config.process_context
+    morphology = config.adaptive_morphology
+
+    seed_method = str(
+        apsrg.seed_selection_method
+    ).lower()
+
+    if seed_method not in VALID_SEED_SELECTION_METHODS:
+        errors.append(
+            "apsrg_baseline.seed_selection_method tidak valid: "
+            f"{apsrg.seed_selection_method!r}"
+        )
+
+    growing_mode = str(
+        apsrg.region_growing_mode
+    ).lower()
+
+    if growing_mode not in VALID_REGION_GROWING_MODES:
+        errors.append(
+            "apsrg_baseline.region_growing_mode tidak valid: "
+            f"{apsrg.region_growing_mode!r}"
+        )
+
+    if not 0.0 <= float(apsrg.seed_percentile) <= 100.0:
+        errors.append(
+            "apsrg_baseline.seed_percentile harus berada pada 0–100."
+        )
+
+    if not 0.0 <= float(apsrg.candidate_percentile) <= 100.0:
+        errors.append(
+            "apsrg_baseline.candidate_percentile harus berada pada 0–100."
+        )
+
+    if float(apsrg.candidate_percentile) > float(
+        apsrg.seed_percentile
+    ):
+        errors.append(
+            "candidate_percentile seharusnya tidak lebih besar "
+            "daripada seed_percentile."
+        )
+
+    if not apsrg.vesselness_kernel_sizes:
+        errors.append(
+            "vesselness_kernel_sizes tidak boleh kosong."
+        )
+
+    for kernel_size in apsrg.vesselness_kernel_sizes:
+        if int(kernel_size) < 3 or int(kernel_size) % 2 == 0:
+            errors.append(
+                "Semua vesselness_kernel_sizes harus berupa "
+                f"bilangan ganjil >= 3. Nilai ditemukan: {kernel_size}"
+            )
+
+    if int(apsrg.region_growing_connectivity) not in {4, 8}:
+        errors.append(
+            "region_growing_connectivity harus 4 atau 8."
+        )
+
+    if int(apsrg.max_iterations) <= 0:
+        errors.append(
+            "max_iterations harus lebih besar dari nol."
+        )
+
+    # Harris Corner validation.
+    if int(harris.block_size) < 2:
+        errors.append(
+            "harris_seed.block_size minimal 2."
+        )
+
+    if int(harris.ksize) < 3 or int(harris.ksize) % 2 == 0:
+        errors.append(
+            "harris_seed.ksize harus berupa bilangan ganjil >= 3."
+        )
+
+    if not 0.0 < float(harris.k) < 0.25:
+        errors.append(
+            "harris_seed.k harus lebih besar dari 0 "
+            "dan lebih kecil dari 0.25."
+        )
+
+    if not 0.0 <= float(
+        harris.response_threshold_ratio
+    ) <= 1.0:
+        errors.append(
+            "harris_seed.response_threshold_ratio harus berada "
+            "pada 0–1."
+        )
+
+    if not (
+        int(harris.min_seed_count)
+        <= int(harris.target_seed_count)
+        <= int(harris.max_seed_count)
+    ):
+        errors.append(
+            "harris_seed.target_seed_count harus berada di antara "
+            "min_seed_count dan max_seed_count."
+        )
+
+    # Fuzzy SRG validation.
+    if float(fuzzy.wd) <= 0.0:
+        errors.append(
+            "srg_features.wd harus lebih besar dari nol."
+        )
+
+    if float(fuzzy.ws) <= 0.0:
+        errors.append(
+            "srg_features.ws harus lebih besar dari nol."
+        )
+
+    if not 0.0 <= float(fuzzy.t_small) <= 1.0:
+        errors.append(
+            "srg_features.t_small harus berada pada 0–1."
+        )
+
+    if not 0.0 <= float(fuzzy.t_big) <= 1.0:
+        errors.append(
+            "srg_features.t_big harus berada pada 0–1."
+        )
+
+    if float(fuzzy.t_small) > float(fuzzy.t_big):
+        errors.append(
+            "srg_features.t_small tidak boleh lebih besar "
+            "daripada t_big."
+        )
+
+    # Selective fuzzy-Harris validation.
+    if not (
+        int(hybrid.min_seed_count)
+        <= int(hybrid.target_seed_count)
+        <= int(hybrid.max_seed_count)
+    ):
+        errors.append(
+            "hybrid_seed.target_seed_count harus berada di antara "
+            "min_seed_count dan max_seed_count."
+        )
+
+    hybrid_weights = (
+        float(hybrid.fuzzy_weight)
+        + float(hybrid.harris_weight)
+        + float(hybrid.vesselness_weight)
+    )
+
+    if hybrid_weights <= 0.0:
+        errors.append(
+            "Jumlah fuzzy_weight, harris_weight, dan "
+            "vesselness_weight harus lebih besar dari nol."
+        )
+
+    if any(
+        value < 0.0
+        for value in [
+            float(hybrid.fuzzy_weight),
+            float(hybrid.harris_weight),
+            float(hybrid.vesselness_weight),
+        ]
+    ):
+        errors.append(
+            "Bobot hybrid seed tidak boleh bernilai negatif."
+        )
+
+    if int(hybrid.min_seed_distance) < 0:
+        errors.append(
+            "hybrid_seed.min_seed_distance tidak boleh negatif."
+        )
+
+    # Edge-delayed growing validation.
+    priority_mode = str(
+        growing.priority_mode
+    ).lower()
+
+    if priority_mode not in VALID_EDGE_PRIORITY_MODES:
+        errors.append(
+            "edge_delayed_region_growing.priority_mode "
+            f"tidak valid: {growing.priority_mode!r}"
+        )
+
+    if float(growing.fuzzy_distance_scale) <= 0.0:
+        errors.append(
+            "fuzzy_distance_scale harus lebih besar dari nol."
+        )
+
+    if float(growing.connected_edge_wd) <= 0.0:
+        errors.append(
+            "connected_edge_wd harus lebih besar dari nol."
+        )
+
+    if not 0.0 <= float(growing.edge_floor) <= 1.0:
+        errors.append(
+            "edge_floor harus berada pada 0–1."
+        )
+
+    if not 0.0 <= float(growing.max_fuzzy_distance) <= 1.0:
+        errors.append(
+            "max_fuzzy_distance harus berada pada 0–1."
+        )
+
+    # CA-APSRG context validation.
+    if float(ca_config.low_density_threshold) < 0.0:
+        errors.append(
+            "ca_apsrg.low_density_threshold tidak boleh negatif."
+        )
+
+    if float(ca_config.high_density_threshold) <= float(
+        ca_config.low_density_threshold
+    ):
+        errors.append(
+            "ca_apsrg.high_density_threshold harus lebih besar "
+            "daripada low_density_threshold."
+        )
+
+    if not 0.0 <= float(
+        process.high_candidate_density
+    ) <= 1.0:
+        errors.append(
+            "process_context.high_candidate_density harus 0–1."
+        )
+
+    if not 0.0 <= float(
+        process.high_connected_edge_density
+    ) <= 1.0:
+        errors.append(
+            "process_context.high_connected_edge_density harus 0–1."
+        )
+
+    if not 0.0 <= float(
+        process.connected_edge_threshold
+    ) <= 1.0:
+        errors.append(
+            "process_context.connected_edge_threshold harus 0–1."
+        )
+
+    if float(process.high_growth_ratio) <= 0.0:
+        errors.append(
+            "process_context.high_growth_ratio harus lebih besar "
+            "dari nol."
+        )
+
+    # Adaptive morphology validation.
+    area_values = {
+        "small_component_area_low_density":
+            morphology.small_component_area_low_density,
+        "small_component_area_normal":
+            morphology.small_component_area_normal,
+        "small_component_area_high_density":
+            morphology.small_component_area_high_density,
+        "hole_area_low_density":
+            morphology.hole_area_low_density,
+        "hole_area_normal":
+            morphology.hole_area_normal,
+        "hole_area_high_density":
+            morphology.hole_area_high_density,
+    }
+
+    for name, value in area_values.items():
+        if int(value) < 0:
+            errors.append(
+                f"adaptive_morphology.{name} tidak boleh negatif."
+            )
+
+    kernel_values = {
+        "closing_kernel_low_density":
+            morphology.closing_kernel_low_density,
+        "closing_kernel_normal":
+            morphology.closing_kernel_normal,
+        "closing_kernel_high_density":
+            morphology.closing_kernel_high_density,
+        "opening_kernel_low_density":
+            morphology.opening_kernel_low_density,
+        "opening_kernel_normal":
+            morphology.opening_kernel_normal,
+        "opening_kernel_high_density":
+            morphology.opening_kernel_high_density,
+    }
+
+    for name, value in kernel_values.items():
+        if not _is_zero_or_odd(int(value)):
+            errors.append(
+                f"adaptive_morphology.{name} harus nol atau "
+                "bilangan ganjil positif."
+            )
+
+    if errors:
+        formatted = "\n".join(
+            f"- {message}"
+            for message in errors
+        )
+
+        raise ValueError(
+            "Konfigurasi pipeline tidak valid:\n"
+            f"{formatted}"
+        )
+
+def apply_runtime_overrides(
+    config: PipelineConfig,
+    *,
+    always_refine: bool | None = None,
+    precision_threshold: float | None = None,
+) -> PipelineConfig:
+    """
+    Apply CLI/runtime overrides without losing nested configuration.
+
+    dataclasses.replace() is used so APSRG process-context parameters,
+    morphology settings, and other nested values remain unchanged.
+    """
+    resolved = config
+
+    if always_refine is not None:
+        updated_ca_config = replace(
+            resolved.ca_apsrg,
+            always_refine=bool(always_refine),
+        )
+
+        resolved = replace(
+            resolved,
+            ca_apsrg=updated_ca_config,
+            always_refine=bool(always_refine),
+        )
+
+    if precision_threshold is not None:
+        resolved = replace(
+            resolved,
+            precision_threshold=float(
+                precision_threshold
+            ),
+        )
+
+    validate_pipeline_config(resolved)
+
+    return resolved
 
 @dataclass
 class SingleImageResult:
@@ -209,13 +593,27 @@ def load_yaml_config(config_path: str | Path) -> dict[str, Any]:
     return data or {}
 
 
-def load_pipeline_config(config_path: str | Path | None = None, config: dict[str, Any] | None = None) -> PipelineConfig:
-    """Load PipelineConfig from a YAML file, a dictionary, or defaults."""
+def load_pipeline_config(
+    config_path: str | Path | None = None,
+    config: dict[str, Any] | None = None,
+) -> PipelineConfig:
+    """
+    Load and validate PipelineConfig from YAML, dictionary, or defaults.
+    """
     if config is not None:
-        return PipelineConfig.from_dict(config)
-    if config_path is not None:
-        return PipelineConfig.from_dict(load_yaml_config(config_path))
-    return PipelineConfig.default()
+        resolved = PipelineConfig.from_dict(config)
+
+    elif config_path is not None:
+        resolved = PipelineConfig.from_dict(
+            load_yaml_config(config_path)
+        )
+
+    else:
+        resolved = PipelineConfig.default()
+
+    validate_pipeline_config(resolved)
+
+    return resolved
 
 
 def _is_missing_path(value: Any) -> bool:
@@ -273,6 +671,29 @@ def _write_json(path: str | Path, payload: dict[str, Any]) -> Path:
         json.dump(_make_json_safe(payload), file, indent=2, ensure_ascii=False)
     return path
 
+def _write_yaml(
+    path: str | Path,
+    payload: dict[str, Any],
+) -> Path:
+    """Write resolved configuration into a YAML file."""
+    path = Path(path)
+    path.parent.mkdir(
+        parents=True,
+        exist_ok=True,
+    )
+
+    with path.open(
+        "w",
+        encoding="utf-8",
+    ) as file:
+        yaml.safe_dump(
+            payload,
+            file,
+            sort_keys=False,
+            allow_unicode=True,
+        )
+
+    return path
 
 def _evaluate_optional(
     pred_mask: np.ndarray,
@@ -444,37 +865,11 @@ def run_single_image(
     else:
         pipe_cfg = load_pipeline_config(config_path=config_path, config=config)
 
-    if always_refine is not None:
-        pipe_cfg = PipelineConfig(
-            preprocessing=pipe_cfg.preprocessing,
-            apsrg=pipe_cfg.apsrg,
-            adaptive_morphology=pipe_cfg.adaptive_morphology,
-            ca_apsrg=CAAPSRGConfig(
-                enabled=pipe_cfg.ca_apsrg.enabled,
-                always_refine=bool(always_refine),
-                low_density_threshold=pipe_cfg.ca_apsrg.low_density_threshold,
-                high_density_threshold=pipe_cfg.ca_apsrg.high_density_threshold,
-                target_preserve_thin_vessels=pipe_cfg.ca_apsrg.target_preserve_thin_vessels,
-            ),
-            context_features=pipe_cfg.context_features,
-            evaluation=pipe_cfg.evaluation,
-            outputs=pipe_cfg.outputs,
-            always_refine=bool(always_refine),
-            precision_threshold=pipe_cfg.precision_threshold,
-        )
-
-    if precision_threshold is not None:
-        pipe_cfg = PipelineConfig(
-            preprocessing=pipe_cfg.preprocessing,
-            apsrg=pipe_cfg.apsrg,
-            adaptive_morphology=pipe_cfg.adaptive_morphology,
-            ca_apsrg=pipe_cfg.ca_apsrg,
-            context_features=pipe_cfg.context_features,
-            evaluation=pipe_cfg.evaluation,
-            outputs=pipe_cfg.outputs,
-            always_refine=pipe_cfg.always_refine,
-            precision_threshold=float(precision_threshold),
-        )
+    pipe_cfg = apply_runtime_overrides(
+        pipe_cfg,
+        always_refine=always_refine,
+        precision_threshold=precision_threshold,
+    )
 
     if not image_path.is_file():
         raise FileNotFoundError(f"Image file not found: {image_path}")
@@ -684,6 +1079,17 @@ def run_batch(
     else:
         pipe_cfg = load_pipeline_config(config_path=config_path, config=config)
 
+    pipe_cfg = apply_runtime_overrides(
+        pipe_cfg,
+        always_refine=always_refine,
+        precision_threshold=precision_threshold,
+    )
+
+    resolved_config_path = _write_yaml(
+        output_dir / "resolved_pipeline_config.yaml",
+        pipe_cfg.to_dict(),
+    )
+
     df = pd.read_csv(manifest_path)
     if df.empty:
         raise ValueError(f"Manifest is empty: {manifest_path}")
@@ -705,14 +1111,25 @@ def run_batch(
         try:
             row = run_single_image(
                 image_path=image_path,
-                mask_path=None if _is_missing_path(mask_path) else mask_path,
-                fov_path=None if _is_missing_path(fov_path) else fov_path,
+                mask_path=(
+                    None
+                    if _is_missing_path(mask_path)
+                    else mask_path
+                ),
+                fov_path=(
+                    None
+                    if _is_missing_path(fov_path)
+                    else fov_path
+                ),
                 output_dir=output_dir,
                 dataset=dataset,
                 image_id=image_id,
                 config=pipe_cfg,
-                always_refine=always_refine,
-                precision_threshold=precision_threshold,
+
+                # Override sudah diterapkan satu kali di tingkat batch.
+                always_refine=None,
+                precision_threshold=None,
+
                 return_arrays=False,
             )
             rows.append(row)  # type: ignore[arg-type]

@@ -76,48 +76,93 @@ class EdgeDelayedRegionGrowingParams:
 
     @classmethod
     def from_dict(
-        cls,
-        config: dict[str, Any] | None,
+            cls,
+            config: dict[str, Any] | None,
     ) -> "EdgeDelayedRegionGrowingParams":
         """Create parameters from a YAML-like dictionary."""
         if not config:
             return cls()
 
-        acceptance_mode = str(
-            config.get("acceptance_mode", "region_mean")
-        ),
-
-        region_mean_tolerance_multiplier = float(
-            config.get(
-                "region_mean_tolerance_multiplier",
-                2.0,
-            )
-        ),
-
         return cls(
-            enabled=bool(config.get("enabled", True)),
+            enabled=bool(
+                config.get("enabled", True)
+            ),
+
             priority_mode=str(
-                config.get("priority_mode", "kang_product")
+                config.get(
+                    "priority_mode",
+                    "kang_product",
+                )
             ),
+
             fuzzy_distance_scale=float(
-                config.get("fuzzy_distance_scale", 0.4)
+                config.get(
+                    "fuzzy_distance_scale",
+                    0.4,
+                )
             ),
+
             connected_edge_wd=float(
-                config.get("connected_edge_wd", 0.4)
+                config.get(
+                    "connected_edge_wd",
+                    0.4,
+                )
             ),
-            edge_floor=float(config.get("edge_floor", 0.05)),
-            edge_weight=float(config.get("edge_weight", 0.35)),
+
+            edge_floor=float(
+                config.get(
+                    "edge_floor",
+                    0.05,
+                )
+            ),
+
+            edge_weight=float(
+                config.get(
+                    "edge_weight",
+                    0.35,
+                )
+            ),
+
             max_fuzzy_distance=float(
-                config.get("max_fuzzy_distance", 1.0)
+                config.get(
+                    "max_fuzzy_distance",
+                    1.0,
+                )
             ),
+
+            acceptance_mode=str(
+                config.get(
+                    "acceptance_mode",
+                    "region_mean",
+                )
+            ),
+
+            region_mean_tolerance_multiplier=float(
+                config.get(
+                    "region_mean_tolerance_multiplier",
+                    2.0,
+                )
+            ),
+
             recompute_priority=bool(
-                config.get("recompute_priority", True)
+                config.get(
+                    "recompute_priority",
+                    True,
+                )
             ),
+
             priority_tolerance=float(
-                config.get("priority_tolerance", 1e-6)
+                config.get(
+                    "priority_tolerance",
+                    1e-6,
+                )
             ),
+
             record_growth_order=bool(
-                config.get("record_growth_order", True)
+                config.get(
+                    "record_growth_order",
+                    True,
+                )
             ),
         )
 

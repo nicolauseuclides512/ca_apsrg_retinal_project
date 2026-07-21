@@ -34,6 +34,7 @@ import numpy as np
 
 from src.segmentation.skimage_compat import remove_small_holes_compat
 from src.segmentation.apsrg_harris import HarrisSeedParams, select_harris_seeds
+from src.segmentation.srg_features import SRGFeatureParams, select_fuzzy_srg_seeds
 from src.utils.image_io import (
     ensure_binary_mask,
     normalize_to_uint8,
@@ -52,6 +53,11 @@ SeedSelectionMethod = Literal[
     "percentile_harris_polling",
     "polling_harris",
     "hybrid_harris",
+    "fuzzy_srg",
+    "percentile_fuzzy_srg",
+    "polling_fuzzy_srg",
+    "fuzzy_harris",
+    "hybrid_fuzzy_harris",
 ]
 
 
@@ -77,6 +83,7 @@ class APSRGParams:
     min_component_area: int = 8
     fill_small_holes_area: int = 8
     harris_seed: HarrisSeedParams = field(default_factory=HarrisSeedParams)
+    srg_features: SRGFeatureParams = field(default_factory=SRGFeatureParams)
 
     @classmethod
     def from_dict(cls, config: dict[str, Any] | None) -> "APSRGParams":
@@ -96,6 +103,12 @@ class APSRGParams:
                 or {}
         )
 
+        srg_config = (
+                config.get("srg_features", None)
+                or config.get("srg_core", None)
+                or {}
+        )
+
         return cls(
             vessel_enhancement_method=str(config.get("vessel_enhancement_method", "blackhat_multiscale")),
             vesselness_kernel_sizes=kernel_sizes,
@@ -111,6 +124,7 @@ class APSRGParams:
             min_component_area=int(config.get("min_component_area", 8)),
             fill_small_holes_area=int(config.get("fill_small_holes_area", 8)),
             harris_seed=HarrisSeedParams.from_dict(harris_config),
+            srg_features=SRGFeatureParams.from_dict(srg_config),
         )
 
     def to_dict(self) -> dict[str, Any]:
@@ -425,6 +439,83 @@ def select_automatic_seeds(
         )
         return polling_seeds | harris_seeds
 
+    if method == "fuzzy_srg":
+        fuzzy_seeds, _ = select_fuzzy_srg_seeds(
+            vesselness,
+            candidate_map=candidate_map,
+            fov_mask=fov_mask,
+            params=params.srg_features,
+        )
+        return fuzzy_seeds
+
+    if method == "percentile_fuzzy_srg":
+        percentile_seeds = select_percentile_seeds(vesselness, seed_threshold, fov_mask=fov_mask)
+        fuzzy_seeds, _ = select_fuzzy_srg_seeds(
+            vesselness,
+            candidate_map=candidate_map,
+            fov_mask=fov_mask,
+            params=params.srg_features,
+        )
+        return percentile_seeds | fuzzy_seeds
+
+    if method == "polling_fuzzy_srg":
+        polling_seeds = select_polling_seeds(
+            vesselness,
+            fov_mask=fov_mask,
+            window_size=params.polling_window_size,
+            top_percentile=params.polling_top_percentile,
+            global_seed_threshold=seed_threshold,
+            min_seed_distance=params.min_seed_distance,
+        )
+        fuzzy_seeds, _ = select_fuzzy_srg_seeds(
+            vesselness,
+            candidate_map=candidate_map,
+            fov_mask=fov_mask,
+            params=params.srg_features,
+        )
+        return polling_seeds | fuzzy_seeds
+
+    if method == "fuzzy_harris":
+        fuzzy_seeds, _ = select_fuzzy_srg_seeds(
+            vesselness,
+            candidate_map=candidate_map,
+            fov_mask=fov_mask,
+            params=params.srg_features,
+        )
+        harris_seeds, _ = select_harris_seeds(
+            vesselness,
+            vesselness=vesselness,
+            candidate_map=candidate_map,
+            fov_mask=fov_mask,
+            params=params.harris_seed,
+        )
+        return fuzzy_seeds | harris_seeds
+
+    if method == "hybrid_fuzzy_harris":
+        percentile_seeds = select_percentile_seeds(vesselness, seed_threshold, fov_mask=fov_mask)
+        polling_seeds = select_polling_seeds(
+            vesselness,
+            fov_mask=fov_mask,
+            window_size=params.polling_window_size,
+            top_percentile=params.polling_top_percentile,
+            global_seed_threshold=seed_threshold,
+            min_seed_distance=params.min_seed_distance,
+        )
+        fuzzy_seeds, _ = select_fuzzy_srg_seeds(
+            vesselness,
+            candidate_map=candidate_map,
+            fov_mask=fov_mask,
+            params=params.srg_features,
+        )
+        harris_seeds, _ = select_harris_seeds(
+            vesselness,
+            vesselness=vesselness,
+            candidate_map=candidate_map,
+            fov_mask=fov_mask,
+            params=params.harris_seed,
+        )
+        return percentile_seeds | polling_seeds | fuzzy_seeds | harris_seeds
+
     raise ValueError(f"Unsupported seed_selection_method: {params.seed_selection_method}")
 
 
@@ -608,6 +699,22 @@ def apsrg_segment(
 
     harris_debug: dict[str, Any] = {}
 
+    srg_debug: dict[str, Any] = {}
+
+    if str(params.seed_selection_method).lower() in {
+        "fuzzy_srg",
+        "percentile_fuzzy_srg",
+        "polling_fuzzy_srg",
+        "fuzzy_harris",
+        "hybrid_fuzzy_harris",
+    }:
+        _, srg_debug = select_fuzzy_srg_seeds(
+            vesselness,
+            candidate_map=candidate,
+            fov_mask=fov,
+            params=params.srg_features,
+        )
+
     if str(params.seed_selection_method).lower() in {
         "harris_polling",
         "percentile_harris_polling",
@@ -651,6 +758,7 @@ def apsrg_segment(
         "n_candidate_pixels": int(candidate.sum()),
         "n_output_pixels": int(baseline_mask.sum()),
         "harris_debug": harris_debug,
+        "srg_debug": srg_debug,
         "params": params.to_dict(),
     }
 

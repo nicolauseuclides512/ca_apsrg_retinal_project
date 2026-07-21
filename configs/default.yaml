@@ -79,36 +79,74 @@ preprocessing:
   apply_fov_mask: true
 apsrg_baseline:
   vessel_enhancement_method: blackhat_multiscale
+
   vesselness_kernel_sizes:
-  - 7
-  - 11
-  - 15
+    - 7
+    - 11
+    - 15
+
+  # Pilih salah satu metode seed.
 #  seed_selection_method: percentile_polling
-  seed_selection_method: harris_polling
+#  seed_selection_method: harris_polling
+#  seed_selection_method: fuzzy_srg
+#  seed_selection_method: percentile_fuzzy_srg
+#  seed_selection_method: fuzzy_harris
+  seed_selection_method: hybrid_fuzzy_harris
+
   seed_percentile: 92
   candidate_percentile: 78
+
   polling_window_size: 16
   polling_top_percentile: 97
   min_seed_distance: 2
+
   region_growing_connectivity: 8
   max_intensity_difference: 18
   max_iterations: 500000
+
   min_component_area: 8
   fill_small_holes_area: 8
-harris_seed:
-  enabled: true
-  block_size: 2
-  ksize: 3
-  k: 0.04
-  response_threshold_ratio: 0.01
-  nms_window_size: 3
-  target_seed_count: 35
-  min_seed_count: 7
-  max_seed_count: 77
-  prefer_vesselness_weight: 0.65
-  use_candidate_constraint: true
-  fallback_to_top_vesselness: true
-  seed_dilate_radius: 0
+
+  srg_features:
+    enabled: true
+    wd: 0.4
+    ws: 0.4
+
+    edge_window_size: 3
+    similarity_window_size: 3
+    threshold_mean_window_size: 5
+
+    t_small: 0.75
+    t_big: 0.95
+
+    use_candidate_constraint: true
+    use_fov_constraint: true
+
+    fallback_to_ranked_score: true
+    min_seed_pixels: 20
+    max_seed_pixels: 5000
+
+    seed_dilate_radius: 0
+
+  harris_seed:
+    enabled: true
+
+    block_size: 2
+    ksize: 3
+    k: 0.04
+
+    response_threshold_ratio: 0.01
+    nms_window_size: 3
+
+    target_seed_count: 35
+    min_seed_count: 7
+    max_seed_count: 77
+
+    prefer_vesselness_weight: 0.65
+    use_candidate_constraint: true
+    fallback_to_top_vesselness: true
+
+    seed_dilate_radius: 0
 false_positive_analysis:
   enabled: true
   precision_threshold: 0.95

@@ -35,6 +35,10 @@ import numpy as np
 from src.segmentation.skimage_compat import remove_small_holes_compat
 from src.segmentation.apsrg_harris import HarrisSeedParams, select_harris_seeds
 from src.segmentation.srg_features import SRGFeatureParams, select_fuzzy_srg_seeds
+from src.segmentation.hybrid_seed_selection import (
+    HybridSeedParams,
+    select_hybrid_fuzzy_harris_seeds,
+)
 from src.utils.image_io import (
     ensure_binary_mask,
     normalize_to_uint8,
@@ -58,6 +62,7 @@ SeedSelectionMethod = Literal[
     "polling_fuzzy_srg",
     "fuzzy_harris",
     "hybrid_fuzzy_harris",
+    "selective_fuzzy_harris",
 ]
 
 
@@ -84,6 +89,7 @@ class APSRGParams:
     fill_small_holes_area: int = 8
     harris_seed: HarrisSeedParams = field(default_factory=HarrisSeedParams)
     srg_features: SRGFeatureParams = field(default_factory=SRGFeatureParams)
+    hybrid_seed: HybridSeedParams = field(default_factory=HybridSeedParams)
 
     @classmethod
     def from_dict(cls, config: dict[str, Any] | None) -> "APSRGParams":
@@ -109,6 +115,12 @@ class APSRGParams:
                 or {}
         )
 
+        hybrid_config = (
+                config.get("hybrid_seed")
+                or config.get("hybrid_fuzzy_harris")
+                or {}
+        )
+
         return cls(
             vessel_enhancement_method=str(config.get("vessel_enhancement_method", "blackhat_multiscale")),
             vesselness_kernel_sizes=kernel_sizes,
@@ -125,6 +137,7 @@ class APSRGParams:
             fill_small_holes_area=int(config.get("fill_small_holes_area", 8)),
             harris_seed=HarrisSeedParams.from_dict(harris_config),
             srg_features=SRGFeatureParams.from_dict(srg_config),
+            hybrid_seed=HybridSeedParams.from_dict(hybrid_config),
         )
 
     def to_dict(self) -> dict[str, Any]:
@@ -364,22 +377,30 @@ def select_polling_seeds(
     return seeds
 
 
-def select_automatic_seeds(
+def select_automatic_seeds_with_debug(
     vesselness: np.ndarray,
     fov_mask: Optional[np.ndarray] = None,
     *,
     params: APSRGParams,
     seed_threshold: float,
     candidate_map: Optional[np.ndarray] = None,
-) -> np.ndarray:
-    """Select seeds according to the configured APSRG seed selection method."""
+) -> tuple[np.ndarray, dict[str, Any]]:
+    """Select APSRG seeds and return method-specific debug information."""
     method = str(params.seed_selection_method).lower()
 
     if method == "percentile":
-        return select_percentile_seeds(vesselness, seed_threshold, fov_mask=fov_mask)
+        seeds = select_percentile_seeds(
+            vesselness,
+            seed_threshold,
+            fov_mask=fov_mask,
+        )
+        return seeds, {
+            "method": method,
+            "n_seed_pixels": int(seeds.sum()),
+        }
 
     if method == "polling":
-        return select_polling_seeds(
+        seeds = select_polling_seeds(
             vesselness,
             fov_mask=fov_mask,
             window_size=params.polling_window_size,
@@ -387,9 +408,18 @@ def select_automatic_seeds(
             global_seed_threshold=None,
             min_seed_distance=params.min_seed_distance,
         )
+        return seeds, {
+            "method": method,
+            "n_seed_pixels": int(seeds.sum()),
+        }
 
     if method in {"percentile_polling", "polling_percentile"}:
-        percentile_seeds = select_percentile_seeds(vesselness, seed_threshold, fov_mask=fov_mask)
+        percentile_seeds = select_percentile_seeds(
+            vesselness,
+            seed_threshold,
+            fov_mask=fov_mask,
+        )
+
         polling_seeds = select_polling_seeds(
             vesselness,
             fov_mask=fov_mask,
@@ -398,28 +428,53 @@ def select_automatic_seeds(
             global_seed_threshold=seed_threshold,
             min_seed_distance=params.min_seed_distance,
         )
-        return percentile_seeds | polling_seeds
+
+        seeds = percentile_seeds | polling_seeds
+
+        return seeds, {
+            "method": method,
+            "percentile_seeds": percentile_seeds,
+            "polling_seeds": polling_seeds,
+            "n_seed_pixels": int(seeds.sum()),
+        }
 
     if method == "harris_polling":
-        harris_seeds, _ = select_harris_seeds(
+        seeds, debug = select_harris_seeds(
             vesselness,
             vesselness=vesselness,
             candidate_map=candidate_map,
             fov_mask=fov_mask,
             params=params.harris_seed,
         )
-        return harris_seeds
+        debug["method"] = method
+        return seeds, debug
 
-    if method in {"percentile_harris_polling", "harris_percentile"}:
-        percentile_seeds = select_percentile_seeds(vesselness, seed_threshold, fov_mask=fov_mask)
-        harris_seeds, _ = select_harris_seeds(
+    if method in {
+        "percentile_harris_polling",
+        "harris_percentile",
+    }:
+        percentile_seeds = select_percentile_seeds(
+            vesselness,
+            seed_threshold,
+            fov_mask=fov_mask,
+        )
+
+        harris_seeds, harris_debug = select_harris_seeds(
             vesselness,
             vesselness=vesselness,
             candidate_map=candidate_map,
             fov_mask=fov_mask,
             params=params.harris_seed,
         )
-        return percentile_seeds | harris_seeds
+
+        seeds = percentile_seeds | harris_seeds
+
+        return seeds, {
+            "method": method,
+            "percentile_seeds": percentile_seeds,
+            "harris_debug": harris_debug,
+            "n_seed_pixels": int(seeds.sum()),
+        }
 
     if method in {"polling_harris", "hybrid_harris"}:
         polling_seeds = select_polling_seeds(
@@ -430,33 +485,56 @@ def select_automatic_seeds(
             global_seed_threshold=seed_threshold,
             min_seed_distance=params.min_seed_distance,
         )
-        harris_seeds, _ = select_harris_seeds(
+
+        harris_seeds, harris_debug = select_harris_seeds(
             vesselness,
             vesselness=vesselness,
             candidate_map=candidate_map,
             fov_mask=fov_mask,
             params=params.harris_seed,
         )
-        return polling_seeds | harris_seeds
+
+        seeds = polling_seeds | harris_seeds
+
+        return seeds, {
+            "method": method,
+            "polling_seeds": polling_seeds,
+            "harris_debug": harris_debug,
+            "n_seed_pixels": int(seeds.sum()),
+        }
 
     if method == "fuzzy_srg":
-        fuzzy_seeds, _ = select_fuzzy_srg_seeds(
+        seeds, debug = select_fuzzy_srg_seeds(
             vesselness,
             candidate_map=candidate_map,
             fov_mask=fov_mask,
             params=params.srg_features,
         )
-        return fuzzy_seeds
+        debug["method"] = method
+        return seeds, debug
 
     if method == "percentile_fuzzy_srg":
-        percentile_seeds = select_percentile_seeds(vesselness, seed_threshold, fov_mask=fov_mask)
-        fuzzy_seeds, _ = select_fuzzy_srg_seeds(
+        percentile_seeds = select_percentile_seeds(
+            vesselness,
+            seed_threshold,
+            fov_mask=fov_mask,
+        )
+
+        fuzzy_seeds, fuzzy_debug = select_fuzzy_srg_seeds(
             vesselness,
             candidate_map=candidate_map,
             fov_mask=fov_mask,
             params=params.srg_features,
         )
-        return percentile_seeds | fuzzy_seeds
+
+        seeds = percentile_seeds | fuzzy_seeds
+
+        return seeds, {
+            "method": method,
+            "percentile_seeds": percentile_seeds,
+            "fuzzy_debug": fuzzy_debug,
+            "n_seed_pixels": int(seeds.sum()),
+        }
 
     if method == "polling_fuzzy_srg":
         polling_seeds = select_polling_seeds(
@@ -467,56 +545,63 @@ def select_automatic_seeds(
             global_seed_threshold=seed_threshold,
             min_seed_distance=params.min_seed_distance,
         )
-        fuzzy_seeds, _ = select_fuzzy_srg_seeds(
-            vesselness,
-            candidate_map=candidate_map,
-            fov_mask=fov_mask,
-            params=params.srg_features,
-        )
-        return polling_seeds | fuzzy_seeds
 
-    if method == "fuzzy_harris":
-        fuzzy_seeds, _ = select_fuzzy_srg_seeds(
+        fuzzy_seeds, fuzzy_debug = select_fuzzy_srg_seeds(
             vesselness,
             candidate_map=candidate_map,
             fov_mask=fov_mask,
             params=params.srg_features,
         )
-        harris_seeds, _ = select_harris_seeds(
+
+        seeds = polling_seeds | fuzzy_seeds
+
+        return seeds, {
+            "method": method,
+            "polling_seeds": polling_seeds,
+            "fuzzy_debug": fuzzy_debug,
+            "n_seed_pixels": int(seeds.sum()),
+        }
+
+    if method in {
+        "fuzzy_harris",
+        "hybrid_fuzzy_harris",
+        "selective_fuzzy_harris",
+    }:
+        seeds, debug = select_hybrid_fuzzy_harris_seeds(
             vesselness,
             vesselness=vesselness,
             candidate_map=candidate_map,
             fov_mask=fov_mask,
-            params=params.harris_seed,
+            srg_params=params.srg_features,
+            harris_params=params.harris_seed,
+            hybrid_params=params.hybrid_seed,
         )
-        return fuzzy_seeds | harris_seeds
+        debug["method"] = method
+        return seeds, debug
 
-    if method == "hybrid_fuzzy_harris":
-        percentile_seeds = select_percentile_seeds(vesselness, seed_threshold, fov_mask=fov_mask)
-        polling_seeds = select_polling_seeds(
-            vesselness,
-            fov_mask=fov_mask,
-            window_size=params.polling_window_size,
-            top_percentile=params.polling_top_percentile,
-            global_seed_threshold=seed_threshold,
-            min_seed_distance=params.min_seed_distance,
-        )
-        fuzzy_seeds, _ = select_fuzzy_srg_seeds(
-            vesselness,
-            candidate_map=candidate_map,
-            fov_mask=fov_mask,
-            params=params.srg_features,
-        )
-        harris_seeds, _ = select_harris_seeds(
-            vesselness,
-            vesselness=vesselness,
-            candidate_map=candidate_map,
-            fov_mask=fov_mask,
-            params=params.harris_seed,
-        )
-        return percentile_seeds | polling_seeds | fuzzy_seeds | harris_seeds
+    raise ValueError(
+        f"Unsupported seed_selection_method: "
+        f"{params.seed_selection_method}"
+    )
 
-    raise ValueError(f"Unsupported seed_selection_method: {params.seed_selection_method}")
+
+def select_automatic_seeds(
+    vesselness: np.ndarray,
+    fov_mask: Optional[np.ndarray] = None,
+    *,
+    params: APSRGParams,
+    seed_threshold: float,
+    candidate_map: Optional[np.ndarray] = None,
+) -> np.ndarray:
+    """Compatibility wrapper returning only the selected seed mask."""
+    seeds, _ = select_automatic_seeds_with_debug(
+        vesselness,
+        fov_mask=fov_mask,
+        params=params,
+        seed_threshold=seed_threshold,
+        candidate_map=candidate_map,
+    )
+    return seeds
 
 
 def _region_growing_from_seeds(
@@ -687,12 +772,14 @@ def apsrg_segment(
 
     candidate = create_candidate_map(vesselness, candidate_thr, fov_mask=fov)
 
-    seeds = select_automatic_seeds(
-        vesselness,
-        fov_mask=fov,
-        params=params,
-        seed_threshold=seed_thr,
-        candidate_map=candidate,
+    seeds, seed_selection_debug = (
+        select_automatic_seeds_with_debug(
+            vesselness,
+            fov_mask=fov,
+            params=params,
+            seed_threshold=seed_thr,
+            candidate_map=candidate,
+        )
     )
 
     seeds &= candidate
@@ -757,8 +844,7 @@ def apsrg_segment(
         "n_seed_pixels": int(seeds.sum()),
         "n_candidate_pixels": int(candidate.sum()),
         "n_output_pixels": int(baseline_mask.sum()),
-        "harris_debug": harris_debug,
-        "srg_debug": srg_debug,
+        "seed_selection_debug": seed_selection_debug,
         "params": params.to_dict(),
     }
 

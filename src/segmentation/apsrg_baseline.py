@@ -25,7 +25,7 @@ Conventions:
 from __future__ import annotations
 
 from collections import deque
-from dataclasses import asdict, dataclass
+from dataclasses import asdict, dataclass, field
 from pathlib import Path
 from typing import Any, Literal, Optional
 
@@ -33,6 +33,7 @@ import cv2
 import numpy as np
 
 from src.segmentation.skimage_compat import remove_small_holes_compat
+from src.segmentation.apsrg_harris import HarrisSeedParams, select_harris_seeds
 from src.utils.image_io import (
     ensure_binary_mask,
     normalize_to_uint8,
@@ -43,7 +44,15 @@ from src.utils.image_io import (
 )
 
 VesselEnhancementMethod = Literal["blackhat_multiscale", "blackhat", "none"]
-SeedSelectionMethod = Literal["percentile", "polling", "percentile_polling"]
+SeedSelectionMethod = Literal[
+    "percentile",
+    "polling",
+    "percentile_polling",
+    "harris_polling",
+    "percentile_harris_polling",
+    "polling_harris",
+    "hybrid_harris",
+]
 
 
 @dataclass(frozen=True)
@@ -67,6 +76,7 @@ class APSRGParams:
 
     min_component_area: int = 8
     fill_small_holes_area: int = 8
+    harris_seed: HarrisSeedParams = field(default_factory=HarrisSeedParams)
 
     @classmethod
     def from_dict(cls, config: dict[str, Any] | None) -> "APSRGParams":
@@ -79,6 +89,12 @@ class APSRGParams:
             kernel_sizes = tuple(int(k) for k in kernel_sizes)
         else:
             kernel_sizes = tuple(int(k) for k in kernel_sizes)
+
+        harris_config = (
+                config.get("harris_seed", None)
+                or config.get("harris", None)
+                or {}
+        )
 
         return cls(
             vessel_enhancement_method=str(config.get("vessel_enhancement_method", "blackhat_multiscale")),
@@ -94,6 +110,7 @@ class APSRGParams:
             max_iterations=int(config.get("max_iterations", 500_000)),
             min_component_area=int(config.get("min_component_area", 8)),
             fill_small_holes_area=int(config.get("fill_small_holes_area", 8)),
+            harris_seed=HarrisSeedParams.from_dict(harris_config),
         )
 
     def to_dict(self) -> dict[str, Any]:
@@ -339,6 +356,7 @@ def select_automatic_seeds(
     *,
     params: APSRGParams,
     seed_threshold: float,
+    candidate_map: Optional[np.ndarray] = None,
 ) -> np.ndarray:
     """Select seeds according to the configured APSRG seed selection method."""
     method = str(params.seed_selection_method).lower()
@@ -358,7 +376,6 @@ def select_automatic_seeds(
 
     if method in {"percentile_polling", "polling_percentile"}:
         percentile_seeds = select_percentile_seeds(vesselness, seed_threshold, fov_mask=fov_mask)
-
         polling_seeds = select_polling_seeds(
             vesselness,
             fov_mask=fov_mask,
@@ -367,8 +384,46 @@ def select_automatic_seeds(
             global_seed_threshold=seed_threshold,
             min_seed_distance=params.min_seed_distance,
         )
-
         return percentile_seeds | polling_seeds
+
+    if method == "harris_polling":
+        harris_seeds, _ = select_harris_seeds(
+            vesselness,
+            vesselness=vesselness,
+            candidate_map=candidate_map,
+            fov_mask=fov_mask,
+            params=params.harris_seed,
+        )
+        return harris_seeds
+
+    if method in {"percentile_harris_polling", "harris_percentile"}:
+        percentile_seeds = select_percentile_seeds(vesselness, seed_threshold, fov_mask=fov_mask)
+        harris_seeds, _ = select_harris_seeds(
+            vesselness,
+            vesselness=vesselness,
+            candidate_map=candidate_map,
+            fov_mask=fov_mask,
+            params=params.harris_seed,
+        )
+        return percentile_seeds | harris_seeds
+
+    if method in {"polling_harris", "hybrid_harris"}:
+        polling_seeds = select_polling_seeds(
+            vesselness,
+            fov_mask=fov_mask,
+            window_size=params.polling_window_size,
+            top_percentile=params.polling_top_percentile,
+            global_seed_threshold=seed_threshold,
+            min_seed_distance=params.min_seed_distance,
+        )
+        harris_seeds, _ = select_harris_seeds(
+            vesselness,
+            vesselness=vesselness,
+            candidate_map=candidate_map,
+            fov_mask=fov_mask,
+            params=params.harris_seed,
+        )
+        return polling_seeds | harris_seeds
 
     raise ValueError(f"Unsupported seed_selection_method: {params.seed_selection_method}")
 
@@ -546,9 +601,27 @@ def apsrg_segment(
         fov_mask=fov,
         params=params,
         seed_threshold=seed_thr,
+        candidate_map=candidate,
     )
 
     seeds &= candidate
+
+    harris_debug: dict[str, Any] = {}
+
+    if str(params.seed_selection_method).lower() in {
+        "harris_polling",
+        "percentile_harris_polling",
+        "harris_percentile",
+        "polling_harris",
+        "hybrid_harris",
+    }:
+        _, harris_debug = select_harris_seeds(
+            vesselness,
+            vesselness=vesselness,
+            candidate_map=candidate,
+            fov_mask=fov,
+            params=params.harris_seed,
+        )
 
     grown = _region_growing_from_seeds(
         candidate,
@@ -577,6 +650,7 @@ def apsrg_segment(
         "n_seed_pixels": int(seeds.sum()),
         "n_candidate_pixels": int(candidate.sum()),
         "n_output_pixels": int(baseline_mask.sum()),
+        "harris_debug": harris_debug,
         "params": params.to_dict(),
     }
 

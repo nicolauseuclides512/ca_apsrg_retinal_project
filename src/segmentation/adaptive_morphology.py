@@ -379,6 +379,7 @@ def adaptive_morphological_refinement(
     params: AdaptiveMorphologyConfig | None = None,
     *,
     context_config: ContextFeatureConfig | None = None,
+    precomputed_features: ContextFeatures | None = None,
 ) -> tuple[np.ndarray, dict[str, Any]]:
     """
     Refine APSRG baseline mask using context-aware adaptive morphology.
@@ -399,13 +400,22 @@ def adaptive_morphological_refinement(
     if fov is not None:
         baseline = baseline & fov
 
-    features = extract_context_features(
-        baseline,
-        fov_mask=fov,
-        config=context_config,
-        low_density_threshold=cfg.low_density_threshold,
-        high_density_threshold=cfg.high_density_threshold,
-    )
+    if precomputed_features is not None:
+        if not isinstance(precomputed_features, ContextFeatures):
+            raise TypeError(
+                "precomputed_features must be a ContextFeatures instance"
+            )
+
+        features = precomputed_features
+
+    else:
+        features = extract_context_features(
+            baseline,
+            fov_mask=fov,
+            config=context_config,
+            low_density_threshold=cfg.low_density_threshold,
+            high_density_threshold=cfg.high_density_threshold,
+        )
     selected = select_adaptive_parameters(features, cfg)
 
     if not cfg.enabled:

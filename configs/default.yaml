@@ -176,9 +176,31 @@ context_features:
 ca_apsrg:
   enabled: true
   always_refine: true
+
   low_density_threshold: 0.025
   high_density_threshold: 0.12
+
   target_preserve_thin_vessels: true
+
+  process_context:
+    enabled: true
+
+    # Dengan always_refine=true, opsi ini belum mengubah keputusan.
+    can_trigger_refinement: true
+
+    # Tetap false pada pengujian pertama agar hasil morphology lama
+    # tidak langsung berubah.
+    can_override_refinement_level: false
+
+    low_seed_count: 7
+    high_seed_count: 77
+
+    high_candidate_density: 0.25
+    high_connected_edge_density: 0.20
+    connected_edge_threshold: 0.50
+    high_growth_ratio: 600.0
+
+    max_iterations_is_high_risk: true
 adaptive_morphology:
   enabled: true
 

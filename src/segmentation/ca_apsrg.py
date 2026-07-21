@@ -18,7 +18,7 @@ Conventions:
 
 from __future__ import annotations
 
-from dataclasses import asdict, dataclass
+from dataclasses import asdict, dataclass, field, replace
 from pathlib import Path
 from typing import Any, Optional
 
@@ -43,6 +43,10 @@ from src.utils.image_io import (
     read_gray_image,
     save_binary_mask,
 )
+from src.segmentation.apsrg_process_context import (
+    APSRGProcessContextConfig,
+    extract_apsrg_process_context,
+)
 
 
 @dataclass(frozen=True)
@@ -51,22 +55,53 @@ class CAAPSRGConfig:
 
     enabled: bool = True
     always_refine: bool = True
+
     low_density_threshold: float = 0.025
     high_density_threshold: float = 0.120
+
     target_preserve_thin_vessels: bool = True
 
+    process_context: APSRGProcessContextConfig = field(
+        default_factory=APSRGProcessContextConfig
+    )
+
     @classmethod
-    def from_dict(cls, config: dict[str, Any] | None) -> "CAAPSRGConfig":
+    def from_dict(
+        cls,
+        config: dict[str, Any] | None,
+    ) -> "CAAPSRGConfig":
         """Create CAAPSRGConfig from config['ca_apsrg']."""
         if not config:
             return cls()
 
+        process_context_config = (
+            config.get("process_context")
+            or config.get("apsrg_process_context")
+            or {}
+        )
+
         return cls(
             enabled=bool(config.get("enabled", True)),
-            always_refine=bool(config.get("always_refine", True)),
-            low_density_threshold=float(config.get("low_density_threshold", 0.025)),
-            high_density_threshold=float(config.get("high_density_threshold", 0.120)),
-            target_preserve_thin_vessels=bool(config.get("target_preserve_thin_vessels", True)),
+            always_refine=bool(
+                config.get("always_refine", True)
+            ),
+            low_density_threshold=float(
+                config.get("low_density_threshold", 0.025)
+            ),
+            high_density_threshold=float(
+                config.get("high_density_threshold", 0.120)
+            ),
+            target_preserve_thin_vessels=bool(
+                config.get(
+                    "target_preserve_thin_vessels",
+                    True,
+                )
+            ),
+            process_context=(
+                APSRGProcessContextConfig.from_dict(
+                    process_context_config
+                )
+            ),
         )
 
     def to_dict(self) -> dict[str, Any]:
@@ -117,33 +152,120 @@ def _prepare_fov_mask(fov_mask: Optional[np.ndarray], reference_shape: tuple[int
         raise ValueError(f"FoV mask shape {fov.shape} does not match image shape {reference_shape}")
     return fov.astype(bool)
 
+def combine_refinement_levels(
+    mask_level: str,
+    process_level: str,
+    *,
+    allow_process_override: bool,
+) -> str:
+    """
+    Combine mask-based and APSRG-process refinement recommendations.
+
+    When process override is disabled, the original mask-based level is used.
+
+    When enabled:
+    - identical levels are preserved;
+    - a normal level accepts the non-normal recommendation;
+    - conflicting conservative/aggressive recommendations become normal.
+    """
+    valid_levels = {
+        "conservative",
+        "normal",
+        "aggressive",
+    }
+
+    mask_value = str(mask_level).lower()
+    process_value = str(process_level).lower()
+
+    if mask_value not in valid_levels:
+        mask_value = "normal"
+
+    if process_value not in valid_levels:
+        process_value = "normal"
+
+    if not allow_process_override:
+        return mask_value
+
+    if mask_value == process_value:
+        return mask_value
+
+    if process_value == "normal":
+        return mask_value
+
+    if mask_value == "normal":
+        return process_value
+
+    # Conservative and aggressive conflict.
+    return "normal"
 
 def should_apply_refinement(
     ca_config: CAAPSRGConfig,
     context_features: dict[str, Any],
+    process_context: dict[str, Any] | None = None,
 ) -> bool:
-    """
-    Decide whether adaptive refinement should be applied.
-
-    The default proposal setting is always_refine=True. When always_refine=False,
-    refinement is applied only when the baseline mask shows signs of noise or
-    unusually high vessel density.
-    """
+    """Decide whether adaptive refinement should be applied."""
     if not ca_config.enabled:
         return False
 
     if ca_config.always_refine:
         return True
 
-    density_level = str(context_features.get("density_level", "normal")).lower()
-    noise_level = str(context_features.get("noise_level", "normal")).lower()
-    refinement_level = str(context_features.get("recommended_refinement_level", "normal")).lower()
+    density_level = str(
+        context_features.get(
+            "density_level",
+            "normal",
+        )
+    ).lower()
 
-    return (
+    noise_level = str(
+        context_features.get(
+            "noise_level",
+            "normal",
+        )
+    ).lower()
+
+    refinement_level = str(
+        context_features.get(
+            "recommended_refinement_level",
+            "normal",
+        )
+    ).lower()
+
+    mask_rule = (
         noise_level in {"medium", "high"}
         or density_level == "high"
-        or refinement_level in {"aggressive", "conservative"}
+        or refinement_level
+        in {"aggressive", "conservative"}
     )
+
+    process_rule = False
+
+    if (
+        process_context
+        and ca_config.process_context.enabled
+        and ca_config.process_context.can_trigger_refinement
+    ):
+        process_risk = str(
+            process_context.get(
+                "process_risk_level",
+                "low",
+            )
+        ).lower()
+
+        process_level = str(
+            process_context.get(
+                "recommended_refinement_level",
+                "normal",
+            )
+        ).lower()
+
+        process_rule = (
+            process_risk in {"medium", "high"}
+            or process_level
+            in {"conservative", "aggressive"}
+        )
+
+    return bool(mask_rule or process_rule)
 
 
 def ca_apsrg_refine(
@@ -153,16 +275,23 @@ def ca_apsrg_refine(
     *,
     ca_config: CAAPSRGConfig | None = None,
     context_config: ContextFeatureConfig | None = None,
+    apsrg_debug: dict[str, Any] | None = None,
 ) -> tuple[np.ndarray, dict[str, Any]]:
     """
-    Refine an existing APSRG baseline mask using CA-APSRG refinement.
-
-    This function is useful when APSRG baseline has already been computed and
-    saved. It returns the refined mask and a debug dictionary.
+    Refine an APSRG baseline mask using mask context and optional
+    APSRG process context.
     """
     ca_cfg = ca_config or CAAPSRGConfig()
-    baseline = ensure_binary_mask(baseline_mask, return_uint8=False)
-    fov = _prepare_fov_mask(fov_mask, baseline.shape)
+
+    baseline = ensure_binary_mask(
+        baseline_mask,
+        return_uint8=False,
+    )
+
+    fov = _prepare_fov_mask(
+        fov_mask,
+        baseline.shape,
+    )
 
     if fov is not None:
         baseline = baseline & fov
@@ -175,21 +304,89 @@ def ca_apsrg_refine(
         high_density_threshold=ca_cfg.high_density_threshold,
     )
 
-    if not should_apply_refinement(ca_cfg, baseline_features.to_dict()):
+    if (
+        ca_cfg.process_context.enabled
+        and apsrg_debug is not None
+    ):
+        process_features = extract_apsrg_process_context(
+            apsrg_debug,
+            fov_mask=fov,
+            config=ca_cfg.process_context,
+        )
+        process_context_dict = process_features.to_dict()
+    else:
+        process_context_dict = {}
+
+    mask_refinement_level = str(
+        baseline_features.recommended_refinement_level
+    )
+
+    process_refinement_level = str(
+        process_context_dict.get(
+            "recommended_refinement_level",
+            "normal",
+        )
+    )
+
+    combined_refinement_level = combine_refinement_levels(
+        mask_refinement_level,
+        process_refinement_level,
+        allow_process_override=(
+            ca_cfg.process_context.can_override_refinement_level
+        ),
+    )
+
+    effective_features = baseline_features
+
+    if (
+        ca_cfg.process_context.enabled
+        and ca_cfg.process_context.can_override_refinement_level
+        and combined_refinement_level
+        != baseline_features.recommended_refinement_level
+    ):
+        effective_features = replace(
+            baseline_features,
+            recommended_refinement_level=(
+                combined_refinement_level
+            ),
+        )
+
+    if not should_apply_refinement(
+        ca_cfg,
+        baseline_features.to_dict(),
+        process_context=process_context_dict,
+    ):
         debug = {
             "enabled": False,
-            "reason": "CA-APSRG refinement disabled or not required by context rule",
+            "reason": (
+                "CA-APSRG refinement disabled or not "
+                "required by context rule"
+            ),
             "context_features": baseline_features.to_dict(),
-            "refined_context_features": baseline_features.to_dict(),
+            "apsrg_process_context": process_context_dict,
+            "mask_refinement_level": mask_refinement_level,
+            "process_refinement_level": (
+                process_refinement_level
+            ),
+            "combined_refinement_level": (
+                combined_refinement_level
+            ),
+            "refined_context_features": (
+                baseline_features.to_dict()
+            ),
             "ca_apsrg_config": ca_cfg.to_dict(),
         }
+
         return baseline.astype(bool), debug
 
-    refined, refinement_debug = adaptive_morphological_refinement(
-        baseline,
-        fov_mask=fov,
-        params=params,
-        context_config=context_config,
+    refined, refinement_debug = (
+        adaptive_morphological_refinement(
+            baseline,
+            fov_mask=fov,
+            params=params,
+            context_config=context_config,
+            precomputed_features=effective_features,
+        )
     )
 
     refined_features = extract_context_features(
@@ -203,13 +400,38 @@ def ca_apsrg_refine(
     debug = {
         "enabled": True,
         "context_features": baseline_features.to_dict(),
-        "refined_context_features": refined_features.to_dict(),
+        "effective_context_features": (
+            effective_features.to_dict()
+        ),
+        "apsrg_process_context": process_context_dict,
+        "mask_refinement_level": mask_refinement_level,
+        "process_refinement_level": (
+            process_refinement_level
+        ),
+        "combined_refinement_level": (
+            combined_refinement_level
+        ),
+        "refined_context_features": (
+            refined_features.to_dict()
+        ),
         "refinement_debug": refinement_debug,
         "ca_apsrg_config": ca_cfg.to_dict(),
         "n_baseline_pixels": int(baseline.sum()),
         "n_refined_pixels": int(refined.sum()),
-        "n_pixels_removed": int(max(int(baseline.sum()) - int(refined.sum()), 0)),
-        "n_pixels_added": int(max(int(refined.sum()) - int(baseline.sum()), 0)),
+        "n_pixels_removed": int(
+            max(
+                int(baseline.sum())
+                - int(refined.sum()),
+                0,
+            )
+        ),
+        "n_pixels_added": int(
+            max(
+                int(refined.sum())
+                - int(baseline.sum()),
+                0,
+            )
+        ),
     }
 
     return refined.astype(bool), debug
@@ -249,6 +471,7 @@ def ca_apsrg_segment(
         params=adaptive_params,
         ca_config=ca_cfg,
         context_config=context_config,
+        apsrg_debug=apsrg_debug,
     )
 
     debug_info: dict[str, Any] = {
@@ -262,6 +485,14 @@ def ca_apsrg_segment(
         "apsrg_params": apsrg_params.to_dict() if apsrg_params else APSRGParams().to_dict(),
         "adaptive_params": adaptive_params.to_dict() if adaptive_params else AdaptiveMorphologyConfig().to_dict(),
         "context_config": context_config.to_dict() if context_config else ContextFeatureConfig().to_dict(),
+        "apsrg_process_context": refine_debug.get(
+            "apsrg_process_context",
+            {},
+        ),
+        "combined_refinement_level": refine_debug.get(
+            "combined_refinement_level",
+            "normal",
+        ),
     }
 
     return refined_mask.astype(bool), debug_info

@@ -519,6 +519,7 @@ def run_single_image(
             params=pipe_cfg.adaptive_morphology,
             ca_config=pipe_cfg.ca_apsrg,
             context_config=pipe_cfg.context_features,
+            apsrg_debug=apsrg_debug,
         )
     else:
         ca_mask = baseline_mask.copy()

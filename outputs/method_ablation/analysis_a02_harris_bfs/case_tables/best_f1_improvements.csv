@@ -1,0 +1,11 @@
+dataset,image_id,comparison_path,baseline_f1_score,ca_apsrg_f1_score,delta_f1_score,delta_precision,delta_recall
+STARE,im0081,E:\ca_apsrg_retinal_project\outputs\method_ablation\experiments_a02_harris_bfs\STARE\comparison\im0081_comparison.png,0.6557020002242044,0.6558910692831398,0.00018906905893534276,0.00038796784218086966,0.0
+STARE,im0044,E:\ca_apsrg_retinal_project\outputs\method_ablation\experiments_a02_harris_bfs\STARE\comparison\im0044_comparison.png,0.5983765862581456,0.5985134362492853,0.0001368499911397203,0.00035680932836201773,0.0
+STARE,im0139,E:\ca_apsrg_retinal_project\outputs\method_ablation\experiments_a02_harris_bfs\STARE\comparison\im0139_comparison.png,0.6275998178229847,0.6277322980842265,0.00013248026124179635,0.0007949511672539211,-0.00023490031417916502
+STARE,im0235,E:\ca_apsrg_retinal_project\outputs\method_ablation\experiments_a02_harris_bfs\STARE\comparison\im0235_comparison.png,0.6035628019323671,0.6036640606650338,0.00010125873266664254,0.00037477496394500154,0.0
+CHASEDB1,Image_02R,E:\ca_apsrg_retinal_project\outputs\method_ablation\experiments_a02_harris_bfs\CHASEDB1\comparison\Image_02R_comparison.png,0.0779056691978217,0.0779056691978217,0.0,0.0,0.0
+CHASEDB1,Image_02L,E:\ca_apsrg_retinal_project\outputs\method_ablation\experiments_a02_harris_bfs\CHASEDB1\comparison\Image_02L_comparison.png,0.1098864355572539,0.1098864355572539,0.0,0.0,0.0
+CHASEDB1,Image_01R,E:\ca_apsrg_retinal_project\outputs\method_ablation\experiments_a02_harris_bfs\CHASEDB1\comparison\Image_01R_comparison.png,0.0761099912131079,0.0761099912131079,0.0,0.0,0.0
+CHASEDB1,Image_01L,E:\ca_apsrg_retinal_project\outputs\method_ablation\experiments_a02_harris_bfs\CHASEDB1\comparison\Image_01L_comparison.png,0.1956618669184567,0.1956618669184567,0.0,0.0,0.0
+CHASEDB1,Image_03L,E:\ca_apsrg_retinal_project\outputs\method_ablation\experiments_a02_harris_bfs\CHASEDB1\comparison\Image_03L_comparison.png,0.2790205898720089,0.2790205898720089,0.0,0.0,0.0
+CHASEDB1,Image_03R,E:\ca_apsrg_retinal_project\outputs\method_ablation\experiments_a02_harris_bfs\CHASEDB1\comparison\Image_03R_comparison.png,0.2780054185978818,0.2780054185978818,0.0,0.0,0.0

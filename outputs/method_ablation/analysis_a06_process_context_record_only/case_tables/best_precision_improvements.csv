@@ -1,0 +1,11 @@
+dataset,image_id,comparison_path,baseline_precision,ca_apsrg_precision,delta_precision,delta_recall,delta_f1_score
+DRIVE,25,E:\ca_apsrg_retinal_project\outputs\method_ablation\experiments_a06_process_context_record_only\DRIVE\comparison\25_comparison.png,0.7039824945295405,0.7039957939011566,1.3299371616093403e-05,-0.0002842344618494419,-0.0003052009383252008
+CHASEDB1,Image_01L,E:\ca_apsrg_retinal_project\outputs\method_ablation\experiments_a06_process_context_record_only\CHASEDB1\comparison\Image_01L_comparison.png,0.4174344436569808,0.4174344436569808,0.0,0.0,0.0
+CHASEDB1,Image_02L,E:\ca_apsrg_retinal_project\outputs\method_ablation\experiments_a06_process_context_record_only\CHASEDB1\comparison\Image_02L_comparison.png,0.4708998771498771,0.4708998771498771,0.0,0.0,0.0
+CHASEDB1,Image_01R,E:\ca_apsrg_retinal_project\outputs\method_ablation\experiments_a06_process_context_record_only\CHASEDB1\comparison\Image_01R_comparison.png,0.3918143567512431,0.3918143567512431,0.0,0.0,0.0
+CHASEDB1,Image_02R,E:\ca_apsrg_retinal_project\outputs\method_ablation\experiments_a06_process_context_record_only\CHASEDB1\comparison\Image_02R_comparison.png,0.5210946408209807,0.5210946408209807,0.0,0.0,0.0
+CHASEDB1,Image_03L,E:\ca_apsrg_retinal_project\outputs\method_ablation\experiments_a06_process_context_record_only\CHASEDB1\comparison\Image_03L_comparison.png,0.7208131846442317,0.7208131846442317,0.0,0.0,0.0
+CHASEDB1,Image_04L,E:\ca_apsrg_retinal_project\outputs\method_ablation\experiments_a06_process_context_record_only\CHASEDB1\comparison\Image_04L_comparison.png,0.6519289120069354,0.6519289120069354,0.0,0.0,0.0
+CHASEDB1,Image_03R,E:\ca_apsrg_retinal_project\outputs\method_ablation\experiments_a06_process_context_record_only\CHASEDB1\comparison\Image_03R_comparison.png,0.5752792866659834,0.5752792866659834,0.0,0.0,0.0
+CHASEDB1,Image_05L,E:\ca_apsrg_retinal_project\outputs\method_ablation\experiments_a06_process_context_record_only\CHASEDB1\comparison\Image_05L_comparison.png,0.8417630997269536,0.8417630997269536,0.0,0.0,0.0
+CHASEDB1,Image_05R,E:\ca_apsrg_retinal_project\outputs\method_ablation\experiments_a06_process_context_record_only\CHASEDB1\comparison\Image_05R_comparison.png,0.6913740788903338,0.6913740788903338,0.0,0.0,0.0

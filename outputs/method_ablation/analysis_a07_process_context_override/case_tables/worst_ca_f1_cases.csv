@@ -1,0 +1,11 @@
+dataset,image_id,comparison_path,baseline_f1_score,ca_apsrg_f1_score,delta_f1_score,delta_precision,delta_recall
+STARE,im0002,E:\ca_apsrg_retinal_project\outputs\method_ablation\experiments_a07_process_context_override\STARE\comparison\im0002_comparison.png,0.0045578231292517,0.0045578231292517,0.0,0.0,0.0
+STARE,im0239,E:\ca_apsrg_retinal_project\outputs\method_ablation\experiments_a07_process_context_override\STARE\comparison\im0239_comparison.png,0.0201493925941678,0.0201493925941678,0.0,0.0,0.0
+STARE,im0235,E:\ca_apsrg_retinal_project\outputs\method_ablation\experiments_a07_process_context_override\STARE\comparison\im0235_comparison.png,0.0330229282416464,0.0330229282416464,0.0,0.0,0.0
+STARE,im0139,E:\ca_apsrg_retinal_project\outputs\method_ablation\experiments_a07_process_context_override\STARE\comparison\im0139_comparison.png,0.0354945305378304,0.0354945305378304,0.0,0.0,0.0
+DRIVE,32,E:\ca_apsrg_retinal_project\outputs\method_ablation\experiments_a07_process_context_override\DRIVE\comparison\32_comparison.png,0.0409541444287114,0.0409541444287114,0.0,0.0,0.0
+STARE,im0082,E:\ca_apsrg_retinal_project\outputs\method_ablation\experiments_a07_process_context_override\STARE\comparison\im0082_comparison.png,0.0467316846627191,0.0467316846627191,0.0,0.0,0.0
+CHASEDB1,Image_01L,E:\ca_apsrg_retinal_project\outputs\method_ablation\experiments_a07_process_context_override\CHASEDB1\comparison\Image_01L_comparison.png,0.0496920610815827,0.0496920610815827,0.0,0.0,0.0
+STARE,im0001,E:\ca_apsrg_retinal_project\outputs\method_ablation\experiments_a07_process_context_override\STARE\comparison\im0001_comparison.png,0.0531031358534252,0.0531031358534252,0.0,0.0,0.0
+CHASEDB1,Image_13R,E:\ca_apsrg_retinal_project\outputs\method_ablation\experiments_a07_process_context_override\CHASEDB1\comparison\Image_13R_comparison.png,0.0570654741284288,0.0570654741284288,0.0,0.0,0.0
+DRIVE,26,E:\ca_apsrg_retinal_project\outputs\method_ablation\experiments_a07_process_context_override\DRIVE\comparison\26_comparison.png,0.0582564962279966,0.0582564962279966,0.0,0.0,0.0

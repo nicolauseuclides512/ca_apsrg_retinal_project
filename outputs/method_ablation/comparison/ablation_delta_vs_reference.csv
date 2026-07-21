@@ -1,0 +1,289 @@
+experiment,experiment_label,dataset,output_method,metric,n_pairs,mean_delta,median_delta,std_delta,wins,ties,losses
+a02_harris_bfs,A02 - Harris polling seeds with BFS,CHASEDB1,APSRG,accuracy,28,0.016392396861146807,0.014251751751751696,0.010947821162565818,27,0,1
+a02_harris_bfs,A02 - Harris polling seeds with BFS,CHASEDB1,APSRG,balanced_accuracy,28,-0.2515206591211455,-0.2585352689132262,0.05078970508945499,0,0,28
+a02_harris_bfs,A02 - Harris polling seeds with BFS,CHASEDB1,APSRG,dice,28,-0.3323683084595688,-0.38499496792505933,0.1593467906025549,3,0,25
+a02_harris_bfs,A02 - Harris polling seeds with BFS,CHASEDB1,APSRG,f1_score,28,-0.3323683084595688,-0.38499496792505933,0.1593467906025549,3,0,25
+a02_harris_bfs,A02 - Harris polling seeds with BFS,CHASEDB1,APSRG,iou,28,-0.24808279076318032,-0.29085479768989686,0.11338225047696011,3,0,25
+a02_harris_bfs,A02 - Harris polling seeds with BFS,CHASEDB1,APSRG,precision,28,0.2747995509602522,0.29940293112262206,0.10157124420481436,27,0,1
+a02_harris_bfs,A02 - Harris polling seeds with BFS,CHASEDB1,APSRG,recall,28,-0.5629805913044427,-0.5737121139060191,0.10417980594867382,0,0,28
+a02_harris_bfs,A02 - Harris polling seeds with BFS,CHASEDB1,APSRG,specificity,28,0.05993927306215162,0.06107022408163765,0.006353011174124268,28,0,0
+a02_harris_bfs,A02 - Harris polling seeds with BFS,CHASEDB1,CA-APSRG,accuracy,28,0.012650001191667842,0.010294669669669687,0.01156189540274541,25,0,3
+a02_harris_bfs,A02 - Harris polling seeds with BFS,CHASEDB1,CA-APSRG,balanced_accuracy,28,-0.2526000128573328,-0.259545246514523,0.05074868179521539,0,0,28
+a02_harris_bfs,A02 - Harris polling seeds with BFS,CHASEDB1,CA-APSRG,dice,28,-0.3433217737010974,-0.39468323982521697,0.16071706324245869,1,0,27
+a02_harris_bfs,A02 - Harris polling seeds with BFS,CHASEDB1,CA-APSRG,f1_score,28,-0.3433217737010974,-0.39468323982521697,0.16071706324245869,1,0,27
+a02_harris_bfs,A02 - Harris polling seeds with BFS,CHASEDB1,CA-APSRG,iou,28,-0.2586147180530299,-0.3015669016500201,0.11500109506456611,1,0,27
+a02_harris_bfs,A02 - Harris polling seeds with BFS,CHASEDB1,CA-APSRG,precision,28,0.2584592275166445,0.2854223641824208,0.10117490735756357,27,0,1
+a02_harris_bfs,A02 - Harris polling seeds with BFS,CHASEDB1,CA-APSRG,recall,28,-0.5609487991631802,-0.5715899760931907,0.10375597680400125,0,0,28
+a02_harris_bfs,A02 - Harris polling seeds with BFS,CHASEDB1,CA-APSRG,specificity,28,0.05574877344851447,0.0568287817828208,0.006270248534045193,28,0,0
+a02_harris_bfs,A02 - Harris polling seeds with BFS,DRIVE,APSRG,accuracy,20,-0.019598967435074034,-0.019022878907228646,0.015989489585604623,2,0,18
+a02_harris_bfs,A02 - Harris polling seeds with BFS,DRIVE,APSRG,balanced_accuracy,20,-0.18362983227656535,-0.17923526471070306,0.061717101932088715,0,0,20
+a02_harris_bfs,A02 - Harris polling seeds with BFS,DRIVE,APSRG,dice,20,-0.2770329164247823,-0.26449389943925256,0.11839040852636265,0,0,20
+a02_harris_bfs,A02 - Harris polling seeds with BFS,DRIVE,APSRG,f1_score,20,-0.2770329164247823,-0.26449389943925256,0.11839040852636265,0,0,20
+a02_harris_bfs,A02 - Harris polling seeds with BFS,DRIVE,APSRG,iou,20,-0.2618978091053534,-0.26373332286782325,0.09180143184407269,0,0,20
+a02_harris_bfs,A02 - Harris polling seeds with BFS,DRIVE,APSRG,precision,20,0.11552594897474511,0.11047223258459471,0.08708918203756401,19,0,1
+a02_harris_bfs,A02 - Harris polling seeds with BFS,DRIVE,APSRG,recall,20,-0.4003395295266934,-0.39216577181208045,0.13636633113776003,0,0,20
+a02_harris_bfs,A02 - Harris polling seeds with BFS,DRIVE,APSRG,specificity,20,0.03307986497356262,0.026783915460236007,0.018407152193666114,20,0,0
+a02_harris_bfs,A02 - Harris polling seeds with BFS,DRIVE,CA-APSRG,accuracy,20,-0.019944363202256832,-0.019156760940740314,0.015736561976272215,2,0,18
+a02_harris_bfs,A02 - Harris polling seeds with BFS,DRIVE,CA-APSRG,balanced_accuracy,20,-0.18331681360992383,-0.1787229044577136,0.0616380498268134,0,0,20
+a02_harris_bfs,A02 - Harris polling seeds with BFS,DRIVE,CA-APSRG,dice,20,-0.27776530762773455,-0.2642144382906897,0.11847807134413663,0,0,20
+a02_harris_bfs,A02 - Harris polling seeds with BFS,DRIVE,CA-APSRG,f1_score,20,-0.27776530762773455,-0.2642144382906897,0.11847807134413663,0,0,20
+a02_harris_bfs,A02 - Harris polling seeds with BFS,DRIVE,CA-APSRG,iou,20,-0.26255504609005725,-0.2641337720628171,0.09170037591230938,0,0,20
+a02_harris_bfs,A02 - Harris polling seeds with BFS,DRIVE,CA-APSRG,precision,20,0.11342909555469056,0.1096106655597,0.08594876665718942,19,0,1
+a02_harris_bfs,A02 - Harris polling seeds with BFS,DRIVE,CA-APSRG,recall,20,-0.39916227506901475,-0.3905120805369128,0.13604324235256915,0,0,20
+a02_harris_bfs,A02 - Harris polling seeds with BFS,DRIVE,CA-APSRG,specificity,20,0.032528647849167015,0.026570169336969762,0.018042624350646803,20,0,0
+a02_harris_bfs,A02 - Harris polling seeds with BFS,STARE,APSRG,accuracy,20,0.012113223140495882,0.006828807556080285,0.026530141289148077,13,0,7
+a02_harris_bfs,A02 - Harris polling seeds with BFS,STARE,APSRG,balanced_accuracy,20,-0.2307958667823801,-0.20317492385404579,0.08759824726557106,0,0,20
+a02_harris_bfs,A02 - Harris polling seeds with BFS,STARE,APSRG,dice,20,-0.23685939861704405,-0.1925608551437856,0.18166749642437655,1,0,19
+a02_harris_bfs,A02 - Harris polling seeds with BFS,STARE,APSRG,f1_score,20,-0.23685939861704405,-0.1925608551437856,0.18166749642437655,1,0,19
+a02_harris_bfs,A02 - Harris polling seeds with BFS,STARE,APSRG,iou,20,-0.20273783187431588,-0.18982122687929698,0.12594060420949715,1,0,19
+a02_harris_bfs,A02 - Harris polling seeds with BFS,STARE,APSRG,precision,20,0.09724069439109324,0.1568658813430358,0.22385715755833993,16,0,4
+a02_harris_bfs,A02 - Harris polling seeds with BFS,STARE,APSRG,recall,20,-0.5153244033994854,-0.44407204221076746,0.1968120614881277,0,0,20
+a02_harris_bfs,A02 - Harris polling seeds with BFS,STARE,APSRG,specificity,20,0.05373266983472513,0.04135606249579893,0.029483147075357843,20,0,0
+a02_harris_bfs,A02 - Harris polling seeds with BFS,STARE,CA-APSRG,accuracy,20,0.010376741440377757,0.006419126328217173,0.023655190934925945,12,0,8
+a02_harris_bfs,A02 - Harris polling seeds with BFS,STARE,CA-APSRG,balanced_accuracy,20,-0.23151838744977482,-0.20337301006182656,0.08773221268080324,0,0,20
+a02_harris_bfs,A02 - Harris polling seeds with BFS,STARE,CA-APSRG,dice,20,-0.2410078415849573,-0.19381372537829505,0.18013084669382246,0,0,20
+a02_harris_bfs,A02 - Harris polling seeds with BFS,STARE,CA-APSRG,f1_score,20,-0.2410078415849573,-0.19381372537829505,0.18013084669382246,0,0,20
+a02_harris_bfs,A02 - Harris polling seeds with BFS,STARE,CA-APSRG,iou,20,-0.20649415390979323,-0.19491609201292473,0.12402259185926613,0,0,20
+a02_harris_bfs,A02 - Harris polling seeds with BFS,STARE,CA-APSRG,precision,20,0.09275682437765105,0.15642589001166535,0.22150297320224285,16,0,4
+a02_harris_bfs,A02 - Harris polling seeds with BFS,STARE,CA-APSRG,recall,20,-0.5148978061257624,-0.44368102263633835,0.19634358050799866,0,0,20
+a02_harris_bfs,A02 - Harris polling seeds with BFS,STARE,CA-APSRG,specificity,20,0.05186103122621275,0.041222702566531766,0.026882572953744712,20,0,0
+a03_fuzzy_srg_bfs,A03 - Fuzzy SRG seeds with BFS,CHASEDB1,APSRG,accuracy,28,0.0058438646980313435,0.006503378378378499,0.0038375200568636007,26,0,2
+a03_fuzzy_srg_bfs,A03 - Fuzzy SRG seeds with BFS,CHASEDB1,APSRG,balanced_accuracy,28,-0.032677843293938344,-0.030379012117830062,0.008704069564493693,0,0,28
+a03_fuzzy_srg_bfs,A03 - Fuzzy SRG seeds with BFS,CHASEDB1,APSRG,dice,28,-0.010747322250315189,-0.009910298470926449,0.014909880929283663,9,0,19
+a03_fuzzy_srg_bfs,A03 - Fuzzy SRG seeds with BFS,CHASEDB1,APSRG,f1_score,28,-0.010747322250315189,-0.009910298470926449,0.014909880929283663,9,0,19
+a03_fuzzy_srg_bfs,A03 - Fuzzy SRG seeds with BFS,CHASEDB1,APSRG,iou,28,-0.010189935362254803,-0.00902589179457114,0.014074275998663274,9,0,19
+a03_fuzzy_srg_bfs,A03 - Fuzzy SRG seeds with BFS,CHASEDB1,APSRG,precision,28,0.02381167947999172,0.02462214009452121,0.016624962699681195,26,0,2
+a03_fuzzy_srg_bfs,A03 - Fuzzy SRG seeds with BFS,CHASEDB1,APSRG,recall,28,-0.0774954279619389,-0.07581650362495024,0.017792136711265342,0,0,28
+a03_fuzzy_srg_bfs,A03 - Fuzzy SRG seeds with BFS,CHASEDB1,APSRG,specificity,28,0.01213974137406222,0.0132874456506209,0.0043442179984039915,28,0,0
+a03_fuzzy_srg_bfs,A03 - Fuzzy SRG seeds with BFS,CHASEDB1,CA-APSRG,accuracy,28,0.003651754433004417,0.0037563605271938028,0.0029770392814388725,23,0,5
+a03_fuzzy_srg_bfs,A03 - Fuzzy SRG seeds with BFS,CHASEDB1,CA-APSRG,balanced_accuracy,28,-0.03341168643371946,-0.030979588776846034,0.008626860780817756,0,0,28
+a03_fuzzy_srg_bfs,A03 - Fuzzy SRG seeds with BFS,CHASEDB1,CA-APSRG,dice,28,-0.016904396846892655,-0.0173367810705074,0.013923966862163873,3,0,25
+a03_fuzzy_srg_bfs,A03 - Fuzzy SRG seeds with BFS,CHASEDB1,CA-APSRG,f1_score,28,-0.016904396846892655,-0.0173367810705074,0.013923966862163873,3,0,25
+a03_fuzzy_srg_bfs,A03 - Fuzzy SRG seeds with BFS,CHASEDB1,CA-APSRG,iou,28,-0.016206169713813372,-0.016562100262782847,0.013392982788056862,3,0,25
+a03_fuzzy_srg_bfs,A03 - Fuzzy SRG seeds with BFS,CHASEDB1,CA-APSRG,precision,28,0.015732942364281844,0.01809502865713633,0.012727028382928522,25,0,3
+a03_fuzzy_srg_bfs,A03 - Fuzzy SRG seeds with BFS,CHASEDB1,CA-APSRG,recall,28,-0.07652126412976225,-0.07383262018248243,0.017529296692523663,0,0,28
+a03_fuzzy_srg_bfs,A03 - Fuzzy SRG seeds with BFS,CHASEDB1,CA-APSRG,specificity,28,0.009697891262323288,0.01029283895235461,0.0031366474439148994,28,0,0
+a03_fuzzy_srg_bfs,A03 - Fuzzy SRG seeds with BFS,DRIVE,APSRG,accuracy,20,-0.0338946577738617,-0.033447633041710334,0.008739447240559677,0,0,20
+a03_fuzzy_srg_bfs,A03 - Fuzzy SRG seeds with BFS,DRIVE,APSRG,balanced_accuracy,20,-0.0656774358051545,-0.06879730065038031,0.017987304339772626,0,0,20
+a03_fuzzy_srg_bfs,A03 - Fuzzy SRG seeds with BFS,DRIVE,APSRG,dice,20,-0.12548257938966237,-0.12559359046599103,0.03162592761280715,0,0,20
+a03_fuzzy_srg_bfs,A03 - Fuzzy SRG seeds with BFS,DRIVE,APSRG,f1_score,20,-0.12548257938966237,-0.12559359046599103,0.03162592761280715,0,0,20
+a03_fuzzy_srg_bfs,A03 - Fuzzy SRG seeds with BFS,DRIVE,APSRG,iou,20,-0.13576975226782426,-0.13827836401662916,0.037027573585556604,0,0,20
+a03_fuzzy_srg_bfs,A03 - Fuzzy SRG seeds with BFS,DRIVE,APSRG,precision,20,-0.14818772919495232,-0.15239537568508643,0.04485638195897883,0,0,20
+a03_fuzzy_srg_bfs,A03 - Fuzzy SRG seeds with BFS,DRIVE,APSRG,recall,20,-0.10734497329345753,-0.10774471363812088,0.03537772445696752,0,0,20
+a03_fuzzy_srg_bfs,A03 - Fuzzy SRG seeds with BFS,DRIVE,APSRG,specificity,20,-0.0240098983168514,-0.025893148092670792,0.008776383950406072,0,0,20
+a03_fuzzy_srg_bfs,A03 - Fuzzy SRG seeds with BFS,DRIVE,CA-APSRG,accuracy,20,-0.025114341134254103,-0.02521411019604608,0.0068180103849965,0,0,20
+a03_fuzzy_srg_bfs,A03 - Fuzzy SRG seeds with BFS,DRIVE,CA-APSRG,balanced_accuracy,20,-0.06430201618080925,-0.06716469040500217,0.017261845274502786,0,0,20
+a03_fuzzy_srg_bfs,A03 - Fuzzy SRG seeds with BFS,DRIVE,CA-APSRG,dice,20,-0.10853114014007574,-0.10963517281302085,0.02752869470436477,0,0,20
+a03_fuzzy_srg_bfs,A03 - Fuzzy SRG seeds with BFS,DRIVE,CA-APSRG,f1_score,20,-0.10853114014007574,-0.10963517281302085,0.02752869470436477,0,0,20
+a03_fuzzy_srg_bfs,A03 - Fuzzy SRG seeds with BFS,DRIVE,CA-APSRG,iou,20,-0.11875970781016001,-0.12040398762410068,0.03244603453912042,0,0,20
+a03_fuzzy_srg_bfs,A03 - Fuzzy SRG seeds with BFS,DRIVE,CA-APSRG,precision,20,-0.10484076336257683,-0.1064414979032961,0.03532145358909402,0,0,20
+a03_fuzzy_srg_bfs,A03 - Fuzzy SRG seeds with BFS,DRIVE,CA-APSRG,recall,20,-0.11590527564481885,-0.11786904882029975,0.03424598650877707,0,0,20
+a03_fuzzy_srg_bfs,A03 - Fuzzy SRG seeds with BFS,DRIVE,CA-APSRG,specificity,20,-0.012698756716799636,-0.014229348233813222,0.006373556442101431,0,0,20
+a03_fuzzy_srg_bfs,A03 - Fuzzy SRG seeds with BFS,STARE,APSRG,accuracy,20,-0.025449940968122774,-0.030148760330578395,0.017718781560249922,2,0,18
+a03_fuzzy_srg_bfs,A03 - Fuzzy SRG seeds with BFS,STARE,APSRG,balanced_accuracy,20,-0.09592019238325429,-0.09327743996471682,0.031047030673690017,0,0,20
+a03_fuzzy_srg_bfs,A03 - Fuzzy SRG seeds with BFS,STARE,APSRG,dice,20,-0.13825187569992545,-0.1455489990172889,0.07071329501198197,0,0,20
+a03_fuzzy_srg_bfs,A03 - Fuzzy SRG seeds with BFS,STARE,APSRG,f1_score,20,-0.13825187569992545,-0.1455489990172889,0.07071329501198197,0,0,20
+a03_fuzzy_srg_bfs,A03 - Fuzzy SRG seeds with BFS,STARE,APSRG,iou,20,-0.14349020619700797,-0.14987141882367913,0.08067726090940057,0,0,20
+a03_fuzzy_srg_bfs,A03 - Fuzzy SRG seeds with BFS,STARE,APSRG,precision,20,-0.11910612859682072,-0.12253072100173909,0.07507509265526004,0,0,20
+a03_fuzzy_srg_bfs,A03 - Fuzzy SRG seeds with BFS,STARE,APSRG,recall,20,-0.17909230888246624,-0.1756930648865943,0.05268596734725442,0,0,20
+a03_fuzzy_srg_bfs,A03 - Fuzzy SRG seeds with BFS,STARE,APSRG,specificity,20,-0.012748075884042365,-0.01597492754113422,0.014443123632835075,5,0,15
+a03_fuzzy_srg_bfs,A03 - Fuzzy SRG seeds with BFS,STARE,CA-APSRG,accuracy,20,-0.022495867768595062,-0.025654073199527727,0.014372309368182413,1,0,19
+a03_fuzzy_srg_bfs,A03 - Fuzzy SRG seeds with BFS,STARE,CA-APSRG,balanced_accuracy,20,-0.0945461080735261,-0.09310475726441708,0.029913847537610012,0,0,20
+a03_fuzzy_srg_bfs,A03 - Fuzzy SRG seeds with BFS,STARE,CA-APSRG,dice,20,-0.13039515913478913,-0.13579117549660874,0.06327929047432579,0,0,20
+a03_fuzzy_srg_bfs,A03 - Fuzzy SRG seeds with BFS,STARE,CA-APSRG,f1_score,20,-0.13039515913478913,-0.13579117549660874,0.06327929047432579,0,0,20
+a03_fuzzy_srg_bfs,A03 - Fuzzy SRG seeds with BFS,STARE,CA-APSRG,iou,20,-0.13622636285913936,-0.1420299906292194,0.07371818859065904,0,0,20
+a03_fuzzy_srg_bfs,A03 - Fuzzy SRG seeds with BFS,STARE,CA-APSRG,precision,20,-0.10609660868025968,-0.10720510597308555,0.06431860456676709,0,0,20
+a03_fuzzy_srg_bfs,A03 - Fuzzy SRG seeds with BFS,STARE,CA-APSRG,recall,20,-0.1796412759481456,-0.175254588591719,0.05253294673091693,0,0,20
+a03_fuzzy_srg_bfs,A03 - Fuzzy SRG seeds with BFS,STARE,CA-APSRG,specificity,20,-0.0094509401989066,-0.010362779115727527,0.01071506688025074,5,0,15
+a04_selective_hybrid_bfs,A04 - Selective fuzzy-Harris seeds with BFS,CHASEDB1,APSRG,accuracy,28,0.019996931455264762,0.020901109442776122,0.0087678404751964,27,0,1
+a04_selective_hybrid_bfs,A04 - Selective fuzzy-Harris seeds with BFS,CHASEDB1,APSRG,balanced_accuracy,28,-0.1796860424476965,-0.18106503613552827,0.049061958830413595,0,0,28
+a04_selective_hybrid_bfs,A04 - Selective fuzzy-Harris seeds with BFS,CHASEDB1,APSRG,dice,28,-0.1580754427217425,-0.17767275163812812,0.11650473026858164,3,0,25
+a04_selective_hybrid_bfs,A04 - Selective fuzzy-Harris seeds with BFS,CHASEDB1,APSRG,f1_score,28,-0.1580754427217425,-0.17767275163812812,0.11650473026858164,3,0,25
+a04_selective_hybrid_bfs,A04 - Selective fuzzy-Harris seeds with BFS,CHASEDB1,APSRG,iou,28,-0.13028597848937093,-0.15000543314645182,0.09271850507343977,3,0,25
+a04_selective_hybrid_bfs,A04 - Selective fuzzy-Harris seeds with BFS,CHASEDB1,APSRG,precision,28,0.20946140330301571,0.2206538469588408,0.06333594881792964,28,0,0
+a04_selective_hybrid_bfs,A04 - Selective fuzzy-Harris seeds with BFS,CHASEDB1,APSRG,recall,28,-0.41193702123906834,-0.4138835814911461,0.10090972815760395,0,0,28
+a04_selective_hybrid_bfs,A04 - Selective fuzzy-Harris seeds with BFS,CHASEDB1,APSRG,specificity,28,0.05256493634367532,0.05354300506348736,0.005977953416616602,28,0,0
+a04_selective_hybrid_bfs,A04 - Selective fuzzy-Harris seeds with BFS,CHASEDB1,CA-APSRG,accuracy,28,0.016261871991038672,0.01628868451785126,0.009121784140603321,27,0,1
+a04_selective_hybrid_bfs,A04 - Selective fuzzy-Harris seeds with BFS,CHASEDB1,CA-APSRG,balanced_accuracy,28,-0.1807372273961588,-0.1819779900250894,0.049069179862275304,0,0,28
+a04_selective_hybrid_bfs,A04 - Selective fuzzy-Harris seeds with BFS,CHASEDB1,CA-APSRG,dice,28,-0.1689637979514464,-0.1880693101303827,0.11786601098953599,2,0,26
+a04_selective_hybrid_bfs,A04 - Selective fuzzy-Harris seeds with BFS,CHASEDB1,CA-APSRG,f1_score,28,-0.1689637979514464,-0.1880693101303827,0.11786601098953599,2,0,26
+a04_selective_hybrid_bfs,A04 - Selective fuzzy-Harris seeds with BFS,CHASEDB1,CA-APSRG,iou,28,-0.14076048295918214,-0.16323428973111898,0.09434039817657265,2,0,26
+a04_selective_hybrid_bfs,A04 - Selective fuzzy-Harris seeds with BFS,CHASEDB1,CA-APSRG,precision,28,0.19325433074340626,0.2034587593492208,0.060484273084411955,28,0,0
+a04_selective_hybrid_bfs,A04 - Selective fuzzy-Harris seeds with BFS,CHASEDB1,CA-APSRG,recall,28,-0.40985387880294694,-0.41133287048114964,0.10052837371299242,0,0,28
+a04_selective_hybrid_bfs,A04 - Selective fuzzy-Harris seeds with BFS,CHASEDB1,CA-APSRG,specificity,28,0.04837942401062916,0.04901124189426059,0.005330032411212037,28,0,0
+a04_selective_hybrid_bfs,A04 - Selective fuzzy-Harris seeds with BFS,DRIVE,APSRG,accuracy,20,-0.020423502736186698,-0.01825494306820391,0.016868900526094778,2,0,18
+a04_selective_hybrid_bfs,A04 - Selective fuzzy-Harris seeds with BFS,DRIVE,APSRG,balanced_accuracy,20,-0.16229910652095936,-0.15954831277133402,0.04911003753608309,0,0,20
+a04_selective_hybrid_bfs,A04 - Selective fuzzy-Harris seeds with BFS,DRIVE,APSRG,dice,20,-0.2323368786234954,-0.21422090474375316,0.10475869782880949,0,0,20
+a04_selective_hybrid_bfs,A04 - Selective fuzzy-Harris seeds with BFS,DRIVE,APSRG,f1_score,20,-0.2323368786234954,-0.21422090474375316,0.10475869782880949,0,0,20
+a04_selective_hybrid_bfs,A04 - Selective fuzzy-Harris seeds with BFS,DRIVE,APSRG,iou,20,-0.22949840223338977,-0.2110452346527796,0.09492511335057992,0,0,20
+a04_selective_hybrid_bfs,A04 - Selective fuzzy-Harris seeds with BFS,DRIVE,APSRG,precision,20,0.06183073915746003,0.06336046965911862,0.052555700140658725,17,0,3
+a04_selective_hybrid_bfs,A04 - Selective fuzzy-Harris seeds with BFS,DRIVE,APSRG,recall,20,-0.3507799504123186,-0.3385583977424293,0.10236584162173372,0,0,20
+a04_selective_hybrid_bfs,A04 - Selective fuzzy-Harris seeds with BFS,DRIVE,APSRG,specificity,20,0.026181737370399905,0.024151715878095448,0.012724237356080758,20,0,0
+a04_selective_hybrid_bfs,A04 - Selective fuzzy-Harris seeds with BFS,DRIVE,CA-APSRG,accuracy,20,-0.02073079427385947,-0.01820430703821696,0.016552198890429935,2,0,18
+a04_selective_hybrid_bfs,A04 - Selective fuzzy-Harris seeds with BFS,DRIVE,CA-APSRG,balanced_accuracy,20,-0.16189692000053574,-0.15823894097656638,0.04903991401370745,0,0,20
+a04_selective_hybrid_bfs,A04 - Selective fuzzy-Harris seeds with BFS,DRIVE,CA-APSRG,dice,20,-0.2328118593005005,-0.2161735101715308,0.10430127327913075,0,0,20
+a04_selective_hybrid_bfs,A04 - Selective fuzzy-Harris seeds with BFS,DRIVE,CA-APSRG,f1_score,20,-0.2328118593005005,-0.2161735101715308,0.10430127327913075,0,0,20
+a04_selective_hybrid_bfs,A04 - Selective fuzzy-Harris seeds with BFS,DRIVE,CA-APSRG,iou,20,-0.2299579890896566,-0.21365772539740366,0.09435385279887423,0,0,20
+a04_selective_hybrid_bfs,A04 - Selective fuzzy-Harris seeds with BFS,DRIVE,CA-APSRG,precision,20,0.059950672340044184,0.06211224924591313,0.05138204876920414,17,0,3
+a04_selective_hybrid_bfs,A04 - Selective fuzzy-Harris seeds with BFS,DRIVE,CA-APSRG,recall,20,-0.34943989761958055,-0.33665540718641107,0.1022827470709954,0,0,20
+a04_selective_hybrid_bfs,A04 - Selective fuzzy-Harris seeds with BFS,DRIVE,CA-APSRG,specificity,20,0.02564605761850901,0.0239752103641947,0.012333756976992169,20,0,0
+a04_selective_hybrid_bfs,A04 - Selective fuzzy-Harris seeds with BFS,STARE,APSRG,accuracy,20,0.011249232585596236,0.004453364817001315,0.02976291179595615,11,0,9
+a04_selective_hybrid_bfs,A04 - Selective fuzzy-Harris seeds with BFS,STARE,APSRG,balanced_accuracy,20,-0.18292481826084403,-0.17481182134642287,0.06927881942224434,0,0,20
+a04_selective_hybrid_bfs,A04 - Selective fuzzy-Harris seeds with BFS,STARE,APSRG,dice,20,-0.14407166316751083,-0.1257120737692501,0.16870642132226743,2,0,18
+a04_selective_hybrid_bfs,A04 - Selective fuzzy-Harris seeds with BFS,STARE,APSRG,f1_score,20,-0.14407166316751083,-0.1257120737692501,0.16870642132226743,2,0,18
+a04_selective_hybrid_bfs,A04 - Selective fuzzy-Harris seeds with BFS,STARE,APSRG,iou,20,-0.14051658588738675,-0.14414288430523517,0.1467004213858093,2,0,18
+a04_selective_hybrid_bfs,A04 - Selective fuzzy-Harris seeds with BFS,STARE,APSRG,precision,20,0.13798302857225112,0.12903502129380615,0.1351324485534889,19,0,1
+a04_selective_hybrid_bfs,A04 - Selective fuzzy-Harris seeds with BFS,STARE,APSRG,recall,20,-0.41201186147590824,-0.39203233804572507,0.1381400335872369,0,0,20
+a04_selective_hybrid_bfs,A04 - Selective fuzzy-Harris seeds with BFS,STARE,APSRG,specificity,20,0.04616222495422015,0.035955505831235746,0.02465323253420011,20,0,0
+a04_selective_hybrid_bfs,A04 - Selective fuzzy-Harris seeds with BFS,STARE,CA-APSRG,accuracy,20,0.009518063754427365,0.004069657615112077,0.02692384208595812,11,0,9
+a04_selective_hybrid_bfs,A04 - Selective fuzzy-Harris seeds with BFS,STARE,CA-APSRG,balanced_accuracy,20,-0.1836358157860931,-0.17628325740874484,0.06911695660479092,0,0,20
+a04_selective_hybrid_bfs,A04 - Selective fuzzy-Harris seeds with BFS,STARE,CA-APSRG,dice,20,-0.14820538275536677,-0.1263070300429352,0.1650408720242268,2,0,18
+a04_selective_hybrid_bfs,A04 - Selective fuzzy-Harris seeds with BFS,STARE,CA-APSRG,f1_score,20,-0.14820538275536677,-0.1263070300429352,0.1650408720242268,2,0,18
+a04_selective_hybrid_bfs,A04 - Selective fuzzy-Harris seeds with BFS,STARE,CA-APSRG,iou,20,-0.14425655627043069,-0.14487754752572082,0.14351496294184687,2,0,18
+a04_selective_hybrid_bfs,A04 - Selective fuzzy-Harris seeds with BFS,STARE,CA-APSRG,precision,20,0.1336057014713626,0.12626098088002796,0.12992917834925946,19,0,1
+a04_selective_hybrid_bfs,A04 - Selective fuzzy-Harris seeds with BFS,STARE,CA-APSRG,recall,20,-0.4115663565309826,-0.39177323415079357,0.13831776849392455,0,0,20
+a04_selective_hybrid_bfs,A04 - Selective fuzzy-Harris seeds with BFS,STARE,CA-APSRG,specificity,20,0.04429472495879638,0.03504484012000686,0.021529746835658087,20,0,0
+a05_selective_hybrid_edge_delayed,A05 - Selective fuzzy-Harris with edge-delayed growing,CHASEDB1,APSRG,accuracy,28,0.012744478109061418,0.01158137303970641,0.009705210521163583,25,0,3
+a05_selective_hybrid_edge_delayed,A05 - Selective fuzzy-Harris with edge-delayed growing,CHASEDB1,APSRG,balanced_accuracy,28,-0.2768973672714333,-0.2801890793663649,0.02460463331610369,0,0,28
+a05_selective_hybrid_edge_delayed,A05 - Selective fuzzy-Harris with edge-delayed growing,CHASEDB1,APSRG,dice,28,-0.3891464004146958,-0.3904517496891886,0.07363749925912283,0,0,28
+a05_selective_hybrid_edge_delayed,A05 - Selective fuzzy-Harris with edge-delayed growing,CHASEDB1,APSRG,f1_score,28,-0.3891464004146958,-0.3904517496891886,0.07363749925912283,0,0,28
+a05_selective_hybrid_edge_delayed,A05 - Selective fuzzy-Harris with edge-delayed growing,CHASEDB1,APSRG,iou,28,-0.29021197475599514,-0.28847136872568957,0.05122524551870331,0,0,28
+a05_selective_hybrid_edge_delayed,A05 - Selective fuzzy-Harris with edge-delayed growing,CHASEDB1,APSRG,precision,28,0.14064206701829846,0.15763821488440158,0.10196478852728767,25,0,3
+a05_selective_hybrid_edge_delayed,A05 - Selective fuzzy-Harris with edge-delayed growing,CHASEDB1,APSRG,recall,28,-0.6128892753797398,-0.6193085502443552,0.051043157936430446,0,0,28
+a05_selective_hybrid_edge_delayed,A05 - Selective fuzzy-Harris with edge-delayed growing,CHASEDB1,APSRG,specificity,28,0.05909454083687308,0.05941159924633099,0.005905630379760973,28,0,0
+a05_selective_hybrid_edge_delayed,A05 - Selective fuzzy-Harris with edge-delayed growing,CHASEDB1,CA-APSRG,accuracy,28,0.009004577494160837,0.007875062562562596,0.010208608484744183,24,0,4
+a05_selective_hybrid_edge_delayed,A05 - Selective fuzzy-Harris with edge-delayed growing,CHASEDB1,CA-APSRG,balanced_accuracy,28,-0.2779511641918703,-0.28105378464408515,0.02451291663365052,0,0,28
+a05_selective_hybrid_edge_delayed,A05 - Selective fuzzy-Harris with edge-delayed growing,CHASEDB1,CA-APSRG,dice,28,-0.4000543106883005,-0.40287896022558456,0.07496402843235818,0,0,28
+a05_selective_hybrid_edge_delayed,A05 - Selective fuzzy-Harris with edge-delayed growing,CHASEDB1,CA-APSRG,f1_score,28,-0.4000543106883005,-0.40287896022558456,0.07496402843235818,0,0,28
+a05_selective_hybrid_edge_delayed,A05 - Selective fuzzy-Harris with edge-delayed growing,CHASEDB1,CA-APSRG,iou,28,-0.30070229000900356,-0.30130236642302033,0.05299021218882735,0,0,28
+a05_selective_hybrid_edge_delayed,A05 - Selective fuzzy-Harris with edge-delayed growing,CHASEDB1,CA-APSRG,precision,28,0.12432315328835951,0.14260984814569058,0.1007851354814492,24,0,4
+a05_selective_hybrid_edge_delayed,A05 - Selective fuzzy-Harris with edge-delayed growing,CHASEDB1,CA-APSRG,recall,28,-0.6108061329436183,-0.6173430848273537,0.05155084620975161,0,0,28
+a05_selective_hybrid_edge_delayed,A05 - Selective fuzzy-Harris with edge-delayed growing,CHASEDB1,CA-APSRG,specificity,28,0.05490380455987761,0.05458608530437009,0.006059369459022781,28,0,0
+a05_selective_hybrid_edge_delayed,A05 - Selective fuzzy-Harris with edge-delayed growing,DRIVE,APSRG,accuracy,20,-0.044365584709649845,-0.049000214951197885,0.02261684870380076,2,0,18
+a05_selective_hybrid_edge_delayed,A05 - Selective fuzzy-Harris with edge-delayed growing,DRIVE,APSRG,balanced_accuracy,20,-0.2873390969015072,-0.29293097130148954,0.032244543822677066,0,0,20
+a05_selective_hybrid_edge_delayed,A05 - Selective fuzzy-Harris with edge-delayed growing,DRIVE,APSRG,dice,20,-0.5527094539552921,-0.5539602596189928,0.0972555950375761,0,0,20
+a05_selective_hybrid_edge_delayed,A05 - Selective fuzzy-Harris with edge-delayed growing,DRIVE,APSRG,f1_score,20,-0.5527094539552921,-0.5539602596189928,0.0972555950375761,0,0,20
+a05_selective_hybrid_edge_delayed,A05 - Selective fuzzy-Harris with edge-delayed growing,DRIVE,APSRG,iou,20,-0.4585262114922933,-0.4687137673763727,0.08267788313474563,0,0,20
+a05_selective_hybrid_edge_delayed,A05 - Selective fuzzy-Harris with edge-delayed growing,DRIVE,APSRG,precision,20,0.026058403334842783,0.010836588042629547,0.10306917279117027,11,0,9
+a05_selective_hybrid_edge_delayed,A05 - Selective fuzzy-Harris with edge-delayed growing,DRIVE,APSRG,recall,20,-0.6107244925408764,-0.6185222967950532,0.06386765795660483,0,0,20
+a05_selective_hybrid_edge_delayed,A05 - Selective fuzzy-Harris with edge-delayed growing,DRIVE,APSRG,specificity,20,0.03604629873786178,0.03222370825386972,0.015514064368533866,20,0,0
+a05_selective_hybrid_edge_delayed,A05 - Selective fuzzy-Harris with edge-delayed growing,DRIVE,CA-APSRG,accuracy,20,-0.044659854977792374,-0.049143274373888435,0.022299533125884462,2,0,18
+a05_selective_hybrid_edge_delayed,A05 - Selective fuzzy-Harris with edge-delayed growing,DRIVE,CA-APSRG,balanced_accuracy,20,-0.2868220636143739,-0.29278167960001267,0.03227975762039292,0,0,20
+a05_selective_hybrid_edge_delayed,A05 - Selective fuzzy-Harris with edge-delayed growing,DRIVE,CA-APSRG,dice,20,-0.5529835220047994,-0.5543656644075738,0.09655653459421222,0,0,20
+a05_selective_hybrid_edge_delayed,A05 - Selective fuzzy-Harris with edge-delayed growing,DRIVE,CA-APSRG,f1_score,20,-0.5529835220047994,-0.5543656644075738,0.09655653459421222,0,0,20
+a05_selective_hybrid_edge_delayed,A05 - Selective fuzzy-Harris with edge-delayed growing,DRIVE,CA-APSRG,iou,20,-0.45880144215155116,-0.46859198046734307,0.0818931050584899,0,0,20
+a05_selective_hybrid_edge_delayed,A05 - Selective fuzzy-Harris with edge-delayed growing,DRIVE,CA-APSRG,precision,20,0.02406497178439759,0.010366833802395559,0.10290033755836415,11,0,9
+a05_selective_hybrid_edge_delayed,A05 - Selective fuzzy-Harris with edge-delayed growing,DRIVE,CA-APSRG,recall,20,-0.6091356700411173,-0.6179148240408541,0.06421660760371795,0,0,20
+a05_selective_hybrid_edge_delayed,A05 - Selective fuzzy-Harris with edge-delayed growing,DRIVE,CA-APSRG,specificity,20,0.035491542812369443,0.03203559214829582,0.015183151093609073,20,0,0
+a05_selective_hybrid_edge_delayed,A05 - Selective fuzzy-Harris with edge-delayed growing,STARE,APSRG,accuracy,20,-0.001983116883116853,-0.01567060212514748,0.03802545488914584,7,0,13
+a05_selective_hybrid_edge_delayed,A05 - Selective fuzzy-Harris with edge-delayed growing,STARE,APSRG,balanced_accuracy,20,-0.34262900846599453,-0.3529330294837105,0.04784801339057201,0,0,20
+a05_selective_hybrid_edge_delayed,A05 - Selective fuzzy-Harris with edge-delayed growing,STARE,APSRG,dice,20,-0.4918680364661613,-0.5397719185353507,0.20568748372816856,1,0,19
+a05_selective_hybrid_edge_delayed,A05 - Selective fuzzy-Harris with edge-delayed growing,STARE,APSRG,f1_score,20,-0.4918680364661613,-0.5397719185353507,0.20568748372816856,1,0,19
+a05_selective_hybrid_edge_delayed,A05 - Selective fuzzy-Harris with edge-delayed growing,STARE,APSRG,iou,20,-0.39598873404935425,-0.44033297040486874,0.17212518786466727,1,0,19
+a05_selective_hybrid_edge_delayed,A05 - Selective fuzzy-Harris with edge-delayed growing,STARE,APSRG,precision,20,0.10560072922827461,0.07127655354755058,0.29137282404254566,13,0,7
+a05_selective_hybrid_edge_delayed,A05 - Selective fuzzy-Harris with edge-delayed growing,STARE,APSRG,recall,20,-0.7445430262195597,-0.7545570378421533,0.07581394600443019,0,0,20
+a05_selective_hybrid_edge_delayed,A05 - Selective fuzzy-Harris with edge-delayed growing,STARE,APSRG,specificity,20,0.05928500928757062,0.051656297086073,0.026726991820577785,20,0,0
+a05_selective_hybrid_edge_delayed,A05 - Selective fuzzy-Harris with edge-delayed growing,STARE,CA-APSRG,accuracy,20,-0.0037220779220779377,-0.016076741440377906,0.03537142640375864,7,0,13
+a05_selective_hybrid_edge_delayed,A05 - Selective fuzzy-Harris with edge-delayed growing,STARE,CA-APSRG,balanced_accuracy,20,-0.34330692592318435,-0.3533343257226351,0.0470033083908139,0,0,20
+a05_selective_hybrid_edge_delayed,A05 - Selective fuzzy-Harris with edge-delayed growing,STARE,CA-APSRG,dice,20,-0.495980978671661,-0.5418600180569393,0.20046644826100563,1,0,19
+a05_selective_hybrid_edge_delayed,A05 - Selective fuzzy-Harris with edge-delayed growing,STARE,CA-APSRG,f1_score,20,-0.495980978671661,-0.5418600180569393,0.20046644826100563,1,0,19
+a05_selective_hybrid_edge_delayed,A05 - Selective fuzzy-Harris with edge-delayed growing,STARE,CA-APSRG,iou,20,-0.3997091188159542,-0.44141955416072454,0.16797116689121272,1,0,19
+a05_selective_hybrid_edge_delayed,A05 - Selective fuzzy-Harris with edge-delayed growing,STARE,CA-APSRG,precision,20,0.10101591589881746,0.06790171229866476,0.2866726955069167,13,0,7
+a05_selective_hybrid_edge_delayed,A05 - Selective fuzzy-Harris with edge-delayed growing,STARE,CA-APSRG,recall,20,-0.744015423936392,-0.754293206483158,0.07647902843979729,0,0,20
+a05_selective_hybrid_edge_delayed,A05 - Selective fuzzy-Harris with edge-delayed growing,STARE,CA-APSRG,specificity,20,0.0574015720900233,0.05137204948447682,0.023960579869624982,20,0,0
+a06_process_context_record_only,A06 - Full APSRG with process context recorded only,CHASEDB1,APSRG,accuracy,28,0.012744478109061418,0.01158137303970641,0.009705210521163583,25,0,3
+a06_process_context_record_only,A06 - Full APSRG with process context recorded only,CHASEDB1,APSRG,balanced_accuracy,28,-0.2768973672714333,-0.2801890793663649,0.02460463331610369,0,0,28
+a06_process_context_record_only,A06 - Full APSRG with process context recorded only,CHASEDB1,APSRG,dice,28,-0.3891464004146958,-0.3904517496891886,0.07363749925912283,0,0,28
+a06_process_context_record_only,A06 - Full APSRG with process context recorded only,CHASEDB1,APSRG,f1_score,28,-0.3891464004146958,-0.3904517496891886,0.07363749925912283,0,0,28
+a06_process_context_record_only,A06 - Full APSRG with process context recorded only,CHASEDB1,APSRG,iou,28,-0.29021197475599514,-0.28847136872568957,0.05122524551870331,0,0,28
+a06_process_context_record_only,A06 - Full APSRG with process context recorded only,CHASEDB1,APSRG,precision,28,0.14064206701829846,0.15763821488440158,0.10196478852728767,25,0,3
+a06_process_context_record_only,A06 - Full APSRG with process context recorded only,CHASEDB1,APSRG,recall,28,-0.6128892753797398,-0.6193085502443552,0.051043157936430446,0,0,28
+a06_process_context_record_only,A06 - Full APSRG with process context recorded only,CHASEDB1,APSRG,specificity,28,0.05909454083687308,0.05941159924633099,0.005905630379760973,28,0,0
+a06_process_context_record_only,A06 - Full APSRG with process context recorded only,CHASEDB1,CA-APSRG,accuracy,28,0.009004577494160837,0.007875062562562596,0.010208608484744183,24,0,4
+a06_process_context_record_only,A06 - Full APSRG with process context recorded only,CHASEDB1,CA-APSRG,balanced_accuracy,28,-0.2779511641918703,-0.28105378464408515,0.02451291663365052,0,0,28
+a06_process_context_record_only,A06 - Full APSRG with process context recorded only,CHASEDB1,CA-APSRG,dice,28,-0.4000543106883005,-0.40287896022558456,0.07496402843235818,0,0,28
+a06_process_context_record_only,A06 - Full APSRG with process context recorded only,CHASEDB1,CA-APSRG,f1_score,28,-0.4000543106883005,-0.40287896022558456,0.07496402843235818,0,0,28
+a06_process_context_record_only,A06 - Full APSRG with process context recorded only,CHASEDB1,CA-APSRG,iou,28,-0.30070229000900356,-0.30130236642302033,0.05299021218882735,0,0,28
+a06_process_context_record_only,A06 - Full APSRG with process context recorded only,CHASEDB1,CA-APSRG,precision,28,0.12432315328835951,0.14260984814569058,0.1007851354814492,24,0,4
+a06_process_context_record_only,A06 - Full APSRG with process context recorded only,CHASEDB1,CA-APSRG,recall,28,-0.6108061329436183,-0.6173430848273537,0.05155084620975161,0,0,28
+a06_process_context_record_only,A06 - Full APSRG with process context recorded only,CHASEDB1,CA-APSRG,specificity,28,0.05490380455987761,0.05458608530437009,0.006059369459022781,28,0,0
+a06_process_context_record_only,A06 - Full APSRG with process context recorded only,DRIVE,APSRG,accuracy,20,-0.044365584709649845,-0.049000214951197885,0.02261684870380076,2,0,18
+a06_process_context_record_only,A06 - Full APSRG with process context recorded only,DRIVE,APSRG,balanced_accuracy,20,-0.2873390969015072,-0.29293097130148954,0.032244543822677066,0,0,20
+a06_process_context_record_only,A06 - Full APSRG with process context recorded only,DRIVE,APSRG,dice,20,-0.5527094539552921,-0.5539602596189928,0.0972555950375761,0,0,20
+a06_process_context_record_only,A06 - Full APSRG with process context recorded only,DRIVE,APSRG,f1_score,20,-0.5527094539552921,-0.5539602596189928,0.0972555950375761,0,0,20
+a06_process_context_record_only,A06 - Full APSRG with process context recorded only,DRIVE,APSRG,iou,20,-0.4585262114922933,-0.4687137673763727,0.08267788313474563,0,0,20
+a06_process_context_record_only,A06 - Full APSRG with process context recorded only,DRIVE,APSRG,precision,20,0.026058403334842783,0.010836588042629547,0.10306917279117027,11,0,9
+a06_process_context_record_only,A06 - Full APSRG with process context recorded only,DRIVE,APSRG,recall,20,-0.6107244925408764,-0.6185222967950532,0.06386765795660483,0,0,20
+a06_process_context_record_only,A06 - Full APSRG with process context recorded only,DRIVE,APSRG,specificity,20,0.03604629873786178,0.03222370825386972,0.015514064368533866,20,0,0
+a06_process_context_record_only,A06 - Full APSRG with process context recorded only,DRIVE,CA-APSRG,accuracy,20,-0.044659854977792374,-0.049143274373888435,0.022299533125884462,2,0,18
+a06_process_context_record_only,A06 - Full APSRG with process context recorded only,DRIVE,CA-APSRG,balanced_accuracy,20,-0.2868220636143739,-0.29278167960001267,0.03227975762039292,0,0,20
+a06_process_context_record_only,A06 - Full APSRG with process context recorded only,DRIVE,CA-APSRG,dice,20,-0.5529835220047994,-0.5543656644075738,0.09655653459421222,0,0,20
+a06_process_context_record_only,A06 - Full APSRG with process context recorded only,DRIVE,CA-APSRG,f1_score,20,-0.5529835220047994,-0.5543656644075738,0.09655653459421222,0,0,20
+a06_process_context_record_only,A06 - Full APSRG with process context recorded only,DRIVE,CA-APSRG,iou,20,-0.45880144215155116,-0.46859198046734307,0.0818931050584899,0,0,20
+a06_process_context_record_only,A06 - Full APSRG with process context recorded only,DRIVE,CA-APSRG,precision,20,0.02406497178439759,0.010366833802395559,0.10290033755836415,11,0,9
+a06_process_context_record_only,A06 - Full APSRG with process context recorded only,DRIVE,CA-APSRG,recall,20,-0.6091356700411173,-0.6179148240408541,0.06421660760371795,0,0,20
+a06_process_context_record_only,A06 - Full APSRG with process context recorded only,DRIVE,CA-APSRG,specificity,20,0.035491542812369443,0.03203559214829582,0.015183151093609073,20,0,0
+a06_process_context_record_only,A06 - Full APSRG with process context recorded only,STARE,APSRG,accuracy,20,-0.001983116883116853,-0.01567060212514748,0.03802545488914584,7,0,13
+a06_process_context_record_only,A06 - Full APSRG with process context recorded only,STARE,APSRG,balanced_accuracy,20,-0.34262900846599453,-0.3529330294837105,0.04784801339057201,0,0,20
+a06_process_context_record_only,A06 - Full APSRG with process context recorded only,STARE,APSRG,dice,20,-0.4918680364661613,-0.5397719185353507,0.20568748372816856,1,0,19
+a06_process_context_record_only,A06 - Full APSRG with process context recorded only,STARE,APSRG,f1_score,20,-0.4918680364661613,-0.5397719185353507,0.20568748372816856,1,0,19
+a06_process_context_record_only,A06 - Full APSRG with process context recorded only,STARE,APSRG,iou,20,-0.39598873404935425,-0.44033297040486874,0.17212518786466727,1,0,19
+a06_process_context_record_only,A06 - Full APSRG with process context recorded only,STARE,APSRG,precision,20,0.10560072922827461,0.07127655354755058,0.29137282404254566,13,0,7
+a06_process_context_record_only,A06 - Full APSRG with process context recorded only,STARE,APSRG,recall,20,-0.7445430262195597,-0.7545570378421533,0.07581394600443019,0,0,20
+a06_process_context_record_only,A06 - Full APSRG with process context recorded only,STARE,APSRG,specificity,20,0.05928500928757062,0.051656297086073,0.026726991820577785,20,0,0
+a06_process_context_record_only,A06 - Full APSRG with process context recorded only,STARE,CA-APSRG,accuracy,20,-0.0037220779220779377,-0.016076741440377906,0.03537142640375864,7,0,13
+a06_process_context_record_only,A06 - Full APSRG with process context recorded only,STARE,CA-APSRG,balanced_accuracy,20,-0.34330692592318435,-0.3533343257226351,0.0470033083908139,0,0,20
+a06_process_context_record_only,A06 - Full APSRG with process context recorded only,STARE,CA-APSRG,dice,20,-0.495980978671661,-0.5418600180569393,0.20046644826100563,1,0,19
+a06_process_context_record_only,A06 - Full APSRG with process context recorded only,STARE,CA-APSRG,f1_score,20,-0.495980978671661,-0.5418600180569393,0.20046644826100563,1,0,19
+a06_process_context_record_only,A06 - Full APSRG with process context recorded only,STARE,CA-APSRG,iou,20,-0.3997091188159542,-0.44141955416072454,0.16797116689121272,1,0,19
+a06_process_context_record_only,A06 - Full APSRG with process context recorded only,STARE,CA-APSRG,precision,20,0.10101591589881746,0.06790171229866476,0.2866726955069167,13,0,7
+a06_process_context_record_only,A06 - Full APSRG with process context recorded only,STARE,CA-APSRG,recall,20,-0.744015423936392,-0.754293206483158,0.07647902843979729,0,0,20
+a06_process_context_record_only,A06 - Full APSRG with process context recorded only,STARE,CA-APSRG,specificity,20,0.0574015720900233,0.05137204948447682,0.023960579869624982,20,0,0
+a07_process_context_override,A07 - Full CA-APSRG with process-context override,CHASEDB1,APSRG,accuracy,28,0.012744478109061418,0.01158137303970641,0.009705210521163583,25,0,3
+a07_process_context_override,A07 - Full CA-APSRG with process-context override,CHASEDB1,APSRG,balanced_accuracy,28,-0.2768973672714333,-0.2801890793663649,0.02460463331610369,0,0,28
+a07_process_context_override,A07 - Full CA-APSRG with process-context override,CHASEDB1,APSRG,dice,28,-0.3891464004146958,-0.3904517496891886,0.07363749925912283,0,0,28
+a07_process_context_override,A07 - Full CA-APSRG with process-context override,CHASEDB1,APSRG,f1_score,28,-0.3891464004146958,-0.3904517496891886,0.07363749925912283,0,0,28
+a07_process_context_override,A07 - Full CA-APSRG with process-context override,CHASEDB1,APSRG,iou,28,-0.29021197475599514,-0.28847136872568957,0.05122524551870331,0,0,28
+a07_process_context_override,A07 - Full CA-APSRG with process-context override,CHASEDB1,APSRG,precision,28,0.14064206701829846,0.15763821488440158,0.10196478852728767,25,0,3
+a07_process_context_override,A07 - Full CA-APSRG with process-context override,CHASEDB1,APSRG,recall,28,-0.6128892753797398,-0.6193085502443552,0.051043157936430446,0,0,28
+a07_process_context_override,A07 - Full CA-APSRG with process-context override,CHASEDB1,APSRG,specificity,28,0.05909454083687308,0.05941159924633099,0.005905630379760973,28,0,0
+a07_process_context_override,A07 - Full CA-APSRG with process-context override,CHASEDB1,CA-APSRG,accuracy,28,0.009004577494160837,0.007875062562562596,0.010208608484744183,24,0,4
+a07_process_context_override,A07 - Full CA-APSRG with process-context override,CHASEDB1,CA-APSRG,balanced_accuracy,28,-0.2779511641918703,-0.28105378464408515,0.02451291663365052,0,0,28
+a07_process_context_override,A07 - Full CA-APSRG with process-context override,CHASEDB1,CA-APSRG,dice,28,-0.4000543106883005,-0.40287896022558456,0.07496402843235818,0,0,28
+a07_process_context_override,A07 - Full CA-APSRG with process-context override,CHASEDB1,CA-APSRG,f1_score,28,-0.4000543106883005,-0.40287896022558456,0.07496402843235818,0,0,28
+a07_process_context_override,A07 - Full CA-APSRG with process-context override,CHASEDB1,CA-APSRG,iou,28,-0.30070229000900356,-0.30130236642302033,0.05299021218882735,0,0,28
+a07_process_context_override,A07 - Full CA-APSRG with process-context override,CHASEDB1,CA-APSRG,precision,28,0.12432315328835951,0.14260984814569058,0.1007851354814492,24,0,4
+a07_process_context_override,A07 - Full CA-APSRG with process-context override,CHASEDB1,CA-APSRG,recall,28,-0.6108061329436183,-0.6173430848273537,0.05155084620975161,0,0,28
+a07_process_context_override,A07 - Full CA-APSRG with process-context override,CHASEDB1,CA-APSRG,specificity,28,0.05490380455987761,0.05458608530437009,0.006059369459022781,28,0,0
+a07_process_context_override,A07 - Full CA-APSRG with process-context override,DRIVE,APSRG,accuracy,20,-0.044365584709649845,-0.049000214951197885,0.02261684870380076,2,0,18
+a07_process_context_override,A07 - Full CA-APSRG with process-context override,DRIVE,APSRG,balanced_accuracy,20,-0.2873390969015072,-0.29293097130148954,0.032244543822677066,0,0,20
+a07_process_context_override,A07 - Full CA-APSRG with process-context override,DRIVE,APSRG,dice,20,-0.5527094539552921,-0.5539602596189928,0.0972555950375761,0,0,20
+a07_process_context_override,A07 - Full CA-APSRG with process-context override,DRIVE,APSRG,f1_score,20,-0.5527094539552921,-0.5539602596189928,0.0972555950375761,0,0,20
+a07_process_context_override,A07 - Full CA-APSRG with process-context override,DRIVE,APSRG,iou,20,-0.4585262114922933,-0.4687137673763727,0.08267788313474563,0,0,20
+a07_process_context_override,A07 - Full CA-APSRG with process-context override,DRIVE,APSRG,precision,20,0.026058403334842783,0.010836588042629547,0.10306917279117027,11,0,9
+a07_process_context_override,A07 - Full CA-APSRG with process-context override,DRIVE,APSRG,recall,20,-0.6107244925408764,-0.6185222967950532,0.06386765795660483,0,0,20
+a07_process_context_override,A07 - Full CA-APSRG with process-context override,DRIVE,APSRG,specificity,20,0.03604629873786178,0.03222370825386972,0.015514064368533866,20,0,0
+a07_process_context_override,A07 - Full CA-APSRG with process-context override,DRIVE,CA-APSRG,accuracy,20,-0.044659854977792374,-0.049143274373888435,0.022299533125884462,2,0,18
+a07_process_context_override,A07 - Full CA-APSRG with process-context override,DRIVE,CA-APSRG,balanced_accuracy,20,-0.2868220636143739,-0.29278167960001267,0.03227975762039292,0,0,20
+a07_process_context_override,A07 - Full CA-APSRG with process-context override,DRIVE,CA-APSRG,dice,20,-0.5529835220047994,-0.5543656644075738,0.09655653459421222,0,0,20
+a07_process_context_override,A07 - Full CA-APSRG with process-context override,DRIVE,CA-APSRG,f1_score,20,-0.5529835220047994,-0.5543656644075738,0.09655653459421222,0,0,20
+a07_process_context_override,A07 - Full CA-APSRG with process-context override,DRIVE,CA-APSRG,iou,20,-0.45880144215155116,-0.46859198046734307,0.0818931050584899,0,0,20
+a07_process_context_override,A07 - Full CA-APSRG with process-context override,DRIVE,CA-APSRG,precision,20,0.02406497178439759,0.010366833802395559,0.10290033755836415,11,0,9
+a07_process_context_override,A07 - Full CA-APSRG with process-context override,DRIVE,CA-APSRG,recall,20,-0.6091356700411173,-0.6179148240408541,0.06421660760371795,0,0,20
+a07_process_context_override,A07 - Full CA-APSRG with process-context override,DRIVE,CA-APSRG,specificity,20,0.035491542812369443,0.03203559214829582,0.015183151093609073,20,0,0
+a07_process_context_override,A07 - Full CA-APSRG with process-context override,STARE,APSRG,accuracy,20,-0.001983116883116853,-0.01567060212514748,0.03802545488914584,7,0,13
+a07_process_context_override,A07 - Full CA-APSRG with process-context override,STARE,APSRG,balanced_accuracy,20,-0.34262900846599453,-0.3529330294837105,0.04784801339057201,0,0,20
+a07_process_context_override,A07 - Full CA-APSRG with process-context override,STARE,APSRG,dice,20,-0.4918680364661613,-0.5397719185353507,0.20568748372816856,1,0,19
+a07_process_context_override,A07 - Full CA-APSRG with process-context override,STARE,APSRG,f1_score,20,-0.4918680364661613,-0.5397719185353507,0.20568748372816856,1,0,19
+a07_process_context_override,A07 - Full CA-APSRG with process-context override,STARE,APSRG,iou,20,-0.39598873404935425,-0.44033297040486874,0.17212518786466727,1,0,19
+a07_process_context_override,A07 - Full CA-APSRG with process-context override,STARE,APSRG,precision,20,0.10560072922827461,0.07127655354755058,0.29137282404254566,13,0,7
+a07_process_context_override,A07 - Full CA-APSRG with process-context override,STARE,APSRG,recall,20,-0.7445430262195597,-0.7545570378421533,0.07581394600443019,0,0,20
+a07_process_context_override,A07 - Full CA-APSRG with process-context override,STARE,APSRG,specificity,20,0.05928500928757062,0.051656297086073,0.026726991820577785,20,0,0
+a07_process_context_override,A07 - Full CA-APSRG with process-context override,STARE,CA-APSRG,accuracy,20,-0.0037220779220779377,-0.016076741440377906,0.03537142640375864,7,0,13
+a07_process_context_override,A07 - Full CA-APSRG with process-context override,STARE,CA-APSRG,balanced_accuracy,20,-0.34330692592318435,-0.3533343257226351,0.0470033083908139,0,0,20
+a07_process_context_override,A07 - Full CA-APSRG with process-context override,STARE,CA-APSRG,dice,20,-0.495980978671661,-0.5418600180569393,0.20046644826100563,1,0,19
+a07_process_context_override,A07 - Full CA-APSRG with process-context override,STARE,CA-APSRG,f1_score,20,-0.495980978671661,-0.5418600180569393,0.20046644826100563,1,0,19
+a07_process_context_override,A07 - Full CA-APSRG with process-context override,STARE,CA-APSRG,iou,20,-0.3997091188159542,-0.44141955416072454,0.16797116689121272,1,0,19
+a07_process_context_override,A07 - Full CA-APSRG with process-context override,STARE,CA-APSRG,precision,20,0.10101591589881746,0.06790171229866476,0.2866726955069167,13,0,7
+a07_process_context_override,A07 - Full CA-APSRG with process-context override,STARE,CA-APSRG,recall,20,-0.744015423936392,-0.754293206483158,0.07647902843979729,0,0,20
+a07_process_context_override,A07 - Full CA-APSRG with process-context override,STARE,CA-APSRG,specificity,20,0.0574015720900233,0.05137204948447682,0.023960579869624982,20,0,0

@@ -1,0 +1,11 @@
+dataset,image_id,comparison_path,baseline_f1_score,ca_apsrg_f1_score,delta_f1_score,delta_precision,delta_recall
+STARE,im0002,E:\ca_apsrg_retinal_project\outputs\method_ablation\experiments_a04_selective_hybrid_bfs\STARE\comparison\im0002_comparison.png,0.0844933820173436,0.0844933820173436,0.0,0.0,0.0
+CHASEDB1,Image_13R,E:\ca_apsrg_retinal_project\outputs\method_ablation\experiments_a04_selective_hybrid_bfs\CHASEDB1\comparison\Image_13R_comparison.png,0.1055779871392253,0.1055779871392253,0.0,0.0,0.0
+STARE,im0235,E:\ca_apsrg_retinal_project\outputs\method_ablation\experiments_a04_selective_hybrid_bfs\STARE\comparison\im0235_comparison.png,0.1825420989765089,0.1825420989765089,0.0,0.0,0.0
+CHASEDB1,Image_01R,E:\ca_apsrg_retinal_project\outputs\method_ablation\experiments_a04_selective_hybrid_bfs\CHASEDB1\comparison\Image_01R_comparison.png,0.2435975213415955,0.2435975213415955,0.0,0.0,0.0
+CHASEDB1,Image_12R,E:\ca_apsrg_retinal_project\outputs\method_ablation\experiments_a04_selective_hybrid_bfs\CHASEDB1\comparison\Image_12R_comparison.png,0.2459268920696672,0.2459268920696672,0.0,0.0,0.0
+DRIVE,38,E:\ca_apsrg_retinal_project\outputs\method_ablation\experiments_a04_selective_hybrid_bfs\DRIVE\comparison\38_comparison.png,0.2847175397965465,0.2847175397965465,0.0,0.0,0.0
+CHASEDB1,Image_05R,E:\ca_apsrg_retinal_project\outputs\method_ablation\experiments_a04_selective_hybrid_bfs\CHASEDB1\comparison\Image_05R_comparison.png,0.2917598657932577,0.2917598657932577,0.0,0.0,0.0
+DRIVE,23,E:\ca_apsrg_retinal_project\outputs\method_ablation\experiments_a04_selective_hybrid_bfs\DRIVE\comparison\23_comparison.png,0.2949766355140187,0.2950784839712093,0.00010184845719057867,0.0002840927531465032,0.0
+CHASEDB1,Image_04L,E:\ca_apsrg_retinal_project\outputs\method_ablation\experiments_a04_selective_hybrid_bfs\CHASEDB1\comparison\Image_04L_comparison.png,0.2951480649710137,0.2951480649710137,0.0,0.0,0.0
+CHASEDB1,Image_02R,E:\ca_apsrg_retinal_project\outputs\method_ablation\experiments_a04_selective_hybrid_bfs\CHASEDB1\comparison\Image_02R_comparison.png,0.3029383809581589,0.3029383809581589,0.0,0.0,0.0

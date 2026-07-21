@@ -35,6 +35,12 @@ from src.utils.image_io import ensure_binary_mask, to_uint8
 
 PriorityMode = Literal["kang_product", "additive", "hybrid"]
 
+AcceptanceMode = Literal[
+    "region_mean",
+    "local_path",
+    "local_or_region",
+    "local_and_region",
+]
 
 @dataclass(frozen=True)
 class EdgeDelayedRegionGrowingParams:
@@ -52,6 +58,15 @@ class EdgeDelayedRegionGrowingParams:
     # Value 1.0 means the fuzzy-distance rejection gate is disabled.
     max_fuzzy_distance: float = 1.0
 
+    # Acceptance rule.
+    # region_mean mempertahankan perilaku A05 agar eksperimen lama reproducible.
+    acceptance_mode: AcceptanceMode = "region_mean"
+
+    # Digunakan oleh local_or_region dan local_and_region.
+    # Dengan nilai 2.0 dan threshold utama 18:
+    # local limit = 18, region-mean limit = 36.
+    region_mean_tolerance_multiplier: float = 2.0
+
     # Recalculate the priority when a region mean changes.
     recompute_priority: bool = True
     priority_tolerance: float = 1e-6
@@ -67,6 +82,17 @@ class EdgeDelayedRegionGrowingParams:
         """Create parameters from a YAML-like dictionary."""
         if not config:
             return cls()
+
+        acceptance_mode = str(
+            config.get("acceptance_mode", "region_mean")
+        ),
+
+        region_mean_tolerance_multiplier = float(
+            config.get(
+                "region_mean_tolerance_multiplier",
+                2.0,
+            )
+        ),
 
         return cls(
             enabled=bool(config.get("enabled", True)),
@@ -362,6 +388,40 @@ def _neighbor_region_ids(
 
     return region_ids
 
+def _minimum_local_difference(
+    labels: np.ndarray,
+    intensity: np.ndarray,
+    y: int,
+    x: int,
+    region_id: int,
+    neighbors: list[tuple[int, int]],
+) -> float:
+    """
+    Return the minimum intensity difference between a candidate pixel
+    and accepted neighboring pixels belonging to the same region.
+    """
+    h, w = labels.shape
+    pixel_value = float(intensity[y, x])
+    minimum_difference = float("inf")
+
+    for dy, dx in neighbors:
+        yy = y + dy
+        xx = x + dx
+
+        if yy < 0 or yy >= h or xx < 0 or xx >= w:
+            continue
+
+        if int(labels[yy, xx]) != int(region_id):
+            continue
+
+        difference = abs(
+            pixel_value - float(intensity[yy, xx])
+        )
+
+        if difference < minimum_difference:
+            minimum_difference = float(difference)
+
+    return minimum_difference
 
 def _best_neighbor_region(
     labels: np.ndarray,
@@ -373,14 +433,21 @@ def _best_neighbor_region(
     neighbors: list[tuple[int, int]],
     *,
     distance_scale: float,
-) -> tuple[int, float, float] | None:
+) -> tuple[int, float, float, float] | None:
     """
-    Select the adjacent region with minimum fuzzy distance.
+    Select the adjacent region with minimum fuzzy region distance.
 
-    Returns:
-        region_id,
-        fuzzy_distance,
-        raw intensity difference.
+    Returns
+    -------
+    region_id:
+        Selected neighboring region.
+    fuzzy_distance:
+        Fuzzy distance against the current region mean.
+    region_mean_difference:
+        Raw difference against the current region mean.
+    local_difference:
+        Minimum difference against an accepted neighboring pixel
+        in the selected region.
     """
     region_ids = _neighbor_region_ids(
         labels,
@@ -392,18 +459,15 @@ def _best_neighbor_region(
     if not region_ids:
         return None
 
-    pixel_value = float(
-        intensity[y, x]
-    )
+    pixel_value = float(intensity[y, x])
 
     best_region_id = 0
     best_fuzzy_distance = float("inf")
-    best_raw_difference = float("inf")
+    best_region_difference = float("inf")
+    best_local_difference = float("inf")
 
     for region_id in region_ids:
-        count_value = int(
-            region_counts[region_id]
-        )
+        count_value = int(region_counts[region_id])
 
         if count_value <= 0:
             continue
@@ -413,38 +477,45 @@ def _best_neighbor_region(
             / float(count_value)
         )
 
-        raw_difference = abs(
+        region_difference = abs(
             pixel_value - region_mean
         )
 
-        fuzzy_distance = (
-            compute_fuzzy_region_distance(
-                pixel_value,
-                region_mean,
-                scale=distance_scale,
-            )
+        local_difference = _minimum_local_difference(
+            labels,
+            intensity,
+            y,
+            x,
+            region_id,
+            neighbors,
         )
 
-        if (
-            fuzzy_distance < best_fuzzy_distance
-            or (
-                abs(
-                    fuzzy_distance
-                    - best_fuzzy_distance
-                )
-                <= 1e-12
-                and raw_difference
-                < best_raw_difference
+        fuzzy_distance = compute_fuzzy_region_distance(
+            pixel_value,
+            region_mean,
+            scale=distance_scale,
+        )
+
+        current_key = (
+            float(fuzzy_distance),
+            float(local_difference),
+            float(region_difference),
+        )
+
+        best_key = (
+            float(best_fuzzy_distance),
+            float(best_local_difference),
+            float(best_region_difference),
+        )
+
+        if current_key < best_key:
+            best_region_id = int(region_id)
+            best_fuzzy_distance = float(fuzzy_distance)
+            best_region_difference = float(
+                region_difference
             )
-        ):
-            best_region_id = int(
-                region_id
-            )
-            best_fuzzy_distance = float(
-                fuzzy_distance
-            )
-            best_raw_difference = float(
-                raw_difference
+            best_local_difference = float(
+                local_difference
             )
 
     if best_region_id <= 0:
@@ -453,9 +524,76 @@ def _best_neighbor_region(
     return (
         best_region_id,
         best_fuzzy_distance,
-        best_raw_difference,
+        best_region_difference,
+        best_local_difference,
     )
 
+def _passes_intensity_gate(
+    region_difference: float,
+    local_difference: float,
+    *,
+    max_intensity_difference: float,
+    params: EdgeDelayedRegionGrowingParams,
+) -> tuple[bool, bool, bool]:
+    """
+    Evaluate local and region-mean intensity consistency.
+
+    Returns:
+        accepted,
+        local_pass,
+        region_pass.
+    """
+    threshold = float(max_intensity_difference)
+
+    if threshold <= 0.0:
+        return True, True, True
+
+    multiplier = max(
+        float(params.region_mean_tolerance_multiplier),
+        1e-8,
+    )
+
+    local_pass = (
+        float(local_difference) <= threshold
+    )
+
+    mode = str(params.acceptance_mode).lower()
+
+    # Reproduce the original A05 gate.
+    if mode == "region_mean":
+        region_pass = (
+            float(region_difference) <= threshold
+        )
+        return region_pass, local_pass, region_pass
+
+    # Region mean is made more tolerant when combined with
+    # gradual local-path consistency.
+    region_limit = threshold * multiplier
+    region_pass = (
+        float(region_difference) <= region_limit
+    )
+
+    if mode == "local_path":
+        return local_pass, local_pass, region_pass
+
+    if mode == "local_or_region":
+        return (
+            local_pass or region_pass,
+            local_pass,
+            region_pass,
+        )
+
+    if mode == "local_and_region":
+        return (
+            local_pass and region_pass,
+            local_pass,
+            region_pass,
+        )
+
+    raise ValueError(
+        f"Unsupported acceptance_mode: "
+        f"{params.acceptance_mode}"
+    )
 
 def edge_delayed_region_growing(
     candidate_map: np.ndarray,
@@ -641,6 +779,8 @@ def edge_delayed_region_growing(
     rejected_by_fuzzy_distance = 0
     stale_queue_entries = 0
     reprioritized_entries = 0
+    rejected_by_local_intensity = 0
+    rejected_by_region_mean = 0
 
     def enqueue_pixel(
         y: int,
@@ -672,6 +812,7 @@ def edge_delayed_region_growing(
         (
             region_id,
             fuzzy_distance,
+            _,
             _,
         ) = best
 
@@ -808,7 +949,8 @@ def edge_delayed_region_growing(
         (
             region_id,
             fuzzy_distance,
-            raw_difference,
+            region_difference,
+            local_difference,
         ) = best
 
         current_priority = (
@@ -845,17 +987,27 @@ def edge_delayed_region_growing(
             reprioritized_entries += 1
             continue
 
-        if (
-            max_raw_difference > 0.0
-            and raw_difference
-            > max_raw_difference
-        ):
-            rejected_by_intensity += 1
-            best_queued_priority[
-                y,
-                x,
-            ] = np.inf
+        (
+            intensity_accepted,
+            local_pass,
+            region_pass,
+        ) = _passes_intensity_gate(
+            region_difference,
+            local_difference,
+            max_intensity_difference=max_raw_difference,
+            params=params,
+        )
 
+        if not intensity_accepted:
+            rejected_by_intensity += 1
+
+            if not local_pass:
+                rejected_by_local_intensity += 1
+
+            if not region_pass:
+                rejected_by_region_mean += 1
+
+            best_queued_priority[y, x] = np.inf
             continue
 
         if (
@@ -1012,6 +1164,15 @@ def edge_delayed_region_growing(
             final_region_sizes
         ),
         "params": params.to_dict(),
+        "acceptance_mode": str(params.acceptance_mode),
+
+        "n_rejected_by_local_intensity": int(
+            rejected_by_local_intensity
+        ),
+
+        "n_rejected_by_region_mean": int(
+            rejected_by_region_mean
+        ),
     }
 
     return result.astype(bool), debug

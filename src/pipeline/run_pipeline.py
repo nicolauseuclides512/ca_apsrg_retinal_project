@@ -214,6 +214,12 @@ VALID_EDGE_PRIORITY_MODES = {
     "hybrid",
 }
 
+VALID_EDGE_ACCEPTANCE_MODES = {
+    "region_mean",
+    "local_path",
+    "local_or_region",
+    "local_and_region",
+}
 
 def _is_zero_or_odd(value: int) -> bool:
     """Return True when value is zero or a positive odd integer."""
@@ -409,6 +415,24 @@ def validate_pipeline_config(
     priority_mode = str(
         growing.priority_mode
     ).lower()
+
+    acceptance_mode = str(
+        growing.acceptance_mode
+    ).lower()
+
+    if acceptance_mode not in VALID_EDGE_ACCEPTANCE_MODES:
+        errors.append(
+            "edge_delayed_region_growing.acceptance_mode "
+            f"tidak valid: {growing.acceptance_mode!r}"
+        )
+
+    if float(
+            growing.region_mean_tolerance_multiplier
+    ) <= 0.0:
+        errors.append(
+            "region_mean_tolerance_multiplier harus "
+            "lebih besar dari nol."
+        )
 
     if priority_mode not in VALID_EDGE_PRIORITY_MODES:
         errors.append(

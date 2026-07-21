@@ -29,4 +29,7 @@ outputs/*
 !outputs/method_ablation/
 !outputs/method_ablation/**
 
+!outputs/single_test/
+!outputs/single_test/**
+
 *.log

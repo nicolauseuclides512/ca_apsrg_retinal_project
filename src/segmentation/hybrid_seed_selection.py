@@ -522,11 +522,18 @@ def select_hybrid_fuzzy_harris_seeds(
     final_candidate_pool = strict_candidates.copy()
     fallback_stage = "strict_fuzzy_harris"
 
-    # Relax support radius if too few Harris points satisfy the strict area.
+    # Jumlah kandidat yang dibutuhkan untuk mencapai target seed.
+    required_pool_size = max(
+        int(hybrid_params.min_seed_count),
+        int(target_count),
+    )
+
+    # Fallback 1:
+    # Perluas area dukungan fuzzy ketika kandidat strict belum cukup
+    # untuk memenuhi target.
     if (
-        int(final_candidate_pool.sum())
-        < int(hybrid_params.min_seed_count)
-        and hybrid_params.allow_relaxed_harris_fallback
+            int(final_candidate_pool.sum()) < required_pool_size
+            and hybrid_params.allow_relaxed_harris_fallback
     ):
         relaxed_support = _dilate_mask(
             fuzzy_seeds,
@@ -535,35 +542,43 @@ def select_hybrid_fuzzy_harris_seeds(
         relaxed_support &= valid_area
 
         relaxed_candidates = (
-            harris_candidates
-            & relaxed_support
-            & valid_area
+                harris_candidates
+                & relaxed_support
+                & valid_area
         )
 
         final_candidate_pool |= relaxed_candidates
-        fallback_stage = "relaxed_fuzzy_harris"
+        fallback_stage = "relaxed_fuzzy_harris_to_target"
+
     else:
         relaxed_support = strict_fuzzy_support.copy()
         relaxed_candidates = strict_candidates.copy()
 
-    # Final controlled fallback:
-    # use high-scoring fuzzy-supported local maxima, not arbitrary pixels.
+    # Fallback 2:
+    # Tambahkan local maxima pada dukungan fuzzy apabila kandidat
+    # Harris masih belum mencukupi target.
     if (
-        int(final_candidate_pool.sum())
-        < int(hybrid_params.min_seed_count)
-        and hybrid_params.allow_fuzzy_fallback
+            int(final_candidate_pool.sum()) < required_pool_size
+            and hybrid_params.allow_fuzzy_fallback
     ):
         fuzzy_local_maxima = _local_maxima(
             hybrid_score,
-            strict_fuzzy_support & valid_area,
+            relaxed_support & valid_area,
             radius=hybrid_params.min_seed_distance,
         )
 
         final_candidate_pool |= fuzzy_local_maxima
-        fallback_stage = "fuzzy_local_maxima"
-    else:
-        fuzzy_local_maxima = np.zeros(shape, dtype=bool)
+        fallback_stage = "fuzzy_local_maxima_to_target"
 
+    else:
+        fuzzy_local_maxima = np.zeros(
+            shape,
+            dtype=bool,
+        )
+
+    # PENTING:
+    # Blok ini harus berada di luar kedua kondisi fallback.
+    # Artinya, seed selalu dipilih apa pun fallback yang aktif.
     seeds, selected_coords, selected_scores = (
         _select_spatially_separated_points(
             hybrid_score,
@@ -573,6 +588,7 @@ def select_hybrid_fuzzy_harris_seeds(
         )
     )
 
+    # Dilasi baru dilakukan setelah variabel seeds dibuat.
     seeds = _apply_seed_dilation(
         seeds,
         radius=hybrid_params.seed_dilate_radius,
@@ -583,31 +599,56 @@ def select_hybrid_fuzzy_harris_seeds(
         "enabled": True,
         "fuzzy_debug": fuzzy_debug,
         "harris_debug": harris_debug,
+
         "fuzzy_seed_support": fuzzy_seeds,
         "strict_fuzzy_support": strict_fuzzy_support,
         "relaxed_fuzzy_support": relaxed_support,
+
         "harris_candidates": harris_candidates,
         "strict_hybrid_candidates": strict_candidates,
         "relaxed_hybrid_candidates": relaxed_candidates,
         "fuzzy_local_maxima_fallback": fuzzy_local_maxima,
         "final_hybrid_candidate_pool": final_candidate_pool,
+
         "hybrid_score": hybrid_score,
         "hybrid_selected_seeds": seeds,
+
         "selected_coordinates": selected_coords.tolist(),
         "selected_scores": selected_scores.tolist(),
+
         "fallback_stage": fallback_stage,
-        "n_fuzzy_seed_pixels": int(fuzzy_seeds.sum()),
-        "n_harris_candidates": int(harris_candidates.sum()),
+
+        "requested_target_seed_count": int(target_count),
+        "required_candidate_pool_size": int(required_pool_size),
+
+        "target_seed_count_reached": bool(
+            selected_coords.shape[0] >= target_count
+        ),
+
+        "n_fuzzy_seed_pixels": int(
+            fuzzy_seeds.sum()
+        ),
+
+        "n_harris_candidates": int(
+            harris_candidates.sum()
+        ),
+
         "n_strict_hybrid_candidates": int(
             strict_candidates.sum()
         ),
+
         "n_final_hybrid_candidates": int(
             final_candidate_pool.sum()
         ),
+
         "n_selected_seed_points": int(
             selected_coords.shape[0]
         ),
-        "n_hybrid_seed_pixels": int(seeds.sum()),
+
+        "n_hybrid_seed_pixels": int(
+            seeds.sum()
+        ),
+
         "params": hybrid_params.to_dict(),
     }
 

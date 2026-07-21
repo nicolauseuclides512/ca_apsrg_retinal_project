@@ -1,25 +1,21 @@
 """
-APSRG baseline implementation for retinal blood vessel segmentation.
+APSRG implementation for retinal blood vessel segmentation.
 
-This module provides a runnable APSRG-style baseline for the CA-APSRG project.
-It follows the baseline flow used in the proposal:
+Processing flow:
 
-1. Input preprocessed fundus image, usually green channel + CLAHE.
-2. Enhance dark vessel-like structures using multi-scale black-hat morphology.
-3. Select seed pixels automatically using global percentile and local polling.
-4. Grow vessel regions from the selected seeds over a candidate vessel map.
-5. Apply light post-processing to remove tiny isolated components.
-
-Important note:
-This file is a reproducible APSRG-style baseline prepared for experimentation.
-If the full APSRG paper method specifies additional formulas or exact parameter
-values, those details can later be inserted into this module without changing the
-rest of the project pipeline.
+1. Read the preprocessed fundus image, typically green channel + CLAHE.
+2. Enhance vessel-like structures using multi-scale black-hat morphology.
+3. Construct the candidate vessel map.
+4. Select seeds using percentile/polling, fuzzy SRG, Harris Corner,
+   or selective fuzzy-Harris polling.
+5. Grow vessel regions using BFS or edge-delayed priority region growing.
+6. Apply light binary post-processing.
+7. Forward the APSRG mask to the CA-APSRG context-aware refinement stage.
 
 Conventions:
-- Input preprocessed image: grayscale uint8, shape (H, W).
-- Optional FoV mask: boolean or 0/255 uint8, shape (H, W).
-- Output vessel mask: boolean array, shape (H, W).
+- Input image: grayscale uint8, shape (H, W).
+- FoV mask: boolean or binary uint8, shape (H, W).
+- Output vessel mask: boolean, shape (H, W).
 """
 
 from __future__ import annotations
@@ -35,6 +31,7 @@ import numpy as np
 from src.segmentation.skimage_compat import remove_small_holes_compat
 from src.segmentation.apsrg_harris import HarrisSeedParams, select_harris_seeds
 from src.segmentation.srg_features import SRGFeatureParams, select_fuzzy_srg_seeds
+from src.segmentation.edge_delayed_region_growing import EdgeDelayedRegionGrowingParams, edge_delayed_region_growing
 from src.segmentation.hybrid_seed_selection import (
     HybridSeedParams,
     select_hybrid_fuzzy_harris_seeds,
@@ -53,18 +50,28 @@ SeedSelectionMethod = Literal[
     "percentile",
     "polling",
     "percentile_polling",
+    "polling_percentile",
+
     "harris_polling",
     "percentile_harris_polling",
+    "harris_percentile",
+
     "polling_harris",
     "hybrid_harris",
+
     "fuzzy_srg",
     "percentile_fuzzy_srg",
     "polling_fuzzy_srg",
+
     "fuzzy_harris",
     "hybrid_fuzzy_harris",
     "selective_fuzzy_harris",
 ]
 
+RegionGrowingMode = Literal[
+    "bfs",
+    "edge_delayed",
+]
 
 @dataclass(frozen=True)
 class APSRGParams:
@@ -82,8 +89,13 @@ class APSRGParams:
     min_seed_distance: int = 2
 
     region_growing_connectivity: int = 8
+    region_growing_mode: RegionGrowingMode = "bfs"
     max_intensity_difference: float = 18.0
     max_iterations: int = 500_000
+
+    edge_delayed_region_growing: EdgeDelayedRegionGrowingParams = field(
+        default_factory=EdgeDelayedRegionGrowingParams
+    )
 
     min_component_area: int = 8
     fill_small_holes_area: int = 8
@@ -121,23 +133,98 @@ class APSRGParams:
                 or {}
         )
 
+        edge_delayed_config = (
+                config.get("edge_delayed_region_growing")
+                or config.get("edge_delayed")
+                or {}
+        )
+
         return cls(
-            vessel_enhancement_method=str(config.get("vessel_enhancement_method", "blackhat_multiscale")),
+            vessel_enhancement_method=str(
+                config.get(
+                    "vessel_enhancement_method",
+                    "blackhat_multiscale",
+                )
+            ),
             vesselness_kernel_sizes=kernel_sizes,
-            seed_selection_method=str(config.get("seed_selection_method", "percentile_polling")),
-            seed_percentile=float(config.get("seed_percentile", 92.0)),
-            candidate_percentile=float(config.get("candidate_percentile", 78.0)),
-            polling_window_size=int(config.get("polling_window_size", 16)),
-            polling_top_percentile=float(config.get("polling_top_percentile", 97.0)),
-            min_seed_distance=int(config.get("min_seed_distance", 2)),
-            region_growing_connectivity=int(config.get("region_growing_connectivity", 8)),
-            max_intensity_difference=float(config.get("max_intensity_difference", 18.0)),
-            max_iterations=int(config.get("max_iterations", 500_000)),
-            min_component_area=int(config.get("min_component_area", 8)),
-            fill_small_holes_area=int(config.get("fill_small_holes_area", 8)),
-            harris_seed=HarrisSeedParams.from_dict(harris_config),
-            srg_features=SRGFeatureParams.from_dict(srg_config),
-            hybrid_seed=HybridSeedParams.from_dict(hybrid_config),
+
+            seed_selection_method=str(
+                config.get(
+                    "seed_selection_method",
+                    "percentile_polling",
+                )
+            ),
+
+            seed_percentile=float(
+                config.get("seed_percentile", 92.0)
+            ),
+            candidate_percentile=float(
+                config.get("candidate_percentile", 78.0)
+            ),
+
+            polling_window_size=int(
+                config.get("polling_window_size", 16)
+            ),
+            polling_top_percentile=float(
+                config.get("polling_top_percentile", 97.0)
+            ),
+            min_seed_distance=int(
+                config.get("min_seed_distance", 2)
+            ),
+
+            region_growing_connectivity=int(
+                config.get(
+                    "region_growing_connectivity",
+                    8,
+                )
+            ),
+
+            region_growing_mode=str(
+                config.get(
+                    "region_growing_mode",
+                    "bfs",
+                )
+            ),
+
+            max_intensity_difference=float(
+                config.get(
+                    "max_intensity_difference",
+                    18.0,
+                )
+            ),
+
+            max_iterations=int(
+                config.get(
+                    "max_iterations",
+                    500_000,
+                )
+            ),
+
+            min_component_area=int(
+                config.get("min_component_area", 8)
+            ),
+
+            fill_small_holes_area=int(
+                config.get("fill_small_holes_area", 8)
+            ),
+
+            harris_seed=HarrisSeedParams.from_dict(
+                harris_config
+            ),
+
+            srg_features=SRGFeatureParams.from_dict(
+                srg_config
+            ),
+
+            hybrid_seed=HybridSeedParams.from_dict(
+                hybrid_config
+            ),
+
+            edge_delayed_region_growing=(
+                EdgeDelayedRegionGrowingParams.from_dict(
+                    edge_delayed_config
+                )
+            ),
         )
 
     def to_dict(self) -> dict[str, Any]:
@@ -784,47 +871,63 @@ def apsrg_segment(
 
     seeds &= candidate
 
-    harris_debug: dict[str, Any] = {}
+    region_growing_mode = str(
+        params.region_growing_mode
+    ).lower()
 
-    srg_debug: dict[str, Any] = {}
+    region_growing_debug: dict[str, Any] = {}
 
-    if str(params.seed_selection_method).lower() in {
-        "fuzzy_srg",
-        "percentile_fuzzy_srg",
-        "polling_fuzzy_srg",
-        "fuzzy_harris",
-        "hybrid_fuzzy_harris",
-    }:
-        _, srg_debug = select_fuzzy_srg_seeds(
-            vesselness,
-            candidate_map=candidate,
-            fov_mask=fov,
-            params=params.srg_features,
+    if region_growing_mode == "bfs":
+        grown = _region_growing_from_seeds(
+            candidate,
+            seeds,
+            intensity_image=vesselness,
+            connectivity=params.region_growing_connectivity,
+            max_intensity_difference=params.max_intensity_difference,
+            max_iterations=params.max_iterations,
         )
 
-    if str(params.seed_selection_method).lower() in {
-        "harris_polling",
-        "percentile_harris_polling",
-        "harris_percentile",
-        "polling_harris",
-        "hybrid_harris",
-    }:
-        _, harris_debug = select_harris_seeds(
-            vesselness,
-            vesselness=vesselness,
-            candidate_map=candidate,
-            fov_mask=fov,
-            params=params.harris_seed,
+        region_growing_debug = {
+            "mode": "bfs",
+            "n_initial_seed_pixels": int(
+                seeds.sum()
+            ),
+            "n_candidate_pixels": int(
+                candidate.sum()
+            ),
+            "n_output_pixels": int(
+                grown.sum()
+            ),
+        }
+
+    elif region_growing_mode == "edge_delayed":
+        grown, region_growing_debug = (
+            edge_delayed_region_growing(
+                candidate_map=candidate,
+                seed_mask=seeds,
+                intensity_image=vesselness,
+                edge_image=vesselness,
+                fov_mask=fov,
+                params=(
+                    params.edge_delayed_region_growing
+                ),
+                connectivity=(
+                    params.region_growing_connectivity
+                ),
+                max_intensity_difference=(
+                    params.max_intensity_difference
+                ),
+                max_iterations=(
+                    params.max_iterations
+                ),
+            )
         )
 
-    grown = _region_growing_from_seeds(
-        candidate,
-        seeds,
-        intensity_image=vesselness,
-        connectivity=params.region_growing_connectivity,
-        max_intensity_difference=params.max_intensity_difference,
-        max_iterations=params.max_iterations,
-    )
+    else:
+        raise ValueError(
+            "Unsupported region_growing_mode: "
+            f"{params.region_growing_mode}"
+        )
 
     if fov is not None:
         grown &= fov
@@ -845,6 +948,7 @@ def apsrg_segment(
         "n_candidate_pixels": int(candidate.sum()),
         "n_output_pixels": int(baseline_mask.sum()),
         "seed_selection_debug": seed_selection_debug,
+        "region_growing_debug": region_growing_debug,
         "params": params.to_dict(),
     }
 

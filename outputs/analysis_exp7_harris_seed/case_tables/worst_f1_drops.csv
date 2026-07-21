@@ -1,0 +1,11 @@
+dataset,image_id,comparison_path,baseline_f1_score,ca_apsrg_f1_score,delta_f1_score,delta_precision,delta_recall
+DRIVE,34,E:\ca_apsrg_retinal_project\outputs\experiments_exp7_harris_seed\DRIVE\comparison\34_comparison.png,0.3076257381388719,0.3061323278387812,-0.0014934103000907029,-0.00043983213688769673,-0.0010840276272184035
+DRIVE,38,E:\ca_apsrg_retinal_project\outputs\experiments_exp7_harris_seed\DRIVE\comparison\38_comparison.png,0.3171168051708218,0.3157560355781448,-0.0013607695926770025,-0.0005039067905043826,-0.0009832496400603852
+DRIVE,21,E:\ca_apsrg_retinal_project\outputs\experiments_exp7_harris_seed\DRIVE\comparison\21_comparison.png,0.4611281180856545,0.460241402316977,-0.0008867157686774929,-0.0002013618071370349,-0.0007707910750507918
+STARE,im0239,E:\ca_apsrg_retinal_project\outputs\experiments_exp7_harris_seed\STARE\comparison\im0239_comparison.png,0.6251656945917285,0.6243056361616396,-0.0008600584300889613,-0.00018125986924244497,-0.0010937628175330394
+DRIVE,36,E:\ca_apsrg_retinal_project\outputs\experiments_exp7_harris_seed\DRIVE\comparison\36_comparison.png,0.5318133513670177,0.5309902176854967,-0.0008231336815209822,-0.0002432541605426053,-0.0008081596254598811
+DRIVE,35,E:\ca_apsrg_retinal_project\outputs\experiments_exp7_harris_seed\DRIVE\comparison\35_comparison.png,0.3541907963501793,0.3534000339155503,-0.0007907624346289999,-0.0001916514737639874,-0.0005941562980568138
+CHASEDB1,Image_09L,E:\ca_apsrg_retinal_project\outputs\experiments_exp7_harris_seed\CHASEDB1\comparison\Image_09L_comparison.png,0.5221516131942923,0.5213836153528684,-0.0007679978414238953,-0.00038001709390644844,-0.0008449427087626749
+DRIVE,25,E:\ca_apsrg_retinal_project\outputs\experiments_exp7_harris_seed\DRIVE\comparison\25_comparison.png,0.6007659825198861,0.6000786009039104,-0.0006873816159757018,-0.0002672783779159582,-0.0007895401718039929
+DRIVE,39,E:\ca_apsrg_retinal_project\outputs\experiments_exp7_harris_seed\DRIVE\comparison\39_comparison.png,0.564645861102174,0.5639657868113676,-0.0006800742908064095,-0.0002099324266287006,-0.0007407930012698904
+DRIVE,26,E:\ca_apsrg_retinal_project\outputs\experiments_exp7_harris_seed\DRIVE\comparison\26_comparison.png,0.5356421356421357,0.5349637724767109,-0.0006783631654248001,0.00037412438184003527,-0.0008728542333431011

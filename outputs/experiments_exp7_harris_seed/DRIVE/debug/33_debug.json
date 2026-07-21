@@ -1,0 +1,479 @@
+{
+  "dataset": "DRIVE",
+  "image_id": "33",
+  "image_path": "E:\\ca_apsrg_retinal_project\\data\\working_png\\DRIVE\\DRIVE\\training\\images\\33_training.png",
+  "mask_path": "E:\\ca_apsrg_retinal_project\\data\\working_png\\DRIVE\\DRIVE\\training\\1st_manual\\33_manual1.png",
+  "fov_path": "E:\\ca_apsrg_retinal_project\\data\\working_png\\DRIVE\\DRIVE\\training\\mask\\33_training_mask.png",
+  "pipeline_config": {
+    "preprocessing": {
+      "use_green_channel": true,
+      "normalize_intensity": true,
+      "apply_clahe": true,
+      "clahe_clip_limit": 2.0,
+      "clahe_tile_grid_size": [
+        8,
+        8
+      ],
+      "denoise_method": "median",
+      "median_kernel_size": 3,
+      "bilateral_d": 5,
+      "bilateral_sigma_color": 50.0,
+      "bilateral_sigma_space": 50.0,
+      "apply_fov_mask": true
+    },
+    "apsrg_baseline": {
+      "vessel_enhancement_method": "blackhat_multiscale",
+      "vesselness_kernel_sizes": [
+        7,
+        11,
+        15
+      ],
+      "seed_selection_method": "harris_polling",
+      "seed_percentile": 92.0,
+      "candidate_percentile": 78.0,
+      "polling_window_size": 16,
+      "polling_top_percentile": 97.0,
+      "min_seed_distance": 2,
+      "region_growing_connectivity": 8,
+      "max_intensity_difference": 18.0,
+      "max_iterations": 500000,
+      "min_component_area": 8,
+      "fill_small_holes_area": 8,
+      "harris_seed": {
+        "enabled": true,
+        "block_size": 2,
+        "ksize": 3,
+        "k": 0.04,
+        "response_threshold_ratio": 0.01,
+        "nms_window_size": 3,
+        "target_seed_count": 35,
+        "min_seed_count": 7,
+        "max_seed_count": 77,
+        "prefer_vesselness_weight": 0.65,
+        "use_candidate_constraint": true,
+        "fallback_to_top_vesselness": true,
+        "seed_dilate_radius": 0
+      }
+    },
+    "adaptive_morphology": {
+      "enabled": true,
+      "remove_small_objects": true,
+      "fill_small_holes": false,
+      "closing_enabled": false,
+      "opening_enabled": false,
+      "skeleton_guard_enabled": true,
+      "small_component_area_low_density": 8,
+      "small_component_area_normal": 18,
+      "small_component_area_high_density": 28,
+      "hole_area_low_density": 4,
+      "hole_area_normal": 8,
+      "hole_area_high_density": 12,
+      "closing_kernel_low_density": 0,
+      "closing_kernel_normal": 0,
+      "closing_kernel_high_density": 0,
+      "opening_kernel_low_density": 0,
+      "opening_kernel_normal": 0,
+      "opening_kernel_high_density": 0,
+      "low_density_threshold": 0.025,
+      "high_density_threshold": 0.12,
+      "skeleton_restore_radius": 1,
+      "skeleton_min_component_length": 6
+    },
+    "ca_apsrg": {
+      "enabled": true,
+      "always_refine": true,
+      "low_density_threshold": 0.025,
+      "high_density_threshold": 0.12,
+      "target_preserve_thin_vessels": true
+    },
+    "context_features": {
+      "small_component_area": 12,
+      "connectivity": 8,
+      "compute_skeleton_features": true,
+      "resize_fov_to_mask": false
+    },
+    "evaluation": {
+      "binary_threshold": 127,
+      "evaluate_inside_fov_only": true,
+      "resize_prediction_to_gt": true,
+      "resize_fov_to_gt": true
+    },
+    "outputs": {
+      "save_preprocessed": true,
+      "save_apsrg_mask": true,
+      "save_ca_apsrg_mask": true,
+      "save_overlay": true,
+      "save_side_by_side": true,
+      "save_debug_json": true,
+      "overlay_alpha": 0.45
+    },
+    "always_refine": true,
+    "precision_threshold": 0.95
+  },
+  "apsrg_debug": {
+    "vesselness": {
+      "type": "ndarray",
+      "shape": [
+        584,
+        565
+      ],
+      "dtype": "uint8",
+      "min": 0.0,
+      "max": 255.0,
+      "sum": 4701971.0
+    },
+    "seeds": {
+      "type": "ndarray",
+      "shape": [
+        584,
+        565
+      ],
+      "dtype": "bool",
+      "min": 0.0,
+      "max": 1.0,
+      "sum": 35.0
+    },
+    "candidate": {
+      "type": "ndarray",
+      "shape": [
+        584,
+        565
+      ],
+      "dtype": "bool",
+      "min": 0.0,
+      "max": 1.0,
+      "sum": 42772.0
+    },
+    "grown_before_postprocess": {
+      "type": "ndarray",
+      "shape": [
+        584,
+        565
+      ],
+      "dtype": "bool",
+      "min": 0.0,
+      "max": 1.0,
+      "sum": 12859.0
+    },
+    "seed_thr": 71.0,
+    "candidate_thr": 30.0,
+    "n_seed_pixels": 35,
+    "n_candidate_pixels": 42772,
+    "n_output_pixels": 13237,
+    "harris_debug": {
+      "enabled": true,
+      "harris_response": {
+        "type": "ndarray",
+        "shape": [
+          584,
+          565
+        ],
+        "dtype": "float32",
+        "min": 0.0,
+        "max": 1.0,
+        "sum": 43.611732482910156
+      },
+      "harris_candidates": {
+        "type": "ndarray",
+        "shape": [
+          584,
+          565
+        ],
+        "dtype": "bool",
+        "min": 0.0,
+        "max": 1.0,
+        "sum": 157.0
+      },
+      "harris_selected_seeds": {
+        "type": "ndarray",
+        "shape": [
+          584,
+          565
+        ],
+        "dtype": "bool",
+        "min": 0.0,
+        "max": 1.0,
+        "sum": 35.0
+      },
+      "harris_seed_scores_top": [
+        0.7485011219978333,
+        0.686470627784729,
+        0.6618544459342957,
+        0.6419410109519958,
+        0.5715823173522949,
+        0.5497110486030579,
+        0.5353168249130249,
+        0.5318862795829773,
+        0.5000566244125366,
+        0.4809233844280243,
+        0.48041895031929016,
+        0.4654068946838379,
+        0.4638111889362335,
+        0.4488368034362793,
+        0.4451439380645752,
+        0.43967512249946594,
+        0.43226319551467896,
+        0.42808660864830017,
+        0.42662352323532104,
+        0.422232449054718
+      ],
+      "n_harris_candidates": 157,
+      "n_harris_seed_pixels": 35,
+      "selected_seed_count": 35,
+      "valid_seed_area_pixels": 42772,
+      "params": {
+        "enabled": true,
+        "block_size": 2,
+        "ksize": 3,
+        "k": 0.04,
+        "response_threshold_ratio": 0.01,
+        "nms_window_size": 3,
+        "target_seed_count": 35,
+        "min_seed_count": 7,
+        "max_seed_count": 77,
+        "prefer_vesselness_weight": 0.65,
+        "use_candidate_constraint": true,
+        "fallback_to_top_vesselness": true,
+        "seed_dilate_radius": 0
+      }
+    },
+    "params": {
+      "vessel_enhancement_method": "blackhat_multiscale",
+      "vesselness_kernel_sizes": [
+        7,
+        11,
+        15
+      ],
+      "seed_selection_method": "harris_polling",
+      "seed_percentile": 92.0,
+      "candidate_percentile": 78.0,
+      "polling_window_size": 16,
+      "polling_top_percentile": 97.0,
+      "min_seed_distance": 2,
+      "region_growing_connectivity": 8,
+      "max_intensity_difference": 18.0,
+      "max_iterations": 500000,
+      "min_component_area": 8,
+      "fill_small_holes_area": 8,
+      "harris_seed": {
+        "enabled": true,
+        "block_size": 2,
+        "ksize": 3,
+        "k": 0.04,
+        "response_threshold_ratio": 0.01,
+        "nms_window_size": 3,
+        "target_seed_count": 35,
+        "min_seed_count": 7,
+        "max_seed_count": 77,
+        "prefer_vesselness_weight": 0.65,
+        "use_candidate_constraint": true,
+        "fallback_to_top_vesselness": true,
+        "seed_dilate_radius": 0
+      }
+    }
+  },
+  "ca_apsrg_debug": {
+    "enabled": true,
+    "context_features": {
+      "vessel_density": 0.058123808938341424,
+      "vessel_pixel_count": 13237,
+      "valid_area_pixel_count": 227738,
+      "component_count": 10,
+      "mean_component_area": 1323.7,
+      "median_component_area": 378.0,
+      "std_component_area": 1858.3396379564206,
+      "min_component_area": 10,
+      "max_component_area": 5132,
+      "small_component_count": 1,
+      "small_component_ratio": 0.1,
+      "small_component_area_total": 10,
+      "small_component_area_ratio": 0.0007554581853894387,
+      "largest_component_area": 5132,
+      "largest_component_area_ratio": 0.38770114074185996,
+      "skeleton_pixel_count": 4200,
+      "skeleton_to_vessel_ratio": 0.31729243786356426,
+      "endpoint_count": 205,
+      "branchpoint_count": 677,
+      "endpoint_density": 0.04880952380952381,
+      "branchpoint_density": 0.1611904761904762,
+      "density_level": "normal",
+      "noise_level": "low",
+      "recommended_refinement_level": "normal"
+    },
+    "refined_context_features": {
+      "vessel_density": 0.05807989883111295,
+      "vessel_pixel_count": 13227,
+      "valid_area_pixel_count": 227738,
+      "component_count": 9,
+      "mean_component_area": 1469.6666666666667,
+      "median_component_area": 396.0,
+      "std_component_area": 1903.7010152740781,
+      "min_component_area": 21,
+      "max_component_area": 5132,
+      "small_component_count": 0,
+      "small_component_ratio": 0.0,
+      "small_component_area_total": 0,
+      "small_component_area_ratio": 0.0,
+      "largest_component_area": 5132,
+      "largest_component_area_ratio": 0.38799425417706207,
+      "skeleton_pixel_count": 4199,
+      "skeleton_to_vessel_ratio": 0.317456717320632,
+      "endpoint_count": 205,
+      "branchpoint_count": 677,
+      "endpoint_density": 0.048821147892355324,
+      "branchpoint_density": 0.16122886401524172,
+      "density_level": "normal",
+      "noise_level": "low",
+      "recommended_refinement_level": "normal"
+    },
+    "refinement_debug": {
+      "enabled": true,
+      "context_features": {
+        "vessel_density": 0.058123808938341424,
+        "vessel_pixel_count": 13237,
+        "valid_area_pixel_count": 227738,
+        "component_count": 10,
+        "mean_component_area": 1323.7,
+        "median_component_area": 378.0,
+        "std_component_area": 1858.3396379564206,
+        "min_component_area": 10,
+        "max_component_area": 5132,
+        "small_component_count": 1,
+        "small_component_ratio": 0.1,
+        "small_component_area_total": 10,
+        "small_component_area_ratio": 0.0007554581853894387,
+        "largest_component_area": 5132,
+        "largest_component_area_ratio": 0.38770114074185996,
+        "skeleton_pixel_count": 4200,
+        "skeleton_to_vessel_ratio": 0.31729243786356426,
+        "endpoint_count": 205,
+        "branchpoint_count": 677,
+        "endpoint_density": 0.04880952380952381,
+        "branchpoint_density": 0.1611904761904762,
+        "density_level": "normal",
+        "noise_level": "low",
+        "recommended_refinement_level": "normal"
+      },
+      "refined_context_features": {
+        "vessel_density": 0.05807989883111295,
+        "vessel_pixel_count": 13227,
+        "valid_area_pixel_count": 227738,
+        "component_count": 9,
+        "mean_component_area": 1469.6666666666667,
+        "median_component_area": 396.0,
+        "std_component_area": 1903.7010152740781,
+        "min_component_area": 21,
+        "max_component_area": 5132,
+        "small_component_count": 0,
+        "small_component_ratio": 0.0,
+        "small_component_area_total": 0,
+        "small_component_area_ratio": 0.0,
+        "largest_component_area": 5132,
+        "largest_component_area_ratio": 0.38799425417706207,
+        "skeleton_pixel_count": 4199,
+        "skeleton_to_vessel_ratio": 0.317456717320632,
+        "endpoint_count": 205,
+        "branchpoint_count": 677,
+        "endpoint_density": 0.048821147892355324,
+        "branchpoint_density": 0.16122886401524172,
+        "density_level": "normal",
+        "noise_level": "low",
+        "recommended_refinement_level": "normal"
+      },
+      "selected_parameters": {
+        "refinement_level": "normal",
+        "density_level": "normal",
+        "noise_level": "low",
+        "min_component_area": 18,
+        "hole_area": 8,
+        "closing_kernel_size": 0,
+        "opening_kernel_size": 0,
+        "use_opening": false,
+        "use_closing": false,
+        "use_skeleton_guard": true
+      },
+      "config": {
+        "enabled": true,
+        "remove_small_objects": true,
+        "fill_small_holes": false,
+        "closing_enabled": false,
+        "opening_enabled": false,
+        "skeleton_guard_enabled": true,
+        "small_component_area_low_density": 8,
+        "small_component_area_normal": 18,
+        "small_component_area_high_density": 28,
+        "hole_area_low_density": 4,
+        "hole_area_normal": 8,
+        "hole_area_high_density": 12,
+        "closing_kernel_low_density": 0,
+        "closing_kernel_normal": 0,
+        "closing_kernel_high_density": 0,
+        "opening_kernel_low_density": 0,
+        "opening_kernel_normal": 0,
+        "opening_kernel_high_density": 0,
+        "low_density_threshold": 0.025,
+        "high_density_threshold": 0.12,
+        "skeleton_restore_radius": 1,
+        "skeleton_min_component_length": 6
+      },
+      "intermediate_masks": {
+        "baseline": {
+          "type": "ndarray",
+          "shape": [
+            584,
+            565
+          ],
+          "dtype": "bool",
+          "min": 0.0,
+          "max": 1.0,
+          "sum": 13237.0
+        },
+        "after_remove_small_objects": {
+          "type": "ndarray",
+          "shape": [
+            584,
+            565
+          ],
+          "dtype": "bool",
+          "min": 0.0,
+          "max": 1.0,
+          "sum": 13227.0
+        },
+        "after_skeleton_guard": {
+          "type": "ndarray",
+          "shape": [
+            584,
+            565
+          ],
+          "dtype": "bool",
+          "min": 0.0,
+          "max": 1.0,
+          "sum": 13227.0
+        }
+      },
+      "n_pixels_before": 13237,
+      "n_pixels_after": 13227,
+      "n_pixels_removed": 10,
+      "n_pixels_added": 0
+    },
+    "ca_apsrg_config": {
+      "enabled": true,
+      "always_refine": true,
+      "low_density_threshold": 0.025,
+      "high_density_threshold": 0.12,
+      "target_preserve_thin_vessels": true
+    },
+    "n_baseline_pixels": 13237,
+    "n_refined_pixels": 13227,
+    "n_pixels_removed": 10,
+    "n_pixels_added": 0
+  },
+  "saved_paths": {
+    "preprocessed_path": "E:\\ca_apsrg_retinal_project\\outputs\\experiments_exp7_harris_seed\\DRIVE\\preprocessed\\33_preprocessed.png",
+    "baseline_mask_path": "E:\\ca_apsrg_retinal_project\\outputs\\experiments_exp7_harris_seed\\DRIVE\\baseline_masks\\33_apsrg_baseline.png",
+    "ca_apsrg_mask_path": "E:\\ca_apsrg_retinal_project\\outputs\\experiments_exp7_harris_seed\\DRIVE\\ca_apsrg_masks\\33_ca_apsrg.png",
+    "baseline_overlay_path": "E:\\ca_apsrg_retinal_project\\outputs\\experiments_exp7_harris_seed\\DRIVE\\overlays\\33_baseline_overlay.png",
+    "ca_apsrg_overlay_path": "E:\\ca_apsrg_retinal_project\\outputs\\experiments_exp7_harris_seed\\DRIVE\\overlays\\33_ca_apsrg_overlay.png",
+    "comparison_path": "E:\\ca_apsrg_retinal_project\\outputs\\experiments_exp7_harris_seed\\DRIVE\\comparison\\33_comparison.png"
+  }
+}

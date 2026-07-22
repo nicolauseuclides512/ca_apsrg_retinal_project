@@ -1,0 +1,11 @@
+dataset,image_id,comparison_path,baseline_precision,ca_apsrg_precision,delta_precision,delta_recall,delta_f1_score
+DRIVE,37,E:\ca_apsrg_retinal_project\outputs\recovery_ablation\experiments_r01_selective35_bfs\DRIVE\comparison\37_comparison.png,0.7170334585793523,0.7167308898646833,-0.0003025687146690492,-0.0005894386463713985,-0.0006597341262900014
+DRIVE,22,E:\ca_apsrg_retinal_project\outputs\recovery_ablation\experiments_r01_selective35_bfs\DRIVE\comparison\22_comparison.png,0.800836949783013,0.8007142302616257,-0.00012271952138731557,-0.0006711409395973034,-0.0006763758206964621
+DRIVE,21,E:\ca_apsrg_retinal_project\outputs\recovery_ablation\experiments_r01_selective35_bfs\DRIVE\comparison\21_comparison.png,0.8164670443950369,0.8163997989516766,-6.7245443360342e-05,-0.0005679513184583818,-0.0004811357873896194
+CHASEDB1,Image_05R,E:\ca_apsrg_retinal_project\outputs\recovery_ablation\experiments_r01_selective35_bfs\CHASEDB1\comparison\Image_05R_comparison.png,0.8232785380732583,0.8232403682604822,-3.81698127761565e-05,-9.796358203839617e-05,-0.00010015957275866239
+CHASEDB1,Image_04L,E:\ca_apsrg_retinal_project\outputs\recovery_ablation\experiments_r01_selective35_bfs\CHASEDB1\comparison\Image_04L_comparison.png,0.7382964383845715,0.7382964383845715,0.0,0.0,0.0
+CHASEDB1,Image_06L,E:\ca_apsrg_retinal_project\outputs\recovery_ablation\experiments_r01_selective35_bfs\CHASEDB1\comparison\Image_06L_comparison.png,0.7862931006200584,0.7862931006200584,0.0,0.0,0.0
+CHASEDB1,Image_02R,E:\ca_apsrg_retinal_project\outputs\recovery_ablation\experiments_r01_selective35_bfs\CHASEDB1\comparison\Image_02R_comparison.png,0.6239586804398534,0.6239586804398534,0.0,0.0,0.0
+CHASEDB1,Image_01L,E:\ca_apsrg_retinal_project\outputs\recovery_ablation\experiments_r01_selective35_bfs\CHASEDB1\comparison\Image_01L_comparison.png,0.7818715751869456,0.7818715751869456,0.0,0.0,0.0
+CHASEDB1,Image_08R,E:\ca_apsrg_retinal_project\outputs\recovery_ablation\experiments_r01_selective35_bfs\CHASEDB1\comparison\Image_08R_comparison.png,0.7808231447892875,0.7808231447892875,0.0,0.0,0.0
+CHASEDB1,Image_08L,E:\ca_apsrg_retinal_project\outputs\recovery_ablation\experiments_r01_selective35_bfs\CHASEDB1\comparison\Image_08L_comparison.png,0.6322698971958106,0.6322698971958106,0.0,0.0,0.0

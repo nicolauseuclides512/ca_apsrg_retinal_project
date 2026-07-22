@@ -1,0 +1,11 @@
+dataset,image_id,comparison_path,baseline_f1_score,ca_apsrg_f1_score,delta_f1_score,delta_precision,delta_recall
+CHASEDB1,Image_02R,E:\ca_apsrg_retinal_project\outputs\recovery_ablation\experiments_r05_local_or_region_hybrid_priority\CHASEDB1\comparison\Image_02R_comparison.png,0.4848782501619297,0.4848782501619297,0.0,0.0,0.0
+CHASEDB1,Image_02L,E:\ca_apsrg_retinal_project\outputs\recovery_ablation\experiments_r05_local_or_region_hybrid_priority\CHASEDB1\comparison\Image_02L_comparison.png,0.5231608819035145,0.5231608819035145,0.0,0.0,0.0
+CHASEDB1,Image_12L,E:\ca_apsrg_retinal_project\outputs\recovery_ablation\experiments_r05_local_or_region_hybrid_priority\CHASEDB1\comparison\Image_12L_comparison.png,0.5285170794227634,0.5285170794227634,0.0,0.0,0.0
+DRIVE,23,E:\ca_apsrg_retinal_project\outputs\recovery_ablation\experiments_r05_local_or_region_hybrid_priority\DRIVE\comparison\23_comparison.png,0.5301312765377274,0.5301312765377274,0.0,0.0,0.0
+CHASEDB1,Image_10L,E:\ca_apsrg_retinal_project\outputs\recovery_ablation\experiments_r05_local_or_region_hybrid_priority\CHASEDB1\comparison\Image_10L_comparison.png,0.5546199117967946,0.5546199117967946,0.0,0.0,0.0
+STARE,im0324,E:\ca_apsrg_retinal_project\outputs\recovery_ablation\experiments_r05_local_or_region_hybrid_priority\STARE\comparison\im0324_comparison.png,0.5625804738833212,0.5625804738833212,0.0,0.0,0.0
+CHASEDB1,Image_09R,E:\ca_apsrg_retinal_project\outputs\recovery_ablation\experiments_r05_local_or_region_hybrid_priority\CHASEDB1\comparison\Image_09R_comparison.png,0.563043965252599,0.5630953566331441,5.139138054510717e-05,7.259734707287802e-05,0.0
+STARE,im0003,E:\ca_apsrg_retinal_project\outputs\recovery_ablation\experiments_r05_local_or_region_hybrid_priority\STARE\comparison\im0003_comparison.png,0.5659405826029101,0.5659405826029101,0.0,0.0,0.0
+CHASEDB1,Image_04R,E:\ca_apsrg_retinal_project\outputs\recovery_ablation\experiments_r05_local_or_region_hybrid_priority\CHASEDB1\comparison\Image_04R_comparison.png,0.5667681403062383,0.5667845700565785,1.642975034010785e-05,0.0001729483822235922,-8.127438231464446e-05
+STARE,im0002,E:\ca_apsrg_retinal_project\outputs\recovery_ablation\experiments_r05_local_or_region_hybrid_priority\STARE\comparison\im0002_comparison.png,0.5726792493616332,0.5726792493616332,0.0,0.0,0.0

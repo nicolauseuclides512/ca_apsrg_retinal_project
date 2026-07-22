@@ -32,4 +32,7 @@ outputs/*
 !outputs/single_test/
 !outputs/single_test/**
 
+!outputs/recovery_ablation/
+!outputs/recovery_ablation/**
+
 *.log

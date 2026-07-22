@@ -1,0 +1,233 @@
+project:
+  name: ca_apsrg_retinal_project
+  description: Context-Aware APSRG with Selective Fuzzy-Harris Seed Polling and Edge-Delayed
+    Region Growing
+  random_seed: 42
+  experiment_name: r06_local_or_region_process_override
+  experiment_label: R06 - R04 with process-context refinement override
+  experiment_description: Tests the process-context contribution against R04 without
+    changing seed selection, acceptance, or priority mode.
+paths:
+  raw_root: data/raw/Retinal Vessel
+  working_png_root: data/working_png
+  manifest_path: data/manifests/manifest.csv
+  output_root: outputs
+  reports_dir: outputs/reports
+  experiments_dir: outputs/experiments
+  single_test_dir: outputs/single_test
+data:
+  raw_root: data/raw/Retinal Vessel
+  working_png_root: data/working_png
+  manifest_path: data/manifests/manifest.csv
+experiment:
+  output_dir: outputs/experiments
+  reports_dir: outputs/reports
+  single_test_dir: outputs/single_test
+  always_refine: true
+  false_positive_precision_threshold: 0.95
+conversion:
+  convertible_extensions:
+  - .ppm
+  - .jpg
+  - .jpeg
+  - .tif
+  - .tiff
+  - .gif
+  - .bmp
+  copy_existing_png: true
+  skip_archive_extensions:
+  - .zip
+  - .7z
+  - .rar
+  - .tar
+  - .gz
+  preserve_relative_structure: true
+  binarize_masks: true
+  binary_threshold: 127
+  png_compress_level: 3
+  report_csv: outputs/reports/png_conversion_report.csv
+  mask_name_keywords:
+  - mask
+  - manual
+  - label
+  - groundtruth
+  - ground_truth
+  - gt
+  - 1stho
+  - 2ndho
+  - fov
+manifest:
+  datasets:
+  - DRIVE
+  - STARE
+  - CHASEDB1
+  require_ground_truth: true
+  include_fov_mask_if_available: true
+  stare_observer: ah
+  chasedb1_observer: 1stHO
+preprocessing:
+  use_green_channel: true
+  normalize_intensity: true
+  apply_clahe: true
+  clahe_clip_limit: 2.0
+  clahe_tile_grid_size:
+  - 8
+  - 8
+  denoise_method: median
+  median_kernel_size: 3
+  bilateral_d: 5
+  bilateral_sigma_color: 50
+  bilateral_sigma_space: 50
+  apply_fov_mask: true
+apsrg_baseline:
+  vessel_enhancement_method: blackhat_multiscale
+  vesselness_kernel_sizes:
+  - 7
+  - 11
+  - 15
+  seed_selection_method: selective_fuzzy_harris
+  seed_percentile: 92
+  candidate_percentile: 78
+  polling_window_size: 16
+  polling_top_percentile: 97
+  min_seed_distance: 2
+  region_growing_connectivity: 8
+  region_growing_mode: edge_delayed
+  max_intensity_difference: 18
+  max_iterations: 500000
+  min_component_area: 8
+  fill_small_holes_area: 8
+  srg_features:
+    enabled: true
+    wd: 0.4
+    ws: 0.4
+    edge_window_size: 3
+    similarity_window_size: 3
+    threshold_mean_window_size: 5
+    t_small: 0.75
+    t_big: 0.95
+    use_candidate_constraint: true
+    use_fov_constraint: true
+    fallback_to_ranked_score: true
+    min_seed_pixels: 20
+    max_seed_pixels: 5000
+    seed_dilate_radius: 0
+  harris_seed:
+    enabled: true
+    block_size: 2
+    ksize: 3
+    k: 0.04
+    response_threshold_ratio: 0.01
+    nms_window_size: 3
+    target_seed_count: 35
+    min_seed_count: 7
+    max_seed_count: 77
+    prefer_vesselness_weight: 0.65
+    use_candidate_constraint: true
+    fallback_to_top_vesselness: true
+    seed_dilate_radius: 0
+  hybrid_seed:
+    enabled: true
+    target_seed_count: 77
+    min_seed_count: 7
+    max_seed_count: 77
+    fuzzy_support_radius: 2
+    relaxed_support_radius: 5
+    min_seed_distance: 3
+    fuzzy_weight: 0.35
+    harris_weight: 0.4
+    vesselness_weight: 0.25
+    use_candidate_constraint: true
+    use_fov_constraint: true
+    allow_relaxed_harris_fallback: true
+    allow_fuzzy_fallback: true
+    seed_dilate_radius: 1
+  edge_delayed_region_growing:
+    enabled: true
+    priority_mode: kang_product
+    fuzzy_distance_scale: 0.4
+    connected_edge_wd: 0.4
+    edge_floor: 0.05
+    edge_weight: 0.35
+    max_fuzzy_distance: 1.0
+    recompute_priority: true
+    priority_tolerance: 1.0e-06
+    record_growth_order: true
+    acceptance_mode: local_or_region
+    region_mean_tolerance_multiplier: 2.0
+false_positive_analysis:
+  enabled: true
+  precision_threshold: 0.95
+  small_component_area: 12
+  high_small_component_ratio: 0.35
+context_features:
+  enabled: true
+  compute_vessel_density: true
+  compute_connected_components: true
+  compute_small_component_ratio: true
+  compute_component_area_statistics: true
+  small_component_area: 12
+ca_apsrg:
+  enabled: true
+  always_refine: true
+  low_density_threshold: 0.025
+  high_density_threshold: 0.12
+  target_preserve_thin_vessels: true
+  process_context:
+    enabled: true
+    can_trigger_refinement: true
+    can_override_refinement_level: true
+    low_seed_count: 7
+    high_seed_count: 77
+    high_candidate_density: 0.25
+    high_connected_edge_density: 0.2
+    connected_edge_threshold: 0.5
+    high_growth_ratio: 600.0
+    max_iterations_is_high_risk: true
+adaptive_morphology:
+  enabled: true
+  remove_small_objects: true
+  fill_small_holes: false
+  closing_enabled: false
+  opening_enabled: false
+  skeleton_guard_enabled: true
+  small_component_area_low_density: 8
+  small_component_area_normal: 18
+  small_component_area_high_density: 28
+  hole_area_low_density: 4
+  hole_area_normal: 8
+  hole_area_high_density: 12
+  closing_kernel_low_density: 0
+  closing_kernel_normal: 0
+  closing_kernel_high_density: 0
+  opening_kernel_low_density: 0
+  opening_kernel_normal: 0
+  opening_kernel_high_density: 0
+  skeleton_restore_radius: 1
+  skeleton_min_component_length: 6
+evaluation:
+  binary_threshold: 127
+  evaluate_inside_fov_only: true
+  positive_label: 255
+  negative_label: 0
+  metrics:
+  - accuracy
+  - precision
+  - recall
+  - specificity
+  - f1_score
+  - iou
+outputs:
+  save_preprocessed: true
+  save_apsrg_mask: true
+  save_ca_apsrg_mask: true
+  save_overlay: true
+  save_metrics_per_image: true
+  save_metrics_summary: true
+  overlay_alpha: 0.45
+  metrics_per_image_csv: outputs/experiments/metrics_per_image.csv
+  metrics_summary_csv: outputs/experiments/metrics_summary.csv
+visualization:
+  dpi: 150
+  show_titles: true
+  save_side_by_side: true

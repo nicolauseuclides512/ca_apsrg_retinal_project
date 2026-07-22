@@ -1,0 +1,11 @@
+dataset,image_id,comparison_path,baseline_f1_score,ca_apsrg_f1_score,delta_f1_score,delta_precision,delta_recall
+CHASEDB1,Image_02R,E:\ca_apsrg_retinal_project\outputs\recovery_ablation\experiments_r04_local_or_region\CHASEDB1\comparison\Image_02R_comparison.png,0.4846875200262032,0.4846875200262032,0.0,0.0,0.0
+CHASEDB1,Image_02L,E:\ca_apsrg_retinal_project\outputs\recovery_ablation\experiments_r04_local_or_region\CHASEDB1\comparison\Image_02L_comparison.png,0.5233261291942279,0.5233261291942279,0.0,0.0,0.0
+DRIVE,23,E:\ca_apsrg_retinal_project\outputs\recovery_ablation\experiments_r04_local_or_region\DRIVE\comparison\23_comparison.png,0.5267203870992917,0.5267203870992917,0.0,0.0,0.0
+CHASEDB1,Image_12L,E:\ca_apsrg_retinal_project\outputs\recovery_ablation\experiments_r04_local_or_region\CHASEDB1\comparison\Image_12L_comparison.png,0.5281806677698823,0.5281806677698823,0.0,0.0,0.0
+CHASEDB1,Image_10L,E:\ca_apsrg_retinal_project\outputs\recovery_ablation\experiments_r04_local_or_region\CHASEDB1\comparison\Image_10L_comparison.png,0.5543477425847539,0.5543477425847539,0.0,0.0,0.0
+STARE,im0324,E:\ca_apsrg_retinal_project\outputs\recovery_ablation\experiments_r04_local_or_region\STARE\comparison\im0324_comparison.png,0.5624859026920883,0.5624859026920883,0.0,0.0,0.0
+CHASEDB1,Image_09R,E:\ca_apsrg_retinal_project\outputs\recovery_ablation\experiments_r04_local_or_region\CHASEDB1\comparison\Image_09R_comparison.png,0.5631325480964499,0.5631838981364812,5.135004003131716e-05,7.244406128609215e-05,0.0
+CHASEDB1,Image_04R,E:\ca_apsrg_retinal_project\outputs\recovery_ablation\experiments_r04_local_or_region\CHASEDB1\comparison\Image_04R_comparison.png,0.5669926724398958,0.567009138470158,1.6466030262174414e-05,0.00017277687199568348,-8.127438231475548e-05
+STARE,im0003,E:\ca_apsrg_retinal_project\outputs\recovery_ablation\experiments_r04_local_or_region\STARE\comparison\im0003_comparison.png,0.567747925491789,0.567747925491789,0.0,0.0,0.0
+STARE,im0002,E:\ca_apsrg_retinal_project\outputs\recovery_ablation\experiments_r04_local_or_region\STARE\comparison\im0002_comparison.png,0.5731160125418964,0.5731160125418964,0.0,0.0,0.0

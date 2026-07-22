@@ -1,0 +1,289 @@
+experiment,experiment_label,dataset,output_method,metric,n_pairs,mean_delta,median_delta,std_delta,wins,ties,losses
+r01_selective35_bfs,"R01 - Selective fuzzy-Harris, 35 seeds, radius 0, BFS",CHASEDB1,APSRG,accuracy,28,0.02369858697983693,0.02239896146146142,0.008539347369936268,28,0,0
+r01_selective35_bfs,"R01 - Selective fuzzy-Harris, 35 seeds, radius 0, BFS",CHASEDB1,APSRG,balanced_accuracy,28,-0.14848113428005047,-0.15842925422767845,0.04422920666515323,0,0,28
+r01_selective35_bfs,"R01 - Selective fuzzy-Harris, 35 seeds, radius 0, BFS",CHASEDB1,APSRG,dice,28,-0.09172202200548155,-0.11051006856170692,0.09986639812433178,5,0,23
+r01_selective35_bfs,"R01 - Selective fuzzy-Harris, 35 seeds, radius 0, BFS",CHASEDB1,APSRG,f1_score,28,-0.09172202200548155,-0.11051006856170692,0.09986639812433178,5,0,23
+r01_selective35_bfs,"R01 - Selective fuzzy-Harris, 35 seeds, radius 0, BFS",CHASEDB1,APSRG,iou,28,-0.07765814013416737,-0.10114910502351351,0.08616519189457258,5,0,23
+r01_selective35_bfs,"R01 - Selective fuzzy-Harris, 35 seeds, radius 0, BFS",CHASEDB1,APSRG,precision,28,0.24232954330117687,0.25952005617851936,0.06969828041740411,28,0,0
+r01_selective35_bfs,"R01 - Selective fuzzy-Harris, 35 seeds, radius 0, BFS",CHASEDB1,APSRG,recall,28,-0.3487950256666167,-0.36785370554129104,0.08966755880876902,0,0,28
+r01_selective35_bfs,"R01 - Selective fuzzy-Harris, 35 seeds, radius 0, BFS",CHASEDB1,APSRG,specificity,28,0.0518327571065158,0.05328666059175269,0.005807010031611954,28,0,0
+r01_selective35_bfs,"R01 - Selective fuzzy-Harris, 35 seeds, radius 0, BFS",CHASEDB1,CA-APSRG,accuracy,28,0.01996080902330901,0.019490845011678415,0.008722553818225074,28,0,0
+r01_selective35_bfs,"R01 - Selective fuzzy-Harris, 35 seeds, radius 0, BFS",CHASEDB1,CA-APSRG,balanced_accuracy,28,-0.14953922416601426,-0.15975562782490305,0.044111252836055,0,0,28
+r01_selective35_bfs,"R01 - Selective fuzzy-Harris, 35 seeds, radius 0, BFS",CHASEDB1,CA-APSRG,dice,28,-0.10263026179244798,-0.12274069716316205,0.10100474041811455,4,0,24
+r01_selective35_bfs,"R01 - Selective fuzzy-Harris, 35 seeds, radius 0, BFS",CHASEDB1,CA-APSRG,f1_score,28,-0.10263026179244798,-0.12274069716316205,0.10100474041811455,4,0,24
+r01_selective35_bfs,"R01 - Selective fuzzy-Harris, 35 seeds, radius 0, BFS",CHASEDB1,CA-APSRG,iou,28,-0.08814936213159157,-0.11336017120745709,0.08745578692655692,4,0,24
+r01_selective35_bfs,"R01 - Selective fuzzy-Harris, 35 seeds, radius 0, BFS",CHASEDB1,CA-APSRG,precision,28,0.22607888569617504,0.24323697268577635,0.06622447864552074,28,0,0
+r01_selective35_bfs,"R01 - Selective fuzzy-Harris, 35 seeds, radius 0, BFS",CHASEDB1,CA-APSRG,recall,28,-0.34672376544923544,-0.366477468642302,0.08906635999025941,0,0,28
+r01_selective35_bfs,"R01 - Selective fuzzy-Harris, 35 seeds, radius 0, BFS",CHASEDB1,CA-APSRG,specificity,28,0.04764531711720694,0.04877322845109561,0.0050376897466023335,28,0,0
+r01_selective35_bfs,"R01 - Selective fuzzy-Harris, 35 seeds, radius 0, BFS",DRIVE,APSRG,accuracy,20,-0.01666912158762034,-0.019325935843391984,0.014859369368074108,3,0,17
+r01_selective35_bfs,"R01 - Selective fuzzy-Harris, 35 seeds, radius 0, BFS",DRIVE,APSRG,balanced_accuracy,20,-0.1477804449021287,-0.14613996099786875,0.037607074161465165,0,0,20
+r01_selective35_bfs,"R01 - Selective fuzzy-Harris, 35 seeds, radius 0, BFS",DRIVE,APSRG,dice,20,-0.1990868799530171,-0.21519781063214716,0.06652413261775278,0,0,20
+r01_selective35_bfs,"R01 - Selective fuzzy-Harris, 35 seeds, radius 0, BFS",DRIVE,APSRG,f1_score,20,-0.1990868799530171,-0.21519781063214716,0.06652413261775278,0,0,20
+r01_selective35_bfs,"R01 - Selective fuzzy-Harris, 35 seeds, radius 0, BFS",DRIVE,APSRG,iou,20,-0.20178225474760997,-0.20574260111430429,0.06217177861745494,0,0,20
+r01_selective35_bfs,"R01 - Selective fuzzy-Harris, 35 seeds, radius 0, BFS",DRIVE,APSRG,precision,20,0.06833090937381656,0.06250971641258235,0.07100914468881349,17,0,3
+r01_selective35_bfs,"R01 - Selective fuzzy-Harris, 35 seeds, radius 0, BFS",DRIVE,APSRG,recall,20,-0.32168919134387003,-0.31986270879562195,0.08396013352139241,0,0,20
+r01_selective35_bfs,"R01 - Selective fuzzy-Harris, 35 seeds, radius 0, BFS",DRIVE,APSRG,specificity,20,0.02612830153961259,0.02006602424062276,0.015515988272519939,20,0,0
+r01_selective35_bfs,"R01 - Selective fuzzy-Harris, 35 seeds, radius 0, BFS",DRIVE,CA-APSRG,accuracy,20,-0.016978580328480708,-0.01926652118410027,0.014535691945556265,3,0,17
+r01_selective35_bfs,"R01 - Selective fuzzy-Harris, 35 seeds, radius 0, BFS",DRIVE,CA-APSRG,balanced_accuracy,20,-0.14739241191544808,-0.14581707193781424,0.03761244894555261,0,0,20
+r01_selective35_bfs,"R01 - Selective fuzzy-Harris, 35 seeds, radius 0, BFS",DRIVE,CA-APSRG,dice,20,-0.1995889558057306,-0.21573850178086196,0.06626080395694696,0,0,20
+r01_selective35_bfs,"R01 - Selective fuzzy-Harris, 35 seeds, radius 0, BFS",DRIVE,CA-APSRG,f1_score,20,-0.1995889558057306,-0.21573850178086196,0.06626080395694696,0,0,20
+r01_selective35_bfs,"R01 - Selective fuzzy-Harris, 35 seeds, radius 0, BFS",DRIVE,CA-APSRG,iou,20,-0.202266548405015,-0.2070171460770097,0.061717190889356545,0,0,20
+r01_selective35_bfs,"R01 - Selective fuzzy-Harris, 35 seeds, radius 0, BFS",DRIVE,CA-APSRG,precision,20,0.06646015930984721,0.060471562250951516,0.0696062797285046,17,0,3
+r01_selective35_bfs,"R01 - Selective fuzzy-Harris, 35 seeds, radius 0, BFS",DRIVE,CA-APSRG,recall,20,-0.32038013008775496,-0.3195677062771417,0.08389258616344114,0,0,20
+r01_selective35_bfs,"R01 - Selective fuzzy-Harris, 35 seeds, radius 0, BFS",DRIVE,CA-APSRG,specificity,20,0.02559530625685879,0.019306801565699194,0.01511862108529584,20,0,0
+r01_selective35_bfs,"R01 - Selective fuzzy-Harris, 35 seeds, radius 0, BFS",STARE,APSRG,accuracy,20,0.013849586776859508,0.00199173553719012,0.029226153351229186,10,0,10
+r01_selective35_bfs,"R01 - Selective fuzzy-Harris, 35 seeds, radius 0, BFS",STARE,APSRG,balanced_accuracy,20,-0.17370982902287127,-0.16430532313602408,0.061024008926790434,0,0,20
+r01_selective35_bfs,"R01 - Selective fuzzy-Harris, 35 seeds, radius 0, BFS",STARE,APSRG,dice,20,-0.11572563865990568,-0.1257120737692501,0.13943430001621632,3,0,17
+r01_selective35_bfs,"R01 - Selective fuzzy-Harris, 35 seeds, radius 0, BFS",STARE,APSRG,f1_score,20,-0.11572563865990568,-0.1257120737692501,0.13943430001621632,3,0,17
+r01_selective35_bfs,"R01 - Selective fuzzy-Harris, 35 seeds, radius 0, BFS",STARE,APSRG,iou,20,-0.11946297879493077,-0.14280585118587555,0.13028786476971124,3,0,17
+r01_selective35_bfs,"R01 - Selective fuzzy-Harris, 35 seeds, radius 0, BFS",STARE,APSRG,precision,20,0.17191654635895148,0.1451085647264868,0.1192790936715897,20,0,0
+r01_selective35_bfs,"R01 - Selective fuzzy-Harris, 35 seeds, radius 0, BFS",STARE,APSRG,recall,20,-0.39479047082158725,-0.36264802777735156,0.12009415228638928,0,0,20
+r01_selective35_bfs,"R01 - Selective fuzzy-Harris, 35 seeds, radius 0, BFS",STARE,APSRG,specificity,20,0.047370812775844734,0.039272692752011895,0.02456717117131246,20,0,0
+r01_selective35_bfs,"R01 - Selective fuzzy-Harris, 35 seeds, radius 0, BFS",STARE,CA-APSRG,accuracy,20,0.012114994096812238,0.001213695395513581,0.02643618967640555,10,0,10
+r01_selective35_bfs,"R01 - Selective fuzzy-Harris, 35 seeds, radius 0, BFS",STARE,CA-APSRG,balanced_accuracy,20,-0.17441034376457404,-0.16437537083217468,0.06088516140304463,0,0,20
+r01_selective35_bfs,"R01 - Selective fuzzy-Harris, 35 seeds, radius 0, BFS",STARE,CA-APSRG,dice,20,-0.11985479683367004,-0.1263070300429352,0.13541921703780063,3,0,17
+r01_selective35_bfs,"R01 - Selective fuzzy-Harris, 35 seeds, radius 0, BFS",STARE,CA-APSRG,f1_score,20,-0.11985479683367004,-0.1263070300429352,0.13541921703780063,3,0,17
+r01_selective35_bfs,"R01 - Selective fuzzy-Harris, 35 seeds, radius 0, BFS",STARE,CA-APSRG,iou,20,-0.12319991745892014,-0.14487754752572082,0.12700327423828678,3,0,17
+r01_selective35_bfs,"R01 - Selective fuzzy-Harris, 35 seeds, radius 0, BFS",STARE,CA-APSRG,precision,20,0.16742130892872392,0.14461488013141932,0.11365641674521317,20,0,0
+r01_selective35_bfs,"R01 - Selective fuzzy-Harris, 35 seeds, radius 0, BFS",STARE,CA-APSRG,recall,20,-0.3943179798871942,-0.3625386514955983,0.12021028314898793,0,0,20
+r01_selective35_bfs,"R01 - Selective fuzzy-Harris, 35 seeds, radius 0, BFS",STARE,CA-APSRG,specificity,20,0.04549729235804615,0.038385135605671195,0.021501834772940476,20,0,0
+r02_selective77_radius1_bfs,"R02 - Selective fuzzy-Harris, 77 seeds, radius 1, BFS",CHASEDB1,APSRG,accuracy,28,0.025970464512131152,0.024870182682682596,0.0067537132435249595,28,0,0
+r02_selective77_radius1_bfs,"R02 - Selective fuzzy-Harris, 77 seeds, radius 1, BFS",CHASEDB1,APSRG,balanced_accuracy,28,-0.10336924107734559,-0.108789102581409,0.03054399357549824,0,0,28
+r02_selective77_radius1_bfs,"R02 - Selective fuzzy-Harris, 77 seeds, radius 1, BFS",CHASEDB1,APSRG,dice,28,-0.016688602120052794,-0.024026269398772004,0.06292195493843922,10,0,18
+r02_selective77_radius1_bfs,"R02 - Selective fuzzy-Harris, 77 seeds, radius 1, BFS",CHASEDB1,APSRG,f1_score,28,-0.016688602120052794,-0.024026269398772004,0.06292195493843922,10,0,18
+r02_selective77_radius1_bfs,"R02 - Selective fuzzy-Harris, 77 seeds, radius 1, BFS",CHASEDB1,APSRG,iou,28,-0.01411133048557285,-0.022662231768816515,0.05828686461200186,10,0,18
+r02_selective77_radius1_bfs,"R02 - Selective fuzzy-Harris, 77 seeds, radius 1, BFS",CHASEDB1,APSRG,precision,28,0.21604796896525214,0.23263560847499434,0.044675804610364536,28,0,0
+r02_selective77_radius1_bfs,"R02 - Selective fuzzy-Harris, 77 seeds, radius 1, BFS",CHASEDB1,APSRG,recall,28,-0.2537514561077436,-0.2651083864012125,0.06138134852227602,0,0,28
+r02_selective77_radius1_bfs,"R02 - Selective fuzzy-Harris, 77 seeds, radius 1, BFS",CHASEDB1,APSRG,specificity,28,0.04701297395305235,0.04781002479567226,0.004686977707552434,28,0,0
+r02_selective77_radius1_bfs,"R02 - Selective fuzzy-Harris, 77 seeds, radius 1, BFS",CHASEDB1,CA-APSRG,accuracy,28,0.02223830973830975,0.020032011177844422,0.006925486401275567,28,0,0
+r02_selective77_radius1_bfs,"R02 - Selective fuzzy-Harris, 77 seeds, radius 1, BFS",CHASEDB1,CA-APSRG,balanced_accuracy,28,-0.10442420547566685,-0.1103429325593645,0.030411546361351238,0,0,28
+r02_selective77_radius1_bfs,"R02 - Selective fuzzy-Harris, 77 seeds, radius 1, BFS",CHASEDB1,CA-APSRG,dice,28,-0.027570723585526043,-0.030961365334039703,0.06396241412676279,9,0,19
+r02_selective77_radius1_bfs,"R02 - Selective fuzzy-Harris, 77 seeds, radius 1, BFS",CHASEDB1,CA-APSRG,f1_score,28,-0.027570723585526043,-0.030961365334039703,0.06396241412676279,9,0,19
+r02_selective77_radius1_bfs,"R02 - Selective fuzzy-Harris, 77 seeds, radius 1, BFS",CHASEDB1,CA-APSRG,iou,28,-0.024578224381810367,-0.030583999815160495,0.059453058641786065,9,0,19
+r02_selective77_radius1_bfs,"R02 - Selective fuzzy-Harris, 77 seeds, radius 1, BFS",CHASEDB1,CA-APSRG,precision,28,0.19985483030867343,0.21208408163426679,0.0418228589215831,28,0,0
+r02_selective77_radius1_bfs,"R02 - Selective fuzzy-Harris, 77 seeds, radius 1, BFS",CHASEDB1,CA-APSRG,recall,28,-0.25167982198473937,-0.2631792102549281,0.060840127537884585,0,0,28
+r02_selective77_radius1_bfs,"R02 - Selective fuzzy-Harris, 77 seeds, radius 1, BFS",CHASEDB1,CA-APSRG,specificity,28,0.042831411033405584,0.043618800997779206,0.004085556398988481,28,0,0
+r02_selective77_radius1_bfs,"R02 - Selective fuzzy-Harris, 77 seeds, radius 1, BFS",DRIVE,APSRG,accuracy,20,-0.012016941655563546,-0.016728866295497524,0.014630097752133588,3,0,17
+r02_selective77_radius1_bfs,"R02 - Selective fuzzy-Harris, 77 seeds, radius 1, BFS",DRIVE,APSRG,balanced_accuracy,20,-0.11524161087323485,-0.11075123702772643,0.027563387979523502,0,0,20
+r02_selective77_radius1_bfs,"R02 - Selective fuzzy-Harris, 77 seeds, radius 1, BFS",DRIVE,APSRG,dice,20,-0.14060719246719358,-0.13942391344002442,0.056806909781664645,0,0,20
+r02_selective77_radius1_bfs,"R02 - Selective fuzzy-Harris, 77 seeds, radius 1, BFS",DRIVE,APSRG,f1_score,20,-0.14060719246719358,-0.13942391344002442,0.056806909781664645,0,0,20
+r02_selective77_radius1_bfs,"R02 - Selective fuzzy-Harris, 77 seeds, radius 1, BFS",DRIVE,APSRG,iou,20,-0.1507443523580797,-0.1586422029431429,0.06126162770973497,0,0,20
+r02_selective77_radius1_bfs,"R02 - Selective fuzzy-Harris, 77 seeds, radius 1, BFS",DRIVE,APSRG,precision,20,0.06208511121110789,0.05705110588545881,0.06691853932625258,15,0,5
+r02_selective77_radius1_bfs,"R02 - Selective fuzzy-Harris, 77 seeds, radius 1, BFS",DRIVE,APSRG,recall,20,-0.25242410198311926,-0.2420883607626255,0.0568974849414634,0,0,20
+r02_selective77_radius1_bfs,"R02 - Selective fuzzy-Harris, 77 seeds, radius 1, BFS",DRIVE,APSRG,specificity,20,0.02194088023664955,0.021409888348490114,0.01303439361347266,20,0,0
+r02_selective77_radius1_bfs,"R02 - Selective fuzzy-Harris, 77 seeds, radius 1, BFS",DRIVE,CA-APSRG,accuracy,20,-0.01231673924791602,-0.016783738664899128,0.01430083165326159,3,0,17
+r02_selective77_radius1_bfs,"R02 - Selective fuzzy-Harris, 77 seeds, radius 1, BFS",DRIVE,CA-APSRG,balanced_accuracy,20,-0.11477595073637314,-0.11021807272990791,0.02753225108055991,0,0,20
+r02_selective77_radius1_bfs,"R02 - Selective fuzzy-Harris, 77 seeds, radius 1, BFS",DRIVE,CA-APSRG,dice,20,-0.14095679076754847,-0.13848334694792996,0.056201338920714286,0,0,20
+r02_selective77_radius1_bfs,"R02 - Selective fuzzy-Harris, 77 seeds, radius 1, BFS",DRIVE,CA-APSRG,f1_score,20,-0.14095679076754847,-0.13848334694792996,0.056201338920714286,0,0,20
+r02_selective77_radius1_bfs,"R02 - Selective fuzzy-Harris, 77 seeds, radius 1, BFS",DRIVE,CA-APSRG,iou,20,-0.15109294420179317,-0.15742028816720754,0.060546287790615924,0,0,20
+r02_selective77_radius1_bfs,"R02 - Selective fuzzy-Harris, 77 seeds, radius 1, BFS",DRIVE,CA-APSRG,precision,20,0.060130361262645406,0.055873432161331504,0.06608957417576317,15,0,5
+r02_selective77_radius1_bfs,"R02 - Selective fuzzy-Harris, 77 seeds, radius 1, BFS",DRIVE,CA-APSRG,recall,20,-0.2509478703799565,-0.2408643726601393,0.05696839519490053,0,0,20
+r02_selective77_radius1_bfs,"R02 - Selective fuzzy-Harris, 77 seeds, radius 1, BFS",DRIVE,CA-APSRG,specificity,20,0.021395968907210145,0.021167045541838736,0.012664461552934155,20,0,0
+r02_selective77_radius1_bfs,"R02 - Selective fuzzy-Harris, 77 seeds, radius 1, BFS",STARE,APSRG,accuracy,20,0.014939197166469919,0.006148760330578651,0.027730895941688993,13,0,7
+r02_selective77_radius1_bfs,"R02 - Selective fuzzy-Harris, 77 seeds, radius 1, BFS",STARE,APSRG,balanced_accuracy,20,-0.14337813132022634,-0.15229388796269572,0.042835629002639077,0,0,20
+r02_selective77_radius1_bfs,"R02 - Selective fuzzy-Harris, 77 seeds, radius 1, BFS",STARE,APSRG,dice,20,-0.07009881117567038,-0.0902363572034729,0.1100592460699375,3,0,17
+r02_selective77_radius1_bfs,"R02 - Selective fuzzy-Harris, 77 seeds, radius 1, BFS",STARE,APSRG,f1_score,20,-0.07009881117567038,-0.0902363572034729,0.1100592460699375,3,0,17
+r02_selective77_radius1_bfs,"R02 - Selective fuzzy-Harris, 77 seeds, radius 1, BFS",STARE,APSRG,iou,20,-0.07965956287909913,-0.10051216578930633,0.1109487129560721,3,0,17
+r02_selective77_radius1_bfs,"R02 - Selective fuzzy-Harris, 77 seeds, radius 1, BFS",STARE,APSRG,precision,20,0.15655258105948472,0.13029510523532967,0.10745554164061352,19,0,1
+r02_selective77_radius1_bfs,"R02 - Selective fuzzy-Harris, 77 seeds, radius 1, BFS",STARE,APSRG,recall,20,-0.3300673245698093,-0.3452748865039136,0.07646129502050084,0,0,20
+r02_selective77_radius1_bfs,"R02 - Selective fuzzy-Harris, 77 seeds, radius 1, BFS",STARE,APSRG,specificity,20,0.04331106192935659,0.03451734852831201,0.02318945222171285,20,0,0
+r02_selective77_radius1_bfs,"R02 - Selective fuzzy-Harris, 77 seeds, radius 1, BFS",STARE,CA-APSRG,accuracy,20,0.013207792207792207,0.005740259740259823,0.0249138934486598,13,0,7
+r02_selective77_radius1_bfs,"R02 - Selective fuzzy-Harris, 77 seeds, radius 1, BFS",STARE,CA-APSRG,balanced_accuracy,20,-0.14406431051831073,-0.15353542661338715,0.042190295819354025,0,0,20
+r02_selective77_radius1_bfs,"R02 - Selective fuzzy-Harris, 77 seeds, radius 1, BFS",STARE,CA-APSRG,dice,20,-0.07420110554852746,-0.09199141955067036,0.1046034631563844,3,0,17
+r02_selective77_radius1_bfs,"R02 - Selective fuzzy-Harris, 77 seeds, radius 1, BFS",STARE,CA-APSRG,f1_score,20,-0.07420110554852746,-0.09199141955067036,0.1046034631563844,3,0,17
+r02_selective77_radius1_bfs,"R02 - Selective fuzzy-Harris, 77 seeds, radius 1, BFS",STARE,CA-APSRG,iou,20,-0.08336879533542174,-0.1026700507353289,0.10675764838495214,3,0,17
+r02_selective77_radius1_bfs,"R02 - Selective fuzzy-Harris, 77 seeds, radius 1, BFS",STARE,CA-APSRG,precision,20,0.15205647042792445,0.12943749170199462,0.10255758368877957,19,0,1
+r02_selective77_radius1_bfs,"R02 - Selective fuzzy-Harris, 77 seeds, radius 1, BFS",STARE,CA-APSRG,recall,20,-0.32956732692787244,-0.3451825455282651,0.07662325348656758,0,0,20
+r02_selective77_radius1_bfs,"R02 - Selective fuzzy-Harris, 77 seeds, radius 1, BFS",STARE,CA-APSRG,specificity,20,0.04143870589125095,0.03421052258534202,0.020158389459752356,20,0,0
+r03_edge_region_mean,R03 - Selective 77/radius 1 with region-mean edge growing,CHASEDB1,APSRG,accuracy,28,0.01680899649649647,0.016039998331664918,0.0092545039318266,26,0,2
+r03_edge_region_mean,R03 - Selective 77/radius 1 with region-mean edge growing,CHASEDB1,APSRG,balanced_accuracy,28,-0.23247112781735166,-0.23679782856964232,0.022950164122003916,0,0,28
+r03_edge_region_mean,R03 - Selective 77/radius 1 with region-mean edge growing,CHASEDB1,APSRG,dice,28,-0.2631407349178068,-0.2600727629957615,0.06810486904258398,0,0,28
+r03_edge_region_mean,R03 - Selective 77/radius 1 with region-mean edge growing,CHASEDB1,APSRG,f1_score,28,-0.2631407349178068,-0.2600727629957615,0.06810486904258398,0,0,28
+r03_edge_region_mean,R03 - Selective 77/radius 1 with region-mean edge growing,CHASEDB1,APSRG,iou,28,-0.21045652563231496,-0.20526193094586032,0.05222592137570947,0,0,28
+r03_edge_region_mean,R03 - Selective 77/radius 1 with region-mean edge growing,CHASEDB1,APSRG,precision,28,0.22212995686725986,0.21537652720781814,0.09806268448618112,28,0,0
+r03_edge_region_mean,R03 - Selective 77/radius 1 with region-mean edge growing,CHASEDB1,APSRG,recall,28,-0.5216543091823597,-0.5312666269536345,0.04675880540263774,0,0,28
+r03_edge_region_mean,R03 - Selective 77/radius 1 with region-mean edge growing,CHASEDB1,APSRG,specificity,28,0.05671205354765629,0.0565514353956168,0.0058888119813723504,28,0,0
+r03_edge_region_mean,R03 - Selective 77/radius 1 with region-mean edge growing,CHASEDB1,CA-APSRG,accuracy,28,0.013070734424901096,0.011875938438438427,0.00973946269841737,26,0,2
+r03_edge_region_mean,R03 - Selective 77/radius 1 with region-mean edge growing,CHASEDB1,CA-APSRG,balanced_accuracy,28,-0.23352717498601822,-0.23824152913249474,0.022652454274088272,0,0,28
+r03_edge_region_mean,R03 - Selective 77/radius 1 with region-mean edge growing,CHASEDB1,CA-APSRG,dice,28,-0.27404855874649037,-0.27127446627033,0.06894762369971794,0,0,28
+r03_edge_region_mean,R03 - Selective 77/radius 1 with region-mean edge growing,CHASEDB1,CA-APSRG,f1_score,28,-0.27404855874649037,-0.27127446627033,0.06894762369971794,0,0,28
+r03_edge_region_mean,R03 - Selective 77/radius 1 with region-mean edge growing,CHASEDB1,CA-APSRG,iou,28,-0.2209465595114662,-0.21574642014588435,0.0534866858715785,0,0,28
+r03_edge_region_mean,R03 - Selective 77/radius 1 with region-mean edge growing,CHASEDB1,CA-APSRG,precision,28,0.2058451111358852,0.19851123286109873,0.09824541187162489,28,0,0
+r03_edge_region_mean,R03 - Selective 77/radius 1 with region-mean edge growing,CHASEDB1,CA-APSRG,recall,28,-0.5195779735557975,-0.5301097091126054,0.047050802171131716,0,0,28
+r03_edge_region_mean,R03 - Selective 77/radius 1 with region-mean edge growing,CHASEDB1,CA-APSRG,specificity,28,0.052523623583760934,0.05033362791453222,0.006239869690420781,28,0,0
+r03_edge_region_mean,R03 - Selective 77/radius 1 with region-mean edge growing,DRIVE,APSRG,accuracy,20,-0.0331084659905308,-0.03802769573663484,0.0228584468099859,2,0,18
+r03_edge_region_mean,R03 - Selective 77/radius 1 with region-mean edge growing,DRIVE,APSRG,balanced_accuracy,20,-0.2332344015985203,-0.2353319033136521,0.03364496414467631,0,0,20
+r03_edge_region_mean,R03 - Selective 77/radius 1 with region-mean edge growing,DRIVE,APSRG,dice,20,-0.39068694590240144,-0.4140203648988394,0.0966745319816905,0,0,20
+r03_edge_region_mean,R03 - Selective 77/radius 1 with region-mean edge growing,DRIVE,APSRG,f1_score,20,-0.39068694590240144,-0.4140203648988394,0.0966745319816905,0,0,20
+r03_edge_region_mean,R03 - Selective 77/radius 1 with region-mean edge growing,DRIVE,APSRG,iou,20,-0.35508313164199046,-0.380540188297252,0.08857958359709803,0,0,20
+r03_edge_region_mean,R03 - Selective 77/radius 1 with region-mean edge growing,DRIVE,APSRG,precision,20,0.09509683847143231,0.0396331937364941,0.14490208608596142,12,0,8
+r03_edge_region_mean,R03 - Selective 77/radius 1 with region-mean edge growing,DRIVE,APSRG,recall,20,-0.4997473936605753,-0.5084448216979432,0.06663958342061974,0,0,20
+r03_edge_region_mean,R03 - Selective 77/radius 1 with region-mean edge growing,DRIVE,APSRG,specificity,20,0.03327859046353468,0.028395519722759388,0.016998974815347633,20,0,0
+r03_edge_region_mean,R03 - Selective 77/radius 1 with region-mean edge growing,DRIVE,CA-APSRG,accuracy,20,-0.03342295903092642,-0.03791776751869136,0.022553848040783964,2,0,18
+r03_edge_region_mean,R03 - Selective 77/radius 1 with region-mean edge growing,DRIVE,CA-APSRG,balanced_accuracy,20,-0.2328851718525738,-0.23514767054052593,0.03357296238905148,0,0,20
+r03_edge_region_mean,R03 - Selective 77/radius 1 with region-mean edge growing,DRIVE,CA-APSRG,dice,20,-0.39139783958903557,-0.41341856314826475,0.09602440554919145,0,0,20
+r03_edge_region_mean,R03 - Selective 77/radius 1 with region-mean edge growing,DRIVE,CA-APSRG,f1_score,20,-0.39139783958903557,-0.41341856314826475,0.09602440554919145,0,0,20
+r03_edge_region_mean,R03 - Selective 77/radius 1 with region-mean edge growing,DRIVE,CA-APSRG,iou,20,-0.35565271531982273,-0.3796619589585131,0.08784170130993847,0,0,20
+r03_edge_region_mean,R03 - Selective 77/radius 1 with region-mean edge growing,DRIVE,CA-APSRG,precision,20,0.0931707818795037,0.03826358193006596,0.1444420585391261,12,0,8
+r03_edge_region_mean,R03 - Selective 77/radius 1 with region-mean edge growing,DRIVE,CA-APSRG,recall,20,-0.49852167683277476,-0.5074507767505161,0.06665464687155459,0,0,20
+r03_edge_region_mean,R03 - Selective 77/radius 1 with region-mean edge growing,DRIVE,CA-APSRG,specificity,20,0.03275133312762715,0.02823382605436131,0.016632377258242334,20,0,0
+r03_edge_region_mean,R03 - Selective 77/radius 1 with region-mean edge growing,STARE,APSRG,accuracy,20,0.004047225501770951,-0.0049811097992915054,0.0340043574778067,8,0,12
+r03_edge_region_mean,R03 - Selective 77/radius 1 with region-mean edge growing,STARE,APSRG,balanced_accuracy,20,-0.2841143922203885,-0.30260467418965104,0.057109403307378015,0,0,20
+r03_edge_region_mean,R03 - Selective 77/radius 1 with region-mean edge growing,STARE,APSRG,dice,20,-0.3304267622770093,-0.4010460801168088,0.17627497649886828,2,0,18
+r03_edge_region_mean,R03 - Selective 77/radius 1 with region-mean edge growing,STARE,APSRG,f1_score,20,-0.3304267622770093,-0.4010460801168088,0.17627497649886828,2,0,18
+r03_edge_region_mean,R03 - Selective 77/radius 1 with region-mean edge growing,STARE,APSRG,iou,20,-0.2941347660561232,-0.3439072026412338,0.160492950086362,2,0,18
+r03_edge_region_mean,R03 - Selective 77/radius 1 with region-mean edge growing,STARE,APSRG,precision,20,0.2493875508042424,0.31360685731985105,0.21612782707651437,18,0,2
+r03_edge_region_mean,R03 - Selective 77/radius 1 with region-mean edge growing,STARE,APSRG,recall,20,-0.6245061101877083,-0.6567567774100342,0.09993554697143774,0,0,20
+r03_edge_region_mean,R03 - Selective 77/radius 1 with region-mean edge growing,STARE,APSRG,specificity,20,0.0562773257469313,0.05089262404927297,0.023236882570603887,20,0,0
+r03_edge_region_mean,R03 - Selective 77/radius 1 with region-mean edge growing,STARE,CA-APSRG,accuracy,20,0.0023166469893741992,-0.005289256198347081,0.03129612932945901,7,0,13
+r03_edge_region_mean,R03 - Selective 77/radius 1 with region-mean edge growing,STARE,CA-APSRG,balanced_accuracy,20,-0.2847877003333498,-0.30275592513705185,0.056268905156826095,0,0,20
+r03_edge_region_mean,R03 - Selective 77/radius 1 with region-mean edge growing,STARE,CA-APSRG,dice,20,-0.3345252344749784,-0.4024691761690981,0.17067807517245825,2,0,18
+r03_edge_region_mean,R03 - Selective 77/radius 1 with region-mean edge growing,STARE,CA-APSRG,f1_score,20,-0.3345252344749784,-0.4024691761690981,0.17067807517245825,2,0,18
+r03_edge_region_mean,R03 - Selective 77/radius 1 with region-mean edge growing,STARE,CA-APSRG,iou,20,-0.2978460365880496,-0.34506251282027844,0.15610468836894545,2,0,18
+r03_edge_region_mean,R03 - Selective 77/radius 1 with region-mean edge growing,STARE,CA-APSRG,precision,20,0.24494324139393336,0.31117927923477906,0.21319243336303648,18,0,2
+r03_edge_region_mean,R03 - Selective 77/radius 1 with region-mean edge growing,STARE,CA-APSRG,recall,20,-0.6239785079045406,-0.6567567774100342,0.10052125398527825,0,0,20
+r03_edge_region_mean,R03 - Selective 77/radius 1 with region-mean edge growing,STARE,CA-APSRG,specificity,20,0.05440310723784074,0.050436677308682065,0.020397622513867147,20,0,0
+r04_local_or_region,R04 - Selective 77/radius 1 with local-or-region acceptance,CHASEDB1,APSRG,accuracy,28,0.025204445516945513,0.023827473306639813,0.005672370084748157,28,0,0
+r04_local_or_region,R04 - Selective 77/radius 1 with local-or-region acceptance,CHASEDB1,APSRG,balanced_accuracy,28,-0.031717472491441384,-0.03725444597794725,0.021850963942782083,2,0,26
+r04_local_or_region,R04 - Selective 77/radius 1 with local-or-region acceptance,CHASEDB1,APSRG,dice,28,0.05467055006423801,0.05693625387055018,0.034494748087826724,25,0,3
+r04_local_or_region,R04 - Selective 77/radius 1 with local-or-region acceptance,CHASEDB1,APSRG,f1_score,28,0.05467055006423801,0.05693625387055018,0.034494748087826724,25,0,3
+r04_local_or_region,R04 - Selective 77/radius 1 with local-or-region acceptance,CHASEDB1,APSRG,iou,28,0.05475960010676669,0.05520215216760377,0.034621361267103426,25,0,3
+r04_local_or_region,R04 - Selective 77/radius 1 with local-or-region acceptance,CHASEDB1,APSRG,precision,28,0.15352523332903822,0.1565077247367378,0.03687718345912732,28,0,0
+r04_local_or_region,R04 - Selective 77/radius 1 with local-or-region acceptance,CHASEDB1,APSRG,recall,28,-0.09776387871129957,-0.10707816307367257,0.04551118733798732,1,0,27
+r04_local_or_region,R04 - Selective 77/radius 1 with local-or-region acceptance,CHASEDB1,APSRG,specificity,28,0.034328933728416826,0.03407591229100837,0.006137245814837054,28,0,0
+r04_local_or_region,R04 - Selective 77/radius 1 with local-or-region acceptance,CHASEDB1,CA-APSRG,accuracy,28,0.02146752407169078,0.020296338004671455,0.005301973657978512,28,0,0
+r04_local_or_region,R04 - Selective 77/radius 1 with local-or-region acceptance,CHASEDB1,CA-APSRG,balanced_accuracy,28,-0.03277100171185736,-0.03830235672622745,0.021614855767843805,2,0,26
+r04_local_or_region,R04 - Selective 77/radius 1 with local-or-region acceptance,CHASEDB1,CA-APSRG,dice,28,0.04377432189060874,0.04694067507001748,0.03394657635427084,25,0,3
+r04_local_or_region,R04 - Selective 77/radius 1 with local-or-region acceptance,CHASEDB1,CA-APSRG,f1_score,28,0.04377432189060874,0.04694067507001748,0.03394657635427084,25,0,3
+r04_local_or_region,R04 - Selective 77/radius 1 with local-or-region acceptance,CHASEDB1,CA-APSRG,iou,28,0.04428119711398088,0.04578987206682961,0.03391235211156552,25,0,3
+r04_local_or_region,R04 - Selective 77/radius 1 with local-or-region acceptance,CHASEDB1,CA-APSRG,precision,28,0.13723358779519632,0.13577775767108458,0.033671666806669616,28,0,0
+r04_local_or_region,R04 - Selective 77/radius 1 with local-or-region acceptance,CHASEDB1,CA-APSRG,recall,28,-0.09568363893168938,-0.10376539625168957,0.045164778510481896,1,0,27
+r04_local_or_region,R04 - Selective 77/radius 1 with local-or-region acceptance,CHASEDB1,CA-APSRG,specificity,28,0.03014163550797461,0.030898206239955095,0.005540648027907138,28,0,0
+r04_local_or_region,R04 - Selective 77/radius 1 with local-or-region acceptance,DRIVE,APSRG,accuracy,20,-0.0008381943043731077,-0.003884071149100332,0.009683378497052407,7,0,13
+r04_local_or_region,R04 - Selective 77/radius 1 with local-or-region acceptance,DRIVE,APSRG,balanced_accuracy,20,0.01890728286183015,0.019828284387338246,0.015290600994182717,18,0,2
+r04_local_or_region,R04 - Selective 77/radius 1 with local-or-region acceptance,DRIVE,APSRG,dice,20,0.00857861165642516,0.005320712498638969,0.024917400108366253,11,0,9
+r04_local_or_region,R04 - Selective 77/radius 1 with local-or-region acceptance,DRIVE,APSRG,f1_score,20,0.00857861165642516,0.005320712498638969,0.024917400108366253,11,0,9
+r04_local_or_region,R04 - Selective 77/radius 1 with local-or-region acceptance,DRIVE,APSRG,iou,20,0.009223264256647809,0.006475441894030931,0.028882268294659234,11,0,9
+r04_local_or_region,R04 - Selective 77/radius 1 with local-or-region acceptance,DRIVE,APSRG,precision,20,-0.030792370490259992,-0.04853039955589267,0.06062043238983236,6,0,14
+r04_local_or_region,R04 - Selective 77/radius 1 with local-or-region acceptance,DRIVE,APSRG,recall,20,0.04561403777981725,0.05416684346449335,0.04121767420310103,17,0,3
+r04_local_or_region,R04 - Selective 77/radius 1 with local-or-region acceptance,DRIVE,APSRG,specificity,20,-0.007799472056156881,-0.011997604895211011,0.015038818745500188,6,0,14
+r04_local_or_region,R04 - Selective 77/radius 1 with local-or-region acceptance,DRIVE,CA-APSRG,accuracy,20,-0.0011307134218153715,-0.0039147728226825995,0.009307856947847146,7,0,13
+r04_local_or_region,R04 - Selective 77/radius 1 with local-or-region acceptance,DRIVE,CA-APSRG,balanced_accuracy,20,0.019423970178392404,0.020499663710390192,0.015224295493171938,18,0,2
+r04_local_or_region,R04 - Selective 77/radius 1 with local-or-region acceptance,DRIVE,CA-APSRG,dice,20,0.008316191501359482,0.0038267683878822067,0.02425095571425463,11,0,9
+r04_local_or_region,R04 - Selective 77/radius 1 with local-or-region acceptance,DRIVE,CA-APSRG,f1_score,20,0.008316191501359482,0.0038267683878822067,0.02425095571425463,11,0,9
+r04_local_or_region,R04 - Selective 77/radius 1 with local-or-region acceptance,DRIVE,CA-APSRG,iou,20,0.008956889897000048,0.0045559764484852106,0.028132786391642794,11,0,9
+r04_local_or_region,R04 - Selective 77/radius 1 with local-or-region acceptance,DRIVE,CA-APSRG,precision,20,-0.0327769875859575,-0.04896371793491311,0.05883843467042412,6,0,14
+r04_local_or_region,R04 - Selective 77/radius 1 with local-or-region acceptance,DRIVE,CA-APSRG,recall,20,0.04719969465045431,0.05582400744460442,0.04071641844963677,17,0,3
+r04_local_or_region,R04 - Selective 77/radius 1 with local-or-region acceptance,DRIVE,CA-APSRG,specificity,20,-0.008351754293669484,-0.012060789149758278,0.014514340699416556,6,0,14
+r04_local_or_region,R04 - Selective 77/radius 1 with local-or-region acceptance,STARE,APSRG,accuracy,20,0.0020533648170011688,-0.006462809917355317,0.028437376967100043,8,0,12
+r04_local_or_region,R04 - Selective 77/radius 1 with local-or-region acceptance,STARE,APSRG,balanced_accuracy,20,0.002733031972839889,0.0033747397944387525,0.014068625929919767,11,0,9
+r04_local_or_region,R04 - Selective 77/radius 1 with local-or-region acceptance,STARE,APSRG,dice,20,0.002182444653361859,-0.021692963545000332,0.07844376771042938,8,0,12
+r04_local_or_region,R04 - Selective 77/radius 1 with local-or-region acceptance,STARE,APSRG,f1_score,20,0.002182444653361859,-0.021692963545000332,0.07844376771042938,8,0,12
+r04_local_or_region,R04 - Selective 77/radius 1 with local-or-region acceptance,STARE,APSRG,iou,20,-0.005154371228054279,-0.023394354744772056,0.07854282037038508,8,0,12
+r04_local_or_region,R04 - Selective 77/radius 1 with local-or-region acceptance,STARE,APSRG,precision,20,-0.009344183859329145,-0.025685216219076185,0.11086391420807185,7,0,13
+r04_local_or_region,R04 - Selective 77/radius 1 with local-or-region acceptance,STARE,APSRG,recall,20,0.004464401241912358,0.006533719062532195,0.0515528358292557,11,0,9
+r04_local_or_region,R04 - Selective 77/radius 1 with local-or-region acceptance,STARE,APSRG,specificity,20,0.0010016627037673976,-0.00562971299226972,0.033384959554474604,7,0,13
+r04_local_or_region,R04 - Selective 77/radius 1 with local-or-region acceptance,STARE,CA-APSRG,accuracy,20,0.00032231404958672495,-0.0068311688311687435,0.025496889064862104,7,0,13
+r04_local_or_region,R04 - Selective 77/radius 1 with local-or-region acceptance,STARE,CA-APSRG,balanced_accuracy,20,0.002059461747635777,0.0032521523845285283,0.014610783467321782,11,0,9
+r04_local_or_region,R04 - Selective 77/radius 1 with local-or-region acceptance,STARE,CA-APSRG,dice,20,-0.0019063776596219633,-0.022666552609131807,0.07218187147459251,8,0,12
+r04_local_or_region,R04 - Selective 77/radius 1 with local-or-region acceptance,STARE,CA-APSRG,f1_score,20,-0.0019063776596219633,-0.022666552609131807,0.07218187147459251,8,0,12
+r04_local_or_region,R04 - Selective 77/radius 1 with local-or-region acceptance,STARE,CA-APSRG,iou,20,-0.008847094681912276,-0.02450822605365044,0.07369028924429505,8,0,12
+r04_local_or_region,R04 - Selective 77/radius 1 with local-or-region acceptance,STARE,CA-APSRG,precision,20,-0.013894533578046774,-0.02730617333913335,0.10500957899365916,7,0,13
+r04_local_or_region,R04 - Selective 77/radius 1 with local-or-region acceptance,STARE,CA-APSRG,recall,20,0.004992003525080118,0.006649689904149103,0.05101315465653603,11,0,9
+r04_local_or_region,R04 - Selective 77/radius 1 with local-or-region acceptance,STARE,CA-APSRG,specificity,20,-0.0008730800298085928,-0.006581407928017591,0.030302257049067735,6,0,14
+r05_local_or_region_hybrid_priority,R05 - R04 with hybrid edge priority,CHASEDB1,APSRG,accuracy,28,0.025209249427999424,0.023824345178511674,0.005664684843054091,28,0,0
+r05_local_or_region_hybrid_priority,R05 - R04 with hybrid edge priority,CHASEDB1,APSRG,balanced_accuracy,28,-0.03177959099407431,-0.03722947244292629,0.02185682587312666,2,0,26
+r05_local_or_region_hybrid_priority,R05 - R04 with hybrid edge priority,CHASEDB1,APSRG,dice,28,0.05463927418002671,0.056643044663765574,0.03446267283082808,25,0,3
+r05_local_or_region_hybrid_priority,R05 - R04 with hybrid edge priority,CHASEDB1,APSRG,f1_score,28,0.05463927418002671,0.056643044663765574,0.03446267283082808,25,0,3
+r05_local_or_region_hybrid_priority,R05 - R04 with hybrid edge priority,CHASEDB1,APSRG,iou,28,0.05472626969872579,0.054915943096101816,0.03458978050532273,25,0,3
+r05_local_or_region_hybrid_priority,R05 - R04 with hybrid edge priority,CHASEDB1,APSRG,precision,28,0.15357583840369052,0.1567401084720751,0.036790314095794106,28,0,0
+r05_local_or_region_hybrid_priority,R05 - R04 with hybrid edge priority,CHASEDB1,APSRG,recall,28,-0.09790328375973835,-0.10710110571165671,0.04553306438394541,0,0,28
+r05_local_or_region_hybrid_priority,R05 - R04 with hybrid edge priority,CHASEDB1,APSRG,specificity,28,0.03434410177158973,0.03402625844343993,0.006130136076568594,28,0,0
+r05_local_or_region_hybrid_priority,R05 - R04 with hybrid edge priority,CHASEDB1,CA-APSRG,accuracy,28,0.021472327982744677,0.020293209876543206,0.005298395307695586,28,0,0
+r05_local_or_region_hybrid_priority,R05 - R04 with hybrid edge priority,CHASEDB1,CA-APSRG,balanced_accuracy,28,-0.03283312021449029,-0.03827738319120644,0.021620439154057872,2,0,26
+r05_local_or_region_hybrid_priority,R05 - R04 with hybrid edge priority,CHASEDB1,CA-APSRG,dice,28,0.0437430476632296,0.04664746586323287,0.033920596422691386,25,0,3
+r05_local_or_region_hybrid_priority,R05 - R04 with hybrid edge priority,CHASEDB1,CA-APSRG,f1_score,28,0.0437430476632296,0.04664746586323287,0.033920596422691386,25,0,3
+r05_local_or_region_hybrid_priority,R05 - R04 with hybrid edge priority,CHASEDB1,CA-APSRG,iou,28,0.044247870665039234,0.045503662995327654,0.03388497377499394,25,0,3
+r05_local_or_region_hybrid_priority,R05 - R04 with hybrid edge priority,CHASEDB1,CA-APSRG,precision,28,0.1372842006864467,0.13615665209731814,0.033592465217541195,28,0,0
+r05_local_or_region_hybrid_priority,R05 - R04 with hybrid edge priority,CHASEDB1,CA-APSRG,recall,28,-0.09582304398012813,-0.1037883388896737,0.04518662672266658,1,0,27
+r05_local_or_region_hybrid_priority,R05 - R04 with hybrid edge priority,CHASEDB1,CA-APSRG,specificity,28,0.030156803551147516,0.030904886589076697,0.005538631729052619,28,0,0
+r05_local_or_region_hybrid_priority,R05 - R04 with hybrid edge priority,DRIVE,APSRG,accuracy,20,-0.0006953904441571012,-0.0026301888143207552,0.00972949246116872,7,0,13
+r05_local_or_region_hybrid_priority,R05 - R04 with hybrid edge priority,DRIVE,APSRG,balanced_accuracy,20,0.019173394163477808,0.020536915938561995,0.015238549029972613,17,0,3
+r05_local_or_region_hybrid_priority,R05 - R04 with hybrid edge priority,DRIVE,APSRG,dice,20,0.00914414562551163,0.006044973724154523,0.02533558331318601,12,0,8
+r05_local_or_region_hybrid_priority,R05 - R04 with hybrid edge priority,DRIVE,APSRG,f1_score,20,0.00914414562551163,0.006044973724154523,0.02533558331318601,12,0,8
+r05_local_or_region_hybrid_priority,R05 - R04 with hybrid edge priority,DRIVE,APSRG,iou,20,0.009890543294866569,0.00737238697714121,0.02947629643994246,12,0,8
+r05_local_or_region_hybrid_priority,R05 - R04 with hybrid edge priority,DRIVE,APSRG,precision,20,-0.030691977037099215,-0.044310460339233526,0.05971357583285105,6,0,14
+r05_local_or_region_hybrid_priority,R05 - R04 with hybrid edge priority,DRIVE,APSRG,recall,20,0.04613339109805736,0.05605545878230217,0.04065687811216448,17,0,3
+r05_local_or_region_hybrid_priority,R05 - R04 with hybrid edge priority,DRIVE,APSRG,specificity,20,-0.007786602771101709,-0.012660609987586724,0.014852418465197538,6,0,14
+r05_local_or_region_hybrid_priority,R05 - R04 with hybrid edge priority,DRIVE,CA-APSRG,accuracy,20,-0.000987909561599365,-0.0028149480756641254,0.009361112153509118,7,0,13
+r05_local_or_region_hybrid_priority,R05 - R04 with hybrid edge priority,DRIVE,CA-APSRG,balanced_accuracy,20,0.01969008148004006,0.021281093417786,0.015159355511647068,17,0,3
+r05_local_or_region_hybrid_priority,R05 - R04 with hybrid edge priority,DRIVE,CA-APSRG,dice,20,0.008881750349415985,0.005397473197156,0.024672858370030783,12,0,8
+r05_local_or_region_hybrid_priority,R05 - R04 with hybrid edge priority,DRIVE,CA-APSRG,f1_score,20,0.008881750349415985,0.005397473197156,0.024672858370030783,12,0,8
+r05_local_or_region_hybrid_priority,R05 - R04 with hybrid edge priority,DRIVE,CA-APSRG,iou,20,0.009624195802584445,0.0064618007052471005,0.028726575658799543,12,0,8
+r05_local_or_region_hybrid_priority,R05 - R04 with hybrid edge priority,DRIVE,CA-APSRG,precision,20,-0.03267650647765936,-0.04474377871825397,0.0579680675222173,6,0,14
+r05_local_or_region_hybrid_priority,R05 - R04 with hybrid edge priority,DRIVE,CA-APSRG,recall,20,0.04771904796869442,0.0569431066067288,0.040143933833072964,17,0,3
+r05_local_or_region_hybrid_priority,R05 - R04 with hybrid edge priority,DRIVE,CA-APSRG,specificity,20,-0.0083388850086143,-0.01272379424213399,0.014334353791010498,6,0,14
+r05_local_or_region_hybrid_priority,R05 - R04 with hybrid edge priority,STARE,APSRG,accuracy,20,0.0017566706021251376,-0.006047225501771003,0.02876390693464368,8,0,12
+r05_local_or_region_hybrid_priority,R05 - R04 with hybrid edge priority,STARE,APSRG,balanced_accuracy,20,0.0023772332173229325,0.00281822023470113,0.013619748175543438,12,0,8
+r05_local_or_region_hybrid_priority,R05 - R04 with hybrid edge priority,STARE,APSRG,dice,20,0.0011588652344686867,-0.02160155481964482,0.07932463784427436,8,0,12
+r05_local_or_region_hybrid_priority,R05 - R04 with hybrid edge priority,STARE,APSRG,f1_score,20,0.0011588652344686867,-0.02160155481964482,0.07932463784427436,8,0,12
+r05_local_or_region_hybrid_priority,R05 - R04 with hybrid edge priority,STARE,APSRG,iou,20,-0.006287103164854761,-0.024379696996883193,0.07969629045496958,8,0,12
+r05_local_or_region_hybrid_priority,R05 - R04 with hybrid edge priority,STARE,APSRG,precision,20,-0.01031555721686598,-0.023980762180610515,0.11210981675505628,7,0,13
+r05_local_or_region_hybrid_priority,R05 - R04 with hybrid edge priority,STARE,APSRG,recall,20,0.004027450776342212,0.010877854696993428,0.051308518269961884,12,0,8
+r05_local_or_region_hybrid_priority,R05 - R04 with hybrid edge priority,STARE,APSRG,specificity,20,0.0007270156583035814,-0.004783324689087098,0.03375117855532805,7,0,13
+r05_local_or_region_hybrid_priority,R05 - R04 with hybrid edge priority,STARE,CA-APSRG,accuracy,20,2.5619834710693956e-05,-0.006415584415584374,0.025841645129717414,7,0,13
+r05_local_or_region_hybrid_priority,R05 - R04 with hybrid edge priority,STARE,CA-APSRG,balanced_accuracy,20,0.0017036629921188206,0.00269563282479085,0.01420713342745932,12,0,8
+r05_local_or_region_hybrid_priority,R05 - R04 with hybrid edge priority,STARE,CA-APSRG,dice,20,-0.002929872488019095,-0.02292320824965305,0.07311439107125635,8,0,12
+r05_local_or_region_hybrid_priority,R05 - R04 with hybrid edge priority,STARE,CA-APSRG,f1_score,20,-0.002929872488019095,-0.02292320824965305,0.07311439107125635,8,0,12
+r05_local_or_region_hybrid_priority,R05 - R04 with hybrid edge priority,STARE,CA-APSRG,iou,20,-0.009979691303860888,-0.025610002490181888,0.07489387025099288,8,0,12
+r05_local_or_region_hybrid_priority,R05 - R04 with hybrid edge priority,STARE,CA-APSRG,precision,20,-0.014865652444618595,-0.025600831575286753,0.10629261048104437,7,0,13
+r05_local_or_region_hybrid_priority,R05 - R04 with hybrid edge priority,STARE,CA-APSRG,recall,20,0.004555053059509972,0.010993825538610336,0.05076533853683957,12,0,8
+r05_local_or_region_hybrid_priority,R05 - R04 with hybrid edge priority,STARE,CA-APSRG,specificity,20,-0.0011477270752723978,-0.005735019624834914,0.03068455579925139,6,0,14
+r06_local_or_region_process_override,R06 - R04 with process-context refinement override,CHASEDB1,APSRG,accuracy,28,0.025204445516945513,0.023827473306639813,0.005672370084748157,28,0,0
+r06_local_or_region_process_override,R06 - R04 with process-context refinement override,CHASEDB1,APSRG,balanced_accuracy,28,-0.031717472491441384,-0.03725444597794725,0.021850963942782083,2,0,26
+r06_local_or_region_process_override,R06 - R04 with process-context refinement override,CHASEDB1,APSRG,dice,28,0.05467055006423801,0.05693625387055018,0.034494748087826724,25,0,3
+r06_local_or_region_process_override,R06 - R04 with process-context refinement override,CHASEDB1,APSRG,f1_score,28,0.05467055006423801,0.05693625387055018,0.034494748087826724,25,0,3
+r06_local_or_region_process_override,R06 - R04 with process-context refinement override,CHASEDB1,APSRG,iou,28,0.05475960010676669,0.05520215216760377,0.034621361267103426,25,0,3
+r06_local_or_region_process_override,R06 - R04 with process-context refinement override,CHASEDB1,APSRG,precision,28,0.15352523332903822,0.1565077247367378,0.03687718345912732,28,0,0
+r06_local_or_region_process_override,R06 - R04 with process-context refinement override,CHASEDB1,APSRG,recall,28,-0.09776387871129957,-0.10707816307367257,0.04551118733798732,1,0,27
+r06_local_or_region_process_override,R06 - R04 with process-context refinement override,CHASEDB1,APSRG,specificity,28,0.034328933728416826,0.03407591229100837,0.006137245814837054,28,0,0
+r06_local_or_region_process_override,R06 - R04 with process-context refinement override,CHASEDB1,CA-APSRG,accuracy,28,0.02146752407169078,0.020296338004671455,0.005301973657978512,28,0,0
+r06_local_or_region_process_override,R06 - R04 with process-context refinement override,CHASEDB1,CA-APSRG,balanced_accuracy,28,-0.03277100171185736,-0.03830235672622745,0.021614855767843805,2,0,26
+r06_local_or_region_process_override,R06 - R04 with process-context refinement override,CHASEDB1,CA-APSRG,dice,28,0.04377432189060874,0.04694067507001748,0.03394657635427084,25,0,3
+r06_local_or_region_process_override,R06 - R04 with process-context refinement override,CHASEDB1,CA-APSRG,f1_score,28,0.04377432189060874,0.04694067507001748,0.03394657635427084,25,0,3
+r06_local_or_region_process_override,R06 - R04 with process-context refinement override,CHASEDB1,CA-APSRG,iou,28,0.04428119711398088,0.04578987206682961,0.03391235211156552,25,0,3
+r06_local_or_region_process_override,R06 - R04 with process-context refinement override,CHASEDB1,CA-APSRG,precision,28,0.13723358779519632,0.13577775767108458,0.033671666806669616,28,0,0
+r06_local_or_region_process_override,R06 - R04 with process-context refinement override,CHASEDB1,CA-APSRG,recall,28,-0.09568363893168938,-0.10376539625168957,0.045164778510481896,1,0,27
+r06_local_or_region_process_override,R06 - R04 with process-context refinement override,CHASEDB1,CA-APSRG,specificity,28,0.03014163550797461,0.030898206239955095,0.005540648027907138,28,0,0
+r06_local_or_region_process_override,R06 - R04 with process-context refinement override,DRIVE,APSRG,accuracy,20,-0.0008381943043731077,-0.003884071149100332,0.009683378497052407,7,0,13
+r06_local_or_region_process_override,R06 - R04 with process-context refinement override,DRIVE,APSRG,balanced_accuracy,20,0.01890728286183015,0.019828284387338246,0.015290600994182717,18,0,2
+r06_local_or_region_process_override,R06 - R04 with process-context refinement override,DRIVE,APSRG,dice,20,0.00857861165642516,0.005320712498638969,0.024917400108366253,11,0,9
+r06_local_or_region_process_override,R06 - R04 with process-context refinement override,DRIVE,APSRG,f1_score,20,0.00857861165642516,0.005320712498638969,0.024917400108366253,11,0,9
+r06_local_or_region_process_override,R06 - R04 with process-context refinement override,DRIVE,APSRG,iou,20,0.009223264256647809,0.006475441894030931,0.028882268294659234,11,0,9
+r06_local_or_region_process_override,R06 - R04 with process-context refinement override,DRIVE,APSRG,precision,20,-0.030792370490259992,-0.04853039955589267,0.06062043238983236,6,0,14
+r06_local_or_region_process_override,R06 - R04 with process-context refinement override,DRIVE,APSRG,recall,20,0.04561403777981725,0.05416684346449335,0.04121767420310103,17,0,3
+r06_local_or_region_process_override,R06 - R04 with process-context refinement override,DRIVE,APSRG,specificity,20,-0.007799472056156881,-0.011997604895211011,0.015038818745500188,6,0,14
+r06_local_or_region_process_override,R06 - R04 with process-context refinement override,DRIVE,CA-APSRG,accuracy,20,-0.0011307134218153715,-0.0039147728226825995,0.009307856947847146,7,0,13
+r06_local_or_region_process_override,R06 - R04 with process-context refinement override,DRIVE,CA-APSRG,balanced_accuracy,20,0.019423970178392404,0.020499663710390192,0.015224295493171938,18,0,2
+r06_local_or_region_process_override,R06 - R04 with process-context refinement override,DRIVE,CA-APSRG,dice,20,0.008316191501359482,0.0038267683878822067,0.02425095571425463,11,0,9
+r06_local_or_region_process_override,R06 - R04 with process-context refinement override,DRIVE,CA-APSRG,f1_score,20,0.008316191501359482,0.0038267683878822067,0.02425095571425463,11,0,9
+r06_local_or_region_process_override,R06 - R04 with process-context refinement override,DRIVE,CA-APSRG,iou,20,0.008956889897000048,0.0045559764484852106,0.028132786391642794,11,0,9
+r06_local_or_region_process_override,R06 - R04 with process-context refinement override,DRIVE,CA-APSRG,precision,20,-0.0327769875859575,-0.04896371793491311,0.05883843467042412,6,0,14
+r06_local_or_region_process_override,R06 - R04 with process-context refinement override,DRIVE,CA-APSRG,recall,20,0.04719969465045431,0.05582400744460442,0.04071641844963677,17,0,3
+r06_local_or_region_process_override,R06 - R04 with process-context refinement override,DRIVE,CA-APSRG,specificity,20,-0.008351754293669484,-0.012060789149758278,0.014514340699416556,6,0,14
+r06_local_or_region_process_override,R06 - R04 with process-context refinement override,STARE,APSRG,accuracy,20,0.0020533648170011688,-0.006462809917355317,0.028437376967100043,8,0,12
+r06_local_or_region_process_override,R06 - R04 with process-context refinement override,STARE,APSRG,balanced_accuracy,20,0.002733031972839889,0.0033747397944387525,0.014068625929919767,11,0,9
+r06_local_or_region_process_override,R06 - R04 with process-context refinement override,STARE,APSRG,dice,20,0.002182444653361859,-0.021692963545000332,0.07844376771042938,8,0,12
+r06_local_or_region_process_override,R06 - R04 with process-context refinement override,STARE,APSRG,f1_score,20,0.002182444653361859,-0.021692963545000332,0.07844376771042938,8,0,12
+r06_local_or_region_process_override,R06 - R04 with process-context refinement override,STARE,APSRG,iou,20,-0.005154371228054279,-0.023394354744772056,0.07854282037038508,8,0,12
+r06_local_or_region_process_override,R06 - R04 with process-context refinement override,STARE,APSRG,precision,20,-0.009344183859329145,-0.025685216219076185,0.11086391420807185,7,0,13
+r06_local_or_region_process_override,R06 - R04 with process-context refinement override,STARE,APSRG,recall,20,0.004464401241912358,0.006533719062532195,0.0515528358292557,11,0,9
+r06_local_or_region_process_override,R06 - R04 with process-context refinement override,STARE,APSRG,specificity,20,0.0010016627037673976,-0.00562971299226972,0.033384959554474604,7,0,13
+r06_local_or_region_process_override,R06 - R04 with process-context refinement override,STARE,CA-APSRG,accuracy,20,0.00032231404958672495,-0.0068311688311687435,0.025496889064862104,7,0,13
+r06_local_or_region_process_override,R06 - R04 with process-context refinement override,STARE,CA-APSRG,balanced_accuracy,20,0.002059461747635777,0.0032521523845285283,0.014610783467321782,11,0,9
+r06_local_or_region_process_override,R06 - R04 with process-context refinement override,STARE,CA-APSRG,dice,20,-0.0019063776596219633,-0.022666552609131807,0.07218187147459251,8,0,12
+r06_local_or_region_process_override,R06 - R04 with process-context refinement override,STARE,CA-APSRG,f1_score,20,-0.0019063776596219633,-0.022666552609131807,0.07218187147459251,8,0,12
+r06_local_or_region_process_override,R06 - R04 with process-context refinement override,STARE,CA-APSRG,iou,20,-0.008847094681912276,-0.02450822605365044,0.07369028924429505,8,0,12
+r06_local_or_region_process_override,R06 - R04 with process-context refinement override,STARE,CA-APSRG,precision,20,-0.013894533578046774,-0.02730617333913335,0.10500957899365916,7,0,13
+r06_local_or_region_process_override,R06 - R04 with process-context refinement override,STARE,CA-APSRG,recall,20,0.004992003525080118,0.006649689904149103,0.05101315465653603,11,0,9
+r06_local_or_region_process_override,R06 - R04 with process-context refinement override,STARE,CA-APSRG,specificity,20,-0.0008730800298085928,-0.006581407928017591,0.030302257049067735,6,0,14

@@ -1,0 +1,11 @@
+dataset,image_id,comparison_path,baseline_f1_score,ca_apsrg_f1_score,delta_f1_score,delta_precision,delta_recall
+STARE,im0240,E:\ca_apsrg_retinal_project\outputs\recovery_ablation\experiments_r03_edge_region_mean\STARE\comparison\im0240_comparison.png,0.279087675552785,0.2792105359697714,0.00012286041698639227,0.001433825845310599,0.0
+CHASEDB1,Image_14R,E:\ca_apsrg_retinal_project\outputs\recovery_ablation\experiments_r03_edge_region_mean\CHASEDB1\comparison\Image_14R_comparison.png,0.3513256901421823,0.3514466513908511,0.00012096124866878277,0.0005422639947845198,0.0
+STARE,im0001,E:\ca_apsrg_retinal_project\outputs\recovery_ablation\experiments_r03_edge_region_mean\STARE\comparison\im0001_comparison.png,0.168462674893543,0.1685542247244744,9.154983093140334e-05,0.0006494454308911823,0.0
+STARE,im0005,E:\ca_apsrg_retinal_project\outputs\recovery_ablation\experiments_r03_edge_region_mean\STARE\comparison\im0005_comparison.png,0.1686897861081376,0.1687647760108307,7.498990269311223e-05,0.0007268071067609294,0.0
+CHASEDB1,Image_07L,E:\ca_apsrg_retinal_project\outputs\recovery_ablation\experiments_r03_edge_region_mean\CHASEDB1\comparison\Image_07L_comparison.png,0.3871679889617109,0.3872176004415881,4.9611479877198494e-05,0.00035659323172121393,0.0
+CHASEDB1,Image_09R,E:\ca_apsrg_retinal_project\outputs\recovery_ablation\experiments_r03_edge_region_mean\CHASEDB1\comparison\Image_09R_comparison.png,0.35625015467617,0.356298652277762,4.8497601591979134e-05,0.00015473532202892049,0.0
+CHASEDB1,Image_01R,E:\ca_apsrg_retinal_project\outputs\recovery_ablation\experiments_r03_edge_region_mean\CHASEDB1\comparison\Image_01R_comparison.png,0.2287621359223301,0.2287621359223301,0.0,0.0,0.0
+CHASEDB1,Image_01L,E:\ca_apsrg_retinal_project\outputs\recovery_ablation\experiments_r03_edge_region_mean\CHASEDB1\comparison\Image_01L_comparison.png,0.2376232928679817,0.2376232928679817,0.0,0.0,0.0
+STARE,im0163,E:\ca_apsrg_retinal_project\outputs\recovery_ablation\experiments_r03_edge_region_mean\STARE\comparison\im0163_comparison.png,0.3547156552728003,0.3547156552728003,0.0,0.0,0.0
+CHASEDB1,Image_02R,E:\ca_apsrg_retinal_project\outputs\recovery_ablation\experiments_r03_edge_region_mean\CHASEDB1\comparison\Image_02R_comparison.png,0.1850912028766172,0.1850912028766172,0.0,0.0,0.0

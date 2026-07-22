@@ -33,11 +33,17 @@ from src.ui.streamlit_helpers import (  # noqa: E402
     show_image_grid,
     ensure_display_mask,
 )
+from src.ui.recovery_ablation_viewer import recovery_ablation_page  # noqa: E402
 from src.utils.image_io import overlay_mask_on_image, resize_if_needed  # noqa: E402
 
 
 APP_TITLE = "CA-APSRG Retinal Vessel Segmentation"
-DEFAULT_CONFIG_PATH = Path("configs/default.yaml")
+FINAL_CANDIDATE_CONFIG_PATH = Path("configs/final_candidate_r04.yaml")
+DEFAULT_CONFIG_PATH = (
+    FINAL_CANDIDATE_CONFIG_PATH
+    if (PROJECT_ROOT / FINAL_CANDIDATE_CONFIG_PATH).is_file()
+    else Path("configs/default.yaml")
+)
 BATCH_FILES = {
     "Per-image metrics": Path("outputs/experiments/metrics_per_image.csv"),
     "Metrics summary": Path("outputs/experiments/metrics_summary.csv"),
@@ -100,6 +106,7 @@ def sidebar() -> tuple[str, Path]:
             "Home",
             "Single Image Demo",
             "Batch Result Viewer",
+            "Recovery Ablation R00-R06",
             "Method Explanation",
             "About Dataset",
         ],
@@ -127,14 +134,14 @@ def home_page() -> None:
     st.subheader("Pipeline Flow")
     st.markdown(
         """
-        **Input Fundus Image** -> **Preprocessing** -> **APSRG Baseline** ->
-        **Context Feature Extraction** -> **Adaptive Morphological Refinement** ->
-        **CA-APSRG Output**
+        **Input Fundus Image** -> **Preprocessing** -> **Selective Fuzzy-Harris Seed Polling** ->
+        **Edge-Delayed Region Growing with Local-or-Region Acceptance** -> **APSRG Output** ->
+        **Context Feature Extraction** -> **Adaptive Morphological Refinement** -> **CA-APSRG Output**
         """
     )
     st.info(
-        "Aplikasi ini mendukung demo single image melalui upload citra dan viewer "
-        "hasil batch experiment dari CSV yang sudah dibuat oleh script eksperimen."
+        "Aplikasi ini mendukung demo single image, viewer hasil batch, dan dashboard "
+        "recovery ablation R00-R06 untuk APSRG serta CA-APSRG."
     )
 
 
@@ -197,6 +204,7 @@ def run_single_image_pipeline(
         params=adaptive_cfg,
         ca_config=ca_cfg,
         context_config=context_cfg,
+        apsrg_debug=apsrg_debug,
     )
 
     baseline_metrics = None
@@ -905,35 +913,40 @@ def method_explanation_page() -> None:
     st.markdown(
         """
         ### 1. Preprocessing
-        - Green channel extraction
-        - Normalization
-        - CLAHE
-        - Optional denoising
-        - Optional FoV masking
+        - Green-channel extraction
+        - Normalization and CLAHE
+        - Optional denoising and FoV masking
 
-        ### 2. APSRG Baseline
-        - Vessel enhancement
-        - Automatic seed selection
-        - Candidate vessel map
-        - Region growing
-        - Light post-processing
+        ### 2. Selective Fuzzy-Harris APSRG
+        - Multi-scale black-hat vessel enhancement
+        - Fuzzy SRG support using similarity and connected-edge information
+        - Harris Corner seed polling
+        - Selective fuzzy-Harris candidate ranking
+        - Recovery configuration: 77 seed points and radius-1 seed dilation
 
-        ### 3. Context Feature Extraction
-        - Vessel density
-        - Connected component statistics
-        - Small component ratio
-        - Skeleton indicators
+        ### 3. Edge-Delayed Region Growing
+        - Candidate pixels are processed using a priority queue
+        - Kang-product edge priority is retained in the R04 candidate
+        - Local-or-region acceptance prevents the region-mean gate from becoming too restrictive
 
-        ### 4. Adaptive Morphological Refinement
-        - Remove small objects
-        - Fill small holes
-        - Morphological closing
-        - Optional opening
-        - Skeleton guard
+        ### 4. Context-Aware Refinement
+        - Mask-context feature extraction
+        - Optional APSRG process-context extraction
+        - Adaptive removal of small components
+        - Conservative morphology to preserve thin vessels
 
-        ### 5. CA-APSRG Output
-        - Refined vessel segmentation mask
-        - Expected goal: reduce false positive while preserving thin vessels
+        ### 5. Recovery Ablation R00-R06
+        - R00: legacy percentile-polling + BFS
+        - R01: selective fuzzy-Harris, 35 seeds + BFS
+        - R02: 77 seeds, radius 1 + BFS
+        - R03: edge-delayed region-mean acceptance
+        - R04: local-or-region acceptance
+        - R05: hybrid priority
+        - R06: process-context override
+
+        ### 6. Current Candidate
+        R04 is the stable core candidate. R05 tests priority mode, while R06 evaluates
+        whether process-context override changes adaptive refinement.
         """
     )
 
@@ -969,6 +982,8 @@ def main() -> None:
             single_image_demo_page(config_path)
         elif page == "Batch Result Viewer":
             batch_result_viewer_page()
+        elif page == "Recovery Ablation R00-R06":
+            recovery_ablation_page(PROJECT_ROOT)
         elif page == "Method Explanation":
             method_explanation_page()
         elif page == "About Dataset":

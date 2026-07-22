@@ -9,34 +9,9 @@ data/working_png/
 
 outputs/*
 
-# Hasil analisis utama
-!outputs/analysis/
-!outputs/analysis/**
+!results/
+!results/**
 
-# Hasil analisis eksperimen lama
-!outputs/analysis_exp*/
-!outputs/analysis_exp*/**
-
-# Hasil eksperimen utama
-!outputs/experiments/
-!outputs/experiments/**
-
-# Hasil eksperimen lama
-!outputs/experiments_exp*/
-!outputs/experiments_exp*/**
-
-# Hasil method ablation Langkah No. 7
-!outputs/method_ablation/
-!outputs/method_ablation/**
-
-!outputs/single_test/
-!outputs/single_test/**
-
-!outputs/recovery_ablation/
-!outputs/recovery_ablation/**
-
-# Final candidate R04 and process-context diagnostics
-!outputs/final_candidate_r04/
-!outputs/final_candidate_r04/**
+.pytest_cache/
 
 *.log

@@ -1,14 +1,19 @@
 """
-CA-APSRG segmentation module.
+CA-APSRG context-aware refinement module.
 
 This module combines the APSRG baseline with context-aware adaptive
 morphological refinement. It is the main method proposed in the project:
 
-    preprocessed fundus image
-    -> APSRG baseline segmentation
+    APSRG mask
     -> context feature extraction
+    -> refinement-level decision
     -> adaptive morphological refinement
     -> CA-APSRG vessel mask
+
+SRG supplies fuzzy/connected-edge growing; the adapted APSRG baseline adds
+automatic Harris polling. CA-APSRG is the subsequent conservative context
+refinement. The full-pipeline function remains for compatibility, while
+``ca_apsrg_refine`` is the boundary of the CA-specific development.
 
 Conventions:
 - Input image: preprocessed grayscale uint8, shape (H, W).

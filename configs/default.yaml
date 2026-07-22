@@ -1,3 +1,5 @@
+# Historical/development configuration; not the final article configuration.
+# Use configs/main_methods/ca_apsrg_r04.yaml for the principal journal method.
 project:
   name: ca_apsrg_retinal_project
   description: Context-Aware APSRG with Selective Fuzzy-Harris Seed Polling and Edge-Delayed Region Growing

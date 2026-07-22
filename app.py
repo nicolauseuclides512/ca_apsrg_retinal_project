@@ -38,7 +38,7 @@ from src.utils.image_io import overlay_mask_on_image, resize_if_needed  # noqa: 
 
 
 APP_TITLE = "CA-APSRG Retinal Vessel Segmentation"
-FINAL_CANDIDATE_CONFIG_PATH = Path("configs/final_candidate_r04.yaml")
+FINAL_CANDIDATE_CONFIG_PATH = Path("configs/main_methods/ca_apsrg_r04.yaml")
 DEFAULT_CONFIG_PATH = (
     FINAL_CANDIDATE_CONFIG_PATH
     if (PROJECT_ROOT / FINAL_CANDIDATE_CONFIG_PATH).is_file()

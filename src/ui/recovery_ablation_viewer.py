@@ -645,6 +645,24 @@ def _render_csv_tables(tables: dict[str, pd.DataFrame]) -> None:
     )
 
 
+def _render_representative_cases(project_root: Path) -> None:
+    """Render the nine article-facing best, typical, and worst cases."""
+    root = project_root / "results" / "representative_cases"
+    metadata_path = root / "representative_cases.csv"
+    if not metadata_path.is_file():
+        st.warning("Representative-case metadata was not found in results/.")
+        return
+    metadata = pd.read_csv(metadata_path)
+    dataset = st.selectbox("Representative dataset", sorted(metadata["dataset"].unique()))
+    category = st.selectbox("Category", ["best", "typical", "worst"])
+    row = metadata[(metadata["dataset"] == dataset) & (metadata["category"] == category)].iloc[0]
+    st.dataframe(row.to_frame("value"), width="stretch")
+    case_dir = root / str(dataset) / str(category)
+    images = sorted(case_dir.glob("*.png"))
+    if images:
+        st.image([str(path) for path in images], caption=[path.stem for path in images], width=260)
+
+
 def recovery_ablation_page(project_root: Path) -> None:
     """Render the complete R00-R06 recovery ablation dashboard."""
     st.title("Recovery Ablation R00-R06")
@@ -672,6 +690,7 @@ def recovery_ablation_page(project_root: Path) -> None:
             "Stage Analysis",
             "Delta vs R00",
             "Image Browser",
+            "Representative Cases",
             "Process Context",
             "CSV Tables",
         ]
@@ -687,6 +706,8 @@ def recovery_ablation_page(project_root: Path) -> None:
     with tabs[4]:
         _render_image_browser(recovery_root, project_root)
     with tabs[5]:
-        _render_process_context(tables)
+        _render_representative_cases(project_root)
     with tabs[6]:
+        _render_process_context(tables)
+    with tabs[7]:
         _render_csv_tables(tables)

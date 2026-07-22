@@ -1,0 +1,31 @@
+ca_apsrg_retinal_project/
+|-- app.py
+|-- README.md
+|-- cleanup_audit.md
+|-- cleanup_report.md
+|-- configs/
+|   |-- default.yaml
+|   |-- main_methods/{srg_baseline,apsrg_baseline,ca_apsrg_r04}.yaml
+|   `-- recovery_ablation/r00...r06.yaml
+|-- archive/
+|   |-- README.md
+|   |-- early_morphology_experiments/configs/
+|   |-- method_ablation/{configs,06_run_method_ablation.py}
+|   `-- old_notebooks/
+|-- data/manifests/manifest.csv
+|-- notebooks/ca_apsrg_colab_experiments.ipynb
+|-- results/
+|   |-- tables/
+|   `-- representative_cases/{DRIVE,STARE,CHASEDB1}/{best,typical,worst}/
+|-- scripts/{00_convert_all_to_png.py,01_build_manifest.py,02_run_single_image.py,03_run_batch.py,04_summarize_results.py,07_run_recovery_ablation.py,08_export_process_context_diagnostics.py}
+|-- src/
+|   |-- data/
+|   |-- evaluation/
+|   |-- pipeline/
+|   |-- preprocessing/
+|   |-- segmentation/{srg.py,apsrg.py,ca_apsrg.py,...}
+|   |-- ui/
+|   `-- utils/
+`-- tests/
+
+Generated for the final journal-oriented structure on 2026-07-22.

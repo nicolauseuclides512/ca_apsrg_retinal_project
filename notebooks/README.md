@@ -9,3 +9,5 @@ Rekomendasi notebook bertahap:
 3. `03_baseline_apsrg_visual_check.ipynb`
 4. `04_ca_apsrg_parameter_experiment.ipynb`
 5. `05_metrics_analysis.ipynb`
+
+Copy-Item configs\recovery_ablation\r04_local_or_region.yaml configs\main_methods\ca_apsrg_r04.yaml

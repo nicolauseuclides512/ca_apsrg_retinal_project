@@ -1,0 +1,7 @@
+dataset,mask_refinement_level,process_refinement_level,combined_refinement_level,process_risk_level,refinement_changed_mask,n_images
+CHASEDB1,normal,normal,normal,low,False,22
+CHASEDB1,normal,normal,normal,low,True,6
+DRIVE,normal,normal,normal,low,False,17
+DRIVE,normal,normal,normal,low,True,3
+STARE,normal,normal,normal,low,False,16
+STARE,normal,normal,normal,low,True,4

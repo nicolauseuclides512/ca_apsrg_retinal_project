@@ -35,4 +35,8 @@ outputs/*
 !outputs/recovery_ablation/
 !outputs/recovery_ablation/**
 
+# Final candidate R04 and process-context diagnostics
+!outputs/final_candidate_r04/
+!outputs/final_candidate_r04/**
+
 *.log

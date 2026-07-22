@@ -41,8 +41,10 @@ from copy import deepcopy
 from pathlib import Path
 from typing import Any
 
+import numpy as np
 import pandas as pd
 import yaml
+from scipy.stats import wilcoxon
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_CONFIG = PROJECT_ROOT / "configs" / "default.yaml"
@@ -51,6 +53,10 @@ OUTPUT_ROOT = PROJECT_ROOT / "outputs" / "recovery_ablation"
 COMPARISON_DIR = OUTPUT_ROOT / "comparison"
 
 REFERENCE_EXPERIMENT = "r00_legacy_polling_bfs"
+BOOTSTRAP_ITERATIONS = 5000
+BOOTSTRAP_CONFIDENCE = 0.95
+BOOTSTRAP_RANDOM_SEED = 42
+PAIR_EPSILON = 1e-12
 
 METRICS = [
     "accuracy",
@@ -492,8 +498,110 @@ def build_article_table(summary: pd.DataFrame) -> pd.DataFrame:
     return table
 
 
+def _paired_test_and_interval(
+    deltas: pd.Series,
+    *,
+    confidence: float = BOOTSTRAP_CONFIDENCE,
+    n_bootstrap: int = BOOTSTRAP_ITERATIONS,
+    random_seed: int = BOOTSTRAP_RANDOM_SEED,
+) -> dict[str, Any]:
+    """Return paired win/tie/loss, Wilcoxon, and bootstrap mean CI."""
+    values = pd.to_numeric(deltas, errors="coerce").dropna().to_numpy(dtype=float)
+    n_pairs = int(values.size)
+
+    if n_pairs == 0:
+        return {
+            "n_pairs": 0,
+            "mean_delta": np.nan,
+            "median_delta": np.nan,
+            "std_delta": np.nan,
+            "wins": 0,
+            "ties": 0,
+            "losses": 0,
+            "wilcoxon_statistic": np.nan,
+            "wilcoxon_p_value": np.nan,
+            "bootstrap_mean_ci_low": np.nan,
+            "bootstrap_mean_ci_high": np.nan,
+        }
+
+    wins = int(np.sum(values > PAIR_EPSILON))
+    ties = int(np.sum(np.abs(values) <= PAIR_EPSILON))
+    losses = int(np.sum(values < -PAIR_EPSILON))
+
+    if np.all(np.abs(values) <= PAIR_EPSILON):
+        wilcoxon_statistic = 0.0
+        wilcoxon_p_value = 1.0
+    else:
+        try:
+            test = wilcoxon(
+                values,
+                zero_method="wilcox",
+                correction=False,
+                alternative="two-sided",
+                mode="auto",
+            )
+            wilcoxon_statistic = float(test.statistic)
+            wilcoxon_p_value = float(test.pvalue)
+        except ValueError:
+            wilcoxon_statistic = np.nan
+            wilcoxon_p_value = np.nan
+
+    rng = np.random.default_rng(int(random_seed))
+    sample_indices = rng.integers(
+        0,
+        n_pairs,
+        size=(max(int(n_bootstrap), 1), n_pairs),
+    )
+    bootstrap_means = values[sample_indices].mean(axis=1)
+    alpha = 1.0 - float(confidence)
+    ci_low = float(np.quantile(bootstrap_means, alpha / 2.0))
+    ci_high = float(np.quantile(bootstrap_means, 1.0 - alpha / 2.0))
+
+    return {
+        "n_pairs": n_pairs,
+        "mean_delta": float(np.mean(values)),
+        "median_delta": float(np.median(values)),
+        "std_delta": float(np.std(values, ddof=1)) if n_pairs > 1 else 0.0,
+        "wins": wins,
+        "ties": ties,
+        "losses": losses,
+        "wilcoxon_statistic": wilcoxon_statistic,
+        "wilcoxon_p_value": wilcoxon_p_value,
+        "bootstrap_mean_ci_low": ci_low,
+        "bootstrap_mean_ci_high": ci_high,
+    }
+
+
+def _summarize_paired_deltas(
+    frame: pd.DataFrame,
+    group_columns: list[str],
+) -> pd.DataFrame:
+    """Summarize paired deltas for each requested group."""
+    if frame.empty:
+        return pd.DataFrame()
+
+    records: list[dict[str, Any]] = []
+    grouped = frame.groupby(group_columns, dropna=False, sort=False)
+
+    for group_values, group in grouped:
+        if not isinstance(group_values, tuple):
+            group_values = (group_values,)
+
+        record = dict(zip(group_columns, group_values))
+        seed_offset = sum(ord(ch) for ch in "|".join(map(str, group_values)))
+        record.update(
+            _paired_test_and_interval(
+                group["delta"],
+                random_seed=BOOTSTRAP_RANDOM_SEED + seed_offset,
+            )
+        )
+        records.append(record)
+
+    return pd.DataFrame.from_records(records)
+
+
 def build_delta_vs_reference(long_results: pd.DataFrame) -> pd.DataFrame:
-    """Build paired deltas and win/tie/loss counts against R00."""
+    """Build paired deltas and statistics against R00."""
     if long_results.empty:
         return pd.DataFrame()
 
@@ -524,32 +632,16 @@ def build_delta_vs_reference(long_results: pd.DataFrame) -> pd.DataFrame:
         return pd.DataFrame()
 
     comparison["delta"] = comparison["value"] - comparison["reference_value"]
-    epsilon = 1e-12
-    comparison["win"] = comparison["delta"] > epsilon
-    comparison["tie"] = comparison["delta"].abs() <= epsilon
-    comparison["loss"] = comparison["delta"] < -epsilon
 
-    return (
-        comparison.groupby(
-            [
-                "experiment",
-                "experiment_label",
-                "dataset",
-                "output_method",
-                "metric",
-            ],
-            dropna=False,
-        )
-        .agg(
-            n_pairs=("delta", "count"),
-            mean_delta=("delta", "mean"),
-            median_delta=("delta", "median"),
-            std_delta=("delta", "std"),
-            wins=("win", "sum"),
-            ties=("tie", "sum"),
-            losses=("loss", "sum"),
-        )
-        .reset_index()
+    return _summarize_paired_deltas(
+        comparison,
+        [
+            "experiment",
+            "experiment_label",
+            "dataset",
+            "output_method",
+            "metric",
+        ],
     )
 
 
@@ -558,7 +650,7 @@ def build_stage_delta(
     left_experiment: str,
     right_experiment: str,
 ) -> pd.DataFrame:
-    """Build paired deltas for one planned recovery-stage comparison."""
+    """Build paired statistics for one planned recovery comparison."""
     if long_results.empty:
         return pd.DataFrame()
 
@@ -586,25 +678,16 @@ def build_stage_delta(
     paired["left_experiment"] = left_experiment
     paired["right_experiment"] = right_experiment
 
-    return (
-        paired.groupby(
-            [
-                "comparison",
-                "left_experiment",
-                "right_experiment",
-                "dataset",
-                "output_method",
-                "metric",
-            ],
-            dropna=False,
-        )
-        .agg(
-            n_pairs=("delta", "count"),
-            mean_delta=("delta", "mean"),
-            median_delta=("delta", "median"),
-            std_delta=("delta", "std"),
-        )
-        .reset_index()
+    return _summarize_paired_deltas(
+        paired,
+        [
+            "comparison",
+            "left_experiment",
+            "right_experiment",
+            "dataset",
+            "output_method",
+            "metric",
+        ],
     )
 
 
@@ -630,11 +713,29 @@ def build_planned_stage_deltas(long_results: pd.DataFrame) -> pd.DataFrame:
     return pd.concat(frames, ignore_index=True)
 
 
-def save_comparison_outputs(experiment_keys: list[str]) -> None:
-    """Create cross-experiment recovery comparison CSV files."""
+def completed_experiment_keys() -> list[str]:
+    """Return all recovery experiments with a completed metrics CSV."""
+    return [
+        experiment_key
+        for experiment_key in EXPERIMENTS
+        if (
+            OUTPUT_ROOT
+            / f"experiments_{experiment_key}"
+            / "metrics_per_image.csv"
+        ).is_file()
+    ]
+
+
+def save_comparison_outputs(experiment_keys: list[str] | None = None) -> None:
+    """Create comparison CSV files from every completed experiment."""
     COMPARISON_DIR.mkdir(parents=True, exist_ok=True)
 
-    long_results = collect_long_results(experiment_keys)
+    keys = experiment_keys or completed_experiment_keys()
+    if not keys:
+        print("No completed recovery experiments found.")
+        return
+
+    long_results = collect_long_results(keys)
     if long_results.empty:
         print("No completed metrics found for recovery comparison.")
         return
@@ -656,6 +757,7 @@ def save_comparison_outputs(experiment_keys: list[str]) -> None:
         frame.to_csv(COMPARISON_DIR / filename, index=False)
 
     print("\nRecovery comparison saved:")
+    print(f"Completed experiments: {', '.join(keys)}")
     for filename in outputs:
         print(f"- {COMPARISON_DIR / filename}")
 
@@ -800,7 +902,7 @@ def main() -> None:
 
             run_command(summarize_command)
 
-    save_comparison_outputs(selected_keys)
+    save_comparison_outputs(completed_experiment_keys())
 
     print("\nDone.")
     print(f"Generated configs : {CONFIG_DIR}")

@@ -1,0 +1,11 @@
+dataset,image_id,comparison_path,baseline_f1_score,ca_apsrg_f1_score,delta_f1_score,delta_precision,delta_recall
+STARE,im0240,E:\ca_apsrg_retinal_project\outputs\final_candidate_r04\experiments\STARE\comparison\im0240_comparison.png,0.7218417277814817,0.7220313636731065,0.00018963589162479533,0.0002990139638952005,0.0
+STARE,im0163,E:\ca_apsrg_retinal_project\outputs\final_candidate_r04\experiments\STARE\comparison\im0163_comparison.png,0.6991234821767051,0.6992520078590879,0.00012852568238286288,0.0001651840039754715,0.0
+DRIVE,30,E:\ca_apsrg_retinal_project\outputs\final_candidate_r04\experiments\DRIVE\comparison\30_comparison.png,0.7036995347441093,0.7038051636145302,0.00010562887042087077,0.0001995157280951787,0.0
+STARE,im0005,E:\ca_apsrg_retinal_project\outputs\final_candidate_r04\experiments\STARE\comparison\im0005_comparison.png,0.6275093578417096,0.62760413857092,9.478072921043079e-05,0.00013740159200292812,0.0
+CHASEDB1,Image_14R,E:\ca_apsrg_retinal_project\outputs\final_candidate_r04\experiments\CHASEDB1\comparison\Image_14R_comparison.png,0.6156349141788009,0.6157050343323895,7.012015358864865e-05,0.00011867089634598482,0.0
+STARE,im0001,E:\ca_apsrg_retinal_project\outputs\final_candidate_r04\experiments\STARE\comparison\im0001_comparison.png,0.5757738571694865,0.5758433127165855,6.945554709902879e-05,8.767265491699261e-05,0.0
+CHASEDB1,Image_13R,E:\ca_apsrg_retinal_project\outputs\final_candidate_r04\experiments\CHASEDB1\comparison\Image_13R_comparison.png,0.5771076760120486,0.5771745427460068,6.686673395817078e-05,0.00013465233317422332,0.0
+CHASEDB1,Image_07R,E:\ca_apsrg_retinal_project\outputs\final_candidate_r04\experiments\CHASEDB1\comparison\Image_07R_comparison.png,0.6079868903850949,0.6080518740202365,6.498363514162442e-05,0.000140970358587178,0.0
+CHASEDB1,Image_07L,E:\ca_apsrg_retinal_project\outputs\final_candidate_r04\experiments\CHASEDB1\comparison\Image_07L_comparison.png,0.6341771975921369,0.6342345097984692,5.731220633231615e-05,0.0001239949693280229,0.0
+CHASEDB1,Image_09R,E:\ca_apsrg_retinal_project\outputs\final_candidate_r04\experiments\CHASEDB1\comparison\Image_09R_comparison.png,0.5631325480964499,0.5631838981364812,5.135004003131716e-05,7.244406128609215e-05,0.0
